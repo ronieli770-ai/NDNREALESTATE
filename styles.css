@@ -687,7 +687,7 @@ h1,h2,h3{margin:0;font-weight:400;}
   position:absolute;
   /* measured: the stage bottom sits 78px under the last line of ניהול נכס
      מלא, so this rests the heading's bottom on the word לקצה */
-  top:auto;bottom:3.625rem;
+  top:auto;bottom:4.875rem;
   right:3.9375rem;
   width:28.75rem;
   transform:translateY(var(--drift,43px));
