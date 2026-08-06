@@ -1,3 +1,36 @@
+// The about heading's bottom must rest on the last line of ניהול נכס מלא
+// ("לקצה") — but line wrapping differs between browsers, so a fixed offset
+// can't hold. Measured live instead, drift-neutralised, refreshed on resize.
+(function () {
+  function align() {
+    var stage = document.querySelector('.about-stage');
+    var l2 = document.querySelector('.feat--l2 p');
+    var wrap = document.querySelector('.about-name-wrap');
+    var grid = document.querySelector('.about-grid');
+    if (!stage || !l2 || !wrap || !grid) return;
+
+    // strip the scroll-drift translate out of the measurement — the wrap
+    // carries the same drift, so it must anchor against the neutral position
+    var m = getComputedStyle(grid).transform;
+    var ty = 0;
+    if (m && m !== 'none') {
+      var parts = m.match(/matrix\(([^)]+)\)/);
+      if (parts) ty = parseFloat(parts[1].split(',')[5]) || 0;
+    }
+    var sb = stage.getBoundingClientRect().bottom;
+    var lb = l2.getBoundingClientRect().bottom - ty;
+    wrap.style.bottom = (sb - lb).toFixed(1) + 'px';
+  }
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(align);
+  } else {
+    align();
+  }
+  addEventListener('resize', align);
+  addEventListener('load', align);
+})();
+
 // Match the loader iris' starting aperture to the on-screen mark: the eye is
 // 600 viewBox-units wide and `slice` scales the 1000-unit box to the viewport.
 (function () {
