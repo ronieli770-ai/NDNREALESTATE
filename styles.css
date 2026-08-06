@@ -815,7 +815,7 @@ h1,h2,h3{margin:0;font-weight:400;}
 .step{
   position:relative;
   flex:none;
-  background:rgba(0,37,17,.7);
+  background:rgba(0,37,17,.9);
   backdrop-filter:blur(10.7px);
   -webkit-backdrop-filter:blur(10.7px);
   color:var(--white);
