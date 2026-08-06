@@ -583,11 +583,11 @@ h1,h2,h3{margin:0;font-weight:400;}
   width:100%;height:100%;
   max-width:none;
 }
-/* uniformly inset so the ring keeps a clear margin around the photo */
+/* the photo fills the shape edge to edge — the inset margin left the eye's
+   far tip hollow on wide screens, reading as a cut-off image */
 .opp-eye-photo{
-  position:absolute;
-  left:2.75%;top:2.75%;
-  width:94.5%;height:94.5%;
+  position:absolute;inset:0;
+  width:100%;height:100%;
   max-width:none;
 }
 .opp-inner{
