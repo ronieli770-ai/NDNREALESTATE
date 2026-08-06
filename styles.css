@@ -1163,3 +1163,105 @@ h1,h2,h3{margin:0;font-weight:400;}
   .footer-top{flex-direction:column;align-items:flex-start;gap:2rem;}
   .footer-contact li{justify-content:flex-start;}
 }
+
+/* ============ ABOUT PAGE — עלינו ============ */
+/* Figma 51:38 — a stepped story on #001409, no page scroll. */
+.about-page{
+  overflow:hidden;
+  height:100vh;
+}
+/* entry transition: the eye iris opens over the page, faster than the loader */
+.page-iris{
+  position:fixed;inset:0;
+  z-index:70;
+  pointer-events:none;
+  animation:loader-gone .1s linear 1.15s forwards;
+}
+.page-iris svg{position:absolute;inset:0;width:100%;height:100%;}
+.page-iris-eye{
+  transform-box:view-box;
+  transform-origin:500px 500px;
+  transform:scale(0);
+  animation:loader-iris-open 1.1s cubic-bezier(.66,0,.34,1) .05s forwards;
+}
+.story{
+  position:relative;
+  height:100vh;
+}
+/* 255:1853 — 379×505 at x:65 y:190 */
+.decay{
+  position:absolute;
+  left:4.0625rem;top:11.875rem;
+  width:23.6875rem;height:31.5625rem;
+  will-change:transform;
+  pointer-events:none;
+}
+.decay svg{width:100%;height:100%;display:block;}
+.story-slide{
+  position:absolute;
+  /* 85:366 — heading right edge x:1105, top:229, w:545 */
+  top:14.3125rem;
+  right:10.9375rem;
+  width:34.0625rem;
+  text-align:right;
+  opacity:0;
+  transform:translateY(1.5rem);
+  visibility:hidden;
+  transition:opacity .6s ease,transform .7s cubic-bezier(.16,1,.3,1),visibility 0s .6s;
+}
+.story-slide.is-active{
+  opacity:1;transform:none;visibility:visible;
+  transition:opacity .6s ease,transform .7s cubic-bezier(.16,1,.3,1),visibility 0s;
+}
+.story-head{
+  font-family:var(--display);font-weight:700;
+  font-size:2.8125rem;line-height:1.1;
+  color:var(--white);
+}
+/* right-to-left wipe: a 200%-wide two-stop gradient clipped to the glyphs —
+   sliding it moves the bright edge across the copy from right to left */
+.story-text{
+  margin-block-start:1.75rem;
+  font-family:var(--sans);
+  font-size:2.1875rem;line-height:1.21;
+  color:transparent;
+  background-image:linear-gradient(90deg,
+    rgba(255,255,255,.3) 0%, rgba(255,255,255,.3) 48%,
+    #fff 52%, #fff 100%);
+  background-size:200% 100%;
+  background-position-x:0%;
+  -webkit-background-clip:text;
+  background-clip:text;
+}
+.story-slide.is-active .story-text{
+  background-position-x:100%;
+  transition:background-position-x 1.6s ease .35s;
+}
+.story-text strong{font-weight:600;}
+/* 81:364 — dots x:1197..1211, 14px, spaced 36 */
+.story-dots{
+  position:absolute;
+  right:4.3125rem;
+  top:50%;
+  transform:translateY(-50%);
+  display:flex;flex-direction:column;
+  gap:1.375rem;
+}
+.story-dot{
+  width:.875rem;height:.875rem;
+  border-radius:50%;
+  border:0;padding:0;
+  background:#193229;
+  cursor:pointer;
+  transition:background .3s ease,transform .3s ease;
+}
+.story-dot:hover{transform:scale(1.25);}
+.story-dot.is-active{background:#637570;}
+
+@media (max-width:900px){
+  .decay{left:50%;top:7.5rem;transform:translateX(-50%);width:16rem;height:21.3rem;}
+  .story-slide{right:1.25rem;left:1.25rem;width:auto;top:30rem;}
+  .story-head{font-size:2rem;}
+  .story-text{font-size:1.4rem;}
+  .story-dots{right:1rem;}
+}
