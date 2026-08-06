@@ -39,10 +39,11 @@
   });
 })();
 
-// --- letter-by-letter reveal: each character fades .3 -> 1 on its own beat,
-// in reading order (right to left), every time its slide becomes active ---
+// --- word-by-word reveal: every word rests at 30% white and snaps to full
+// white on its own beat, in reading order (right to left). The sweep is gated
+// on .is-ready so it starts only after the iris has finished. ---
 (function () {
-  var STEP = 0.008; // s between letters
+  var STEP = 0.07; // s between words
 
   document.querySelectorAll('.story-text').forEach(function (text) {
     var walker = document.createTreeWalker(text, NodeFilter.SHOW_TEXT, null);
@@ -52,19 +53,25 @@
     var i = 0;
     nodes.forEach(function (node) {
       var frag = document.createDocumentFragment();
-      node.nodeValue.split('').forEach(function (ch) {
-        if (/\s/.test(ch)) {
-          frag.appendChild(document.createTextNode(ch));
+      node.nodeValue.split(/(\s+)/).forEach(function (part) {
+        if (!part) return;
+        if (/^\s+$/.test(part)) {
+          frag.appendChild(document.createTextNode(part));
           return;
         }
         var span = document.createElement('span');
-        span.className = 'char';
-        span.textContent = ch;
-        span.style.setProperty('--d', (i * STEP).toFixed(3) + 's');
+        span.className = 'sword';
+        span.textContent = part;
+        span.style.setProperty('--d', (i * STEP).toFixed(2) + 's');
         i++;
         frag.appendChild(span);
       });
       node.parentNode.replaceChild(frag, node);
     });
   });
+
+  // the iris finishes at ~1.15s; everything below fades in after it
+  setTimeout(function () {
+    document.body.classList.add('is-ready');
+  }, 1150);
 })();

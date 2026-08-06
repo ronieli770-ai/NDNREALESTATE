@@ -1229,23 +1229,29 @@ h1,h2,h3{margin:0;font-weight:400;}
   font-size:3.75rem;line-height:1.05;
   color:var(--white);
 }
-/* letters rest at 30% white; each brightens on its own delay when the slide
-   arrives, sweeping the copy in reading order */
+/* words rest at 30% white; each snaps to full white on its own beat, right to
+   left, once the page is past the iris (.is-ready) */
 .story-text{
   margin-block-start:1.75rem;
   font-family:var(--sans);
   font-size:2.1875rem;line-height:1.21;
   color:rgba(255,255,255,.3);
 }
-.story-text .char{
+.story-text .sword{
   color:rgba(255,255,255,.3);
-  transition:color .35s ease;
+  transition:color .25s ease;
 }
-.story-slide.is-active .story-text .char{
+.is-ready .story-slide.is-active .story-text .sword{
   color:#fff;
-  transition-delay:calc(var(--d,0s) + .35s);
+  transition-delay:calc(var(--d,0s) + .2s);
 }
-.story-text strong,.story-text strong .char{font-weight:600;}
+.story-text strong,.story-text strong .sword{font-weight:600;}
+/* the stage holds empty under the iris, then everything fades in together */
+.about-page .story{
+  opacity:0;
+  transition:opacity .8s ease;
+}
+.about-page.is-ready .story{opacity:1;}
 /* 273:48 — dots inset 10.76% from the right, just under centre */
 .story-dots{
   position:absolute;
