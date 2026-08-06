@@ -1248,6 +1248,7 @@ h1,h2,h3{margin:0;font-weight:400;}
   transition-delay:calc(var(--d,0s) + .2s);
 }
 .story-text strong,.story-text strong .sword{font-weight:600;}
+.story-text b,.story-text b .sword{font-weight:700;}
 /* the stage holds empty under the iris, then everything fades in together */
 .about-page .story{
   opacity:0;
