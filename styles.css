@@ -642,6 +642,8 @@ h1,h2,h3{margin:0;font-weight:400;}
   width:38.5rem;max-width:100%;
   display:grid;
   grid-template-columns:repeat(2,18.375rem);
+  /* every tile takes the same height as the tallest one */
+  grid-auto-rows:1fr;
   column-gap:1.75rem;row-gap:1.9375rem;
 }
 /* 163:1032 — rgba(255,255,255,.1), radius 15 */
@@ -660,7 +662,8 @@ h1,h2,h3{margin:0;font-weight:400;}
   background:rgba(255,255,255,.1);
   border-radius:.9375rem;
   padding:2rem 1.9375rem;
-  display:flex;flex-direction:column;justify-content:center;
+  /* titles pin to a shared top line instead of floating with centred content */
+  display:flex;flex-direction:column;justify-content:flex-start;
   text-align:center;
 }
 /* 176:1056 — 95×64 box at x:1167 y:2669, i.e. 250px in from the card's left
