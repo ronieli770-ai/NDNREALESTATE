@@ -41,6 +41,25 @@
 
 *,*::before,*::after{box-sizing:border-box;}
 
+/* ============ SCROLLBAR ============ */
+/* track #193229, thumb #637570 — Firefox first, then WebKit */
+html{
+  scrollbar-color:#637570 #193229;
+}
+::-webkit-scrollbar{
+  width:12px;
+}
+::-webkit-scrollbar-track{
+  background:#193229;
+}
+::-webkit-scrollbar-thumb{
+  background:#637570;
+  border-radius:6px;
+}
+::-webkit-scrollbar-thumb:hover{
+  background:#748680;
+}
+
 html{
   font-size:min(16px, 1.25vw);
   /* eased scrolling is driven by smooth-scroll.js; native smoothing and snap
