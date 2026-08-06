@@ -572,10 +572,15 @@ h1,h2,h3{margin:0;font-weight:400;}
 }
 /* 204:1352 — outline 1021×680 at x:-488 y:128; the photo (204:1350) sits
    inside it at +45.5/+22.8, already cut to the eye shape in the file */
+/* right edge stays 50px off the cards; the width tracks the viewport so the
+   left tip always runs past the screen edge — no hollow tip on wide screens */
 .opp-eye{
   position:absolute;
-  top:5rem;right:45.5rem;left:auto;
-  width:75rem;height:49.95rem;
+  top:50%;right:45.5rem;left:auto;
+  transform:translateY(-50%);
+  width:max(75rem, calc(100vw - 41.5rem));
+  aspect-ratio:1021/680;
+  height:auto;
   pointer-events:none;
 }
 .opp-ring{
@@ -583,11 +588,12 @@ h1,h2,h3{margin:0;font-weight:400;}
   width:100%;height:100%;
   max-width:none;
 }
-/* the photo fills the shape edge to edge — the inset margin left the eye's
-   far tip hollow on wide screens, reading as a cut-off image */
+/* the photo sits concentric inside the ring with its margin — do NOT glue it
+   to the frame; the wide-screen fix lives on .opp-eye's viewport width */
 .opp-eye-photo{
-  position:absolute;inset:0;
-  width:100%;height:100%;
+  position:absolute;
+  left:2.75%;top:2.75%;
+  width:94.5%;height:94.5%;
   max-width:none;
 }
 .opp-inner{
