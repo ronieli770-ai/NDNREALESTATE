@@ -39,50 +39,32 @@
   });
 })();
 
-// --- DecayCard, ported (gsap replaced with direct attribute/style writes) ---
+// --- letter-by-letter reveal: each character fades .3 -> 1 on its own beat,
+// in reading order (right to left), every time its slide becomes active ---
 (function () {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if (!window.matchMedia('(pointer: fine)').matches) return;
+  var STEP = 0.008; // s between letters
 
-  var card = document.querySelector('.decay');
-  var map = document.getElementById('decayMap');
-  if (!card || !map) return;
+  document.querySelectorAll('.story-text').forEach(function (text) {
+    var walker = document.createTreeWalker(text, NodeFilter.SHOW_TEXT, null);
+    var nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
 
-  var MAX_DISPLACEMENT = 400;
-  var MOVEMENT_BOUND = 50;
-
-  var cursor = { x: innerWidth / 2, y: innerHeight / 2 };
-  var cached = { x: cursor.x, y: cursor.y };
-  var t = { x: 0, y: 0, rz: 0, scale: 0 };
-
-  function lerp(a, b, n) { return (1 - n) * a + n * b; }
-  function mapRange(x, a, b, c, d) { return ((x - a) * (d - c)) / (b - a) + c; }
-
-  addEventListener('mousemove', function (e) {
-    cursor.x = e.clientX;
-    cursor.y = e.clientY;
-  }, { passive: true });
-
-  (function render() {
-    var tx = lerp(t.x, mapRange(cursor.x, 0, innerWidth, -120, 120), 0.1);
-    var ty = lerp(t.y, mapRange(cursor.y, 0, innerHeight, -120, 120), 0.1);
-    var rz = lerp(t.rz, mapRange(cursor.x, 0, innerWidth, -10, 10), 0.1);
-
-    if (tx > MOVEMENT_BOUND) tx = MOVEMENT_BOUND + (tx - MOVEMENT_BOUND) * 0.2;
-    if (tx < -MOVEMENT_BOUND) tx = -MOVEMENT_BOUND + (tx + MOVEMENT_BOUND) * 0.2;
-    if (ty > MOVEMENT_BOUND) ty = MOVEMENT_BOUND + (ty - MOVEMENT_BOUND) * 0.2;
-    if (ty < -MOVEMENT_BOUND) ty = -MOVEMENT_BOUND + (ty + MOVEMENT_BOUND) * 0.2;
-
-    t.x = tx; t.y = ty; t.rz = rz;
-    card.style.transform =
-      'translate(' + tx.toFixed(2) + 'px,' + ty.toFixed(2) + 'px) rotateZ(' + rz.toFixed(2) + 'deg)';
-
-    var travelled = Math.hypot(cached.x - cursor.x, cached.y - cursor.y);
-    t.scale = lerp(t.scale, mapRange(travelled, 0, 200, 0, MAX_DISPLACEMENT), 0.06);
-    map.setAttribute('scale', t.scale.toFixed(1));
-
-    cached.x = cursor.x;
-    cached.y = cursor.y;
-    requestAnimationFrame(render);
-  })();
+    var i = 0;
+    nodes.forEach(function (node) {
+      var frag = document.createDocumentFragment();
+      node.nodeValue.split('').forEach(function (ch) {
+        if (/\s/.test(ch)) {
+          frag.appendChild(document.createTextNode(ch));
+          return;
+        }
+        var span = document.createElement('span');
+        span.className = 'char';
+        span.textContent = ch;
+        span.style.setProperty('--d', (i * STEP).toFixed(3) + 's');
+        i++;
+        frag.appendChild(span);
+      });
+      node.parentNode.replaceChild(frag, node);
+    });
+  });
 })();

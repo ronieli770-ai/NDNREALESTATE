@@ -1165,7 +1165,9 @@ h1,h2,h3{margin:0;font-weight:400;}
 }
 
 /* ============ ABOUT PAGE — עלינו ============ */
-/* Figma 51:38 — a stepped story on #001409, no page scroll. */
+/* Figma 273:2 (16" master) — the composition holds proportionally on every
+   screen: photo left 10.76% / top 18.8%, copy right 17.1% / top 29.9%,
+   dots mirroring the photo's inset on the right. */
 .about-page{
   overflow:hidden;
   height:100vh;
@@ -1188,21 +1190,27 @@ h1,h2,h3{margin:0;font-weight:400;}
   position:relative;
   height:100vh;
 }
-/* 255:1853 — 379×505 at x:65 y:190 */
+/* 273:57 — 561×749 at x:186 y:210 of 1728×1117 */
 .decay{
   position:absolute;
-  left:4.0625rem;top:11.875rem;
-  width:23.6875rem;height:31.5625rem;
-  will-change:transform;
-  pointer-events:none;
+  left:10.76%;top:18.8%;
+  height:67vh;
+  aspect-ratio:561/749;
+  overflow:hidden;
 }
-.decay svg{width:100%;height:100%;display:block;}
+.decay img{
+  width:100%;height:100%;
+  object-fit:cover;
+  transition:transform .6s cubic-bezier(.16,1,.3,1);
+}
+.decay:hover img{transform:scale(1.06);}
+/* 273:56 — heading right edge x:1432 (17.1% in), top:334, w:593 */
 .story-slide{
   position:absolute;
-  /* 85:366 — heading right edge x:1105, top:229, w:545 */
-  top:14.3125rem;
-  right:10.9375rem;
-  width:34.0625rem;
+  top:29.9%;
+  right:17.13%;
+  width:34.3vw;
+  min-width:28rem;
   text-align:right;
   opacity:0;
   transform:translateY(1.5rem);
@@ -1215,34 +1223,31 @@ h1,h2,h3{margin:0;font-weight:400;}
 }
 .story-head{
   font-family:var(--display);font-weight:700;
-  font-size:2.8125rem;line-height:1.1;
+  font-size:3.75rem;line-height:1.05;
   color:var(--white);
 }
-/* right-to-left wipe: a 200%-wide two-stop gradient clipped to the glyphs —
-   sliding it moves the bright edge across the copy from right to left */
+/* letters rest at 30% white; each brightens on its own delay when the slide
+   arrives, sweeping the copy in reading order */
 .story-text{
   margin-block-start:1.75rem;
   font-family:var(--sans);
   font-size:2.1875rem;line-height:1.21;
-  color:transparent;
-  background-image:linear-gradient(90deg,
-    rgba(255,255,255,.3) 0%, rgba(255,255,255,.3) 48%,
-    #fff 52%, #fff 100%);
-  background-size:200% 100%;
-  background-position-x:0%;
-  -webkit-background-clip:text;
-  background-clip:text;
+  color:rgba(255,255,255,.3);
 }
-.story-slide.is-active .story-text{
-  background-position-x:100%;
-  transition:background-position-x 1.6s ease .35s;
+.story-text .char{
+  color:rgba(255,255,255,.3);
+  transition:color .35s ease;
 }
-.story-text strong{font-weight:600;}
-/* 81:364 — dots x:1197..1211, 14px, spaced 36 */
+.story-slide.is-active .story-text .char{
+  color:#fff;
+  transition-delay:calc(var(--d,0s) + .35s);
+}
+.story-text strong,.story-text strong .char{font-weight:600;}
+/* 273:48 — dots inset 10.76% from the right, just under centre */
 .story-dots{
   position:absolute;
-  right:4.3125rem;
-  top:50%;
+  right:10.76%;
+  top:53%;
   transform:translateY(-50%);
   display:flex;flex-direction:column;
   gap:1.375rem;
@@ -1259,9 +1264,9 @@ h1,h2,h3{margin:0;font-weight:400;}
 .story-dot.is-active{background:#637570;}
 
 @media (max-width:900px){
-  .decay{left:50%;top:7.5rem;transform:translateX(-50%);width:16rem;height:21.3rem;}
-  .story-slide{right:1.25rem;left:1.25rem;width:auto;top:30rem;}
-  .story-head{font-size:2rem;}
+  .decay{left:50%;top:7.5rem;transform:translateX(-50%);height:38vh;}
+  .story-slide{right:1.25rem;left:1.25rem;width:auto;min-width:0;top:52%;}
+  .story-head{font-size:2.2rem;}
   .story-text{font-size:1.4rem;}
   .story-dots{right:1rem;}
 }
