@@ -1,0 +1,1132 @@
+/* ============================================================
+   NDN — השקעות נדל״ן בדובאי
+   1rem = 16px at the 1280px Figma frame; scales fluidly below.
+   ============================================================ */
+
+@font-face{
+  font-family:"Fb Sayeeda";
+  src:url("assets/fonts/FbSayeedaBook-Regular.otf") format("opentype");
+  font-weight:400; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:"Fb Sayeeda";
+  src:url("assets/fonts/FbSayeedaBook-Bold.otf") format("opentype");
+  font-weight:700; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:"Fb Trampolina";
+  src:url("assets/fonts/FbTrampolina-Regular.otf") format("opentype");
+  font-weight:400; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:"Fb Trampolina";
+  src:url("assets/fonts/FbTrampolina-Bold.otf") format("opentype");
+  font-weight:700; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:"Fb Trampolina";
+  src:url("assets/fonts/FbTrampolina-Black.otf") format("opentype");
+  font-weight:900; font-style:normal; font-display:swap;
+}
+
+:root{
+  --ink:#001409;
+  --green:#00843d;
+  --white:#fff;
+  --sans:"Fb Trampolina","IBM Plex Sans Hebrew",system-ui,sans-serif;
+  --display:"Fb Sayeeda","Fb Trampolina",system-ui,sans-serif;
+  /* site gutter for buttons and text — 20px */
+  --gutter:1.25rem;
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+
+html{
+  font-size:min(16px, 1.25vw);
+  /* eased scrolling is driven by smooth-scroll.js; native smoothing and snap
+     would both fight it frame by frame */
+  scroll-behavior:auto;
+}
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--white);
+  font-family:var(--sans);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+p{margin:0;}
+h1,h2,h3{margin:0;font-weight:400;}
+
+.wrap{width:80rem;max-width:100%;margin-inline:auto;}
+
+.sec{
+  position:relative;
+  min-height:100vh;
+  min-height:100svh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* ============ SITE LOADER ============ */
+/* The mark starts dim; a bottom-up wipe brightens it to full white (eye stays
+   an outline, the palm a solid silhouette — the wipe swaps dim for bright,
+   it doesn't flood the hollow). Then the dark plate opens as an eye-shaped
+   iris that starts at the mark's own size and grows off screen. */
+.site-loader{
+  position:fixed;inset:0;
+  z-index:70;
+  pointer-events:none;
+  animation:loader-gone .1s linear 3.3s forwards;
+}
+/* opaque green under the mark; vanishes the instant the iris starts opening,
+   handing off to the identical-coloured masked plate behind it */
+.site-loader::before{
+  content:"";
+  position:absolute;inset:0;
+  background:#001409;
+  z-index:1;
+  animation:loader-cover-off .01s linear 1.8s forwards;
+}
+.loader-iris{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  z-index:0;
+}
+/* --iris-from is set by hero.js so the hole starts exactly at the mark size */
+.loader-iris-eye{
+  transform-box:view-box;
+  transform-origin:500px 500px;
+  transform:scale(var(--iris-from,.4));
+  animation:loader-iris-open 1.4s cubic-bezier(.66,0,.34,1) 1.8s forwards;
+}
+.loader-mark{
+  position:absolute;
+  z-index:2;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:19rem;height:12.6667rem;
+  animation:loader-mark-out .25s ease 1.7s forwards;
+}
+.loader-dim,.loader-bright{position:absolute;inset:0;}
+.loader-mark svg{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  overflow:visible;
+}
+.loader-mark path{fill:none;stroke:#fff;stroke-width:6;}
+/* the palm is the site's proven asset, white fill baked in */
+.loader-palm{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-54%);
+  width:6.25rem;height:auto;
+}
+.loader-dim{opacity:.1;}
+.loader-bright{opacity:1;}
+.loader-fill-clip{
+  position:absolute;inset:-4px;
+  padding:4px;
+  clip-path:inset(100% 0 0 0);
+  animation:loader-rise 1.4s cubic-bezier(.66,0,.34,1) .2s forwards;
+}
+.loader-fill-clip svg{inset:4px;width:calc(100% - 8px);height:calc(100% - 8px);}
+@keyframes loader-rise{
+  to{clip-path:inset(0 0 0 0);}
+}
+@keyframes loader-mark-out{
+  to{opacity:0;}
+}
+@keyframes loader-iris-open{
+  to{transform:scale(14);}
+}
+@keyframes loader-gone{
+  to{opacity:0;visibility:hidden;}
+}
+@keyframes loader-cover-off{
+  to{opacity:0;visibility:hidden;}
+}
+@media (prefers-reduced-motion:reduce){
+  .site-loader{display:none;}
+}
+
+/* ============ NAV ============ */
+/* Bar 1280×96. Bare over section 1 (the hero's own white plate sits behind it),
+   then it picks up a dark translucent background for the rest of the site. */
+.nav{
+  position:fixed;
+  inset-block-start:0; inset-inline:0;
+  height:6rem;
+  z-index:50;
+  background:transparent;
+  /* Figma 155:888 — no fill, just the blur over the sky */
+  backdrop-filter:blur(6.85px);
+  -webkit-backdrop-filter:blur(6.85px);
+  transition:background .45s ease, backdrop-filter .45s ease,
+             -webkit-backdrop-filter .45s ease;
+}
+.nav.is-scrolled{
+  background:rgba(0,20,9,.7);
+  backdrop-filter:blur(13px);
+  -webkit-backdrop-filter:blur(13px);
+}
+/* while section 4 is pinned the bar reverts to its hero appearance.
+   Declared after .is-scrolled so it wins at equal specificity. */
+.nav.nav-hero{
+  background:transparent;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+}
+.nav-inner{
+  /* full-bleed: the 20px gutter is measured from the screen edges, not a 1280 box */
+  width:100%;
+  height:100%;
+  /* 30px left/right, 5px top/bottom — header height stays 96px */
+  padding:.3125rem 1.875rem;
+  /* call button left, logo centred, links right — physical LTR order */
+  direction:ltr;
+  position:relative;
+  display:flex;align-items:center;justify-content:space-between;
+}
+/* fills the padded box: 96 − 5×2 = 86px tall, keeping the 109:66 ratio.
+   cover (not contain) crops the empty margins baked into the PNG, exactly
+   like Figma 100:666 (img at w:145.87% left:-22.94%) */
+/* 163:1001 — 215×62 at x:65, fill #002511, radius 15 */
+.nav-call{
+  position:relative;
+  flex:none;
+  width:13.4375rem;height:3.875rem;
+  border-radius:.9375rem;
+  background:#002511;
+  color:var(--white);
+  font-family:var(--sans);
+  font-size:1.5rem;line-height:1.21;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .45s ease,color .45s ease;
+}
+.nav-call{direction:rtl;gap:.625rem;}
+.nav-call-icon{
+  width:1.375rem;height:1.375rem;flex:none;
+  background:currentColor;
+  -webkit-mask:url("assets/icons/phone.svg") center/contain no-repeat;
+  mask:url("assets/icons/phone.svg") center/contain no-repeat;
+}
+.nav-call:hover{background:var(--white);color:#001409;}
+.nav.is-scrolled .nav-call{background:var(--white);color:#002511;}
+.nav.is-scrolled .nav-call:hover{background:rgba(255,255,255,.8);}
+/* 163:983 — logo x:586..695, i.e. dead centre of the 1280 frame, so it is
+   centred against the bar rather than left to space-between (the call button
+   and the links are different widths and would push it off-centre) */
+.nav-logo{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  display:block;
+}
+.nav-logo img{width:8.8769rem;height:5.375rem;object-fit:cover;}
+/* the dark mark is unreadable once the bar goes dark — cross-fade to the light one */
+.nav-logo .logo-light{
+  position:absolute;inset-block-start:0;inset-inline-start:0;
+  opacity:0;
+}
+.nav-logo img{transition:opacity .45s ease;}
+.nav.is-scrolled .logo-dark{opacity:0;}
+.nav.is-scrolled .logo-light{opacity:1;}
+.nav-links{direction:rtl;display:flex;gap:1.25rem;}
+.nav-links a{
+  font-size:1.75rem;
+  line-height:.68;
+  color:var(--ink);
+  font-weight:400;
+  transition:color .45s ease;
+}
+.nav.is-scrolled .nav-links a{color:var(--white);}
+.nav-links a:hover{color:var(--white);}
+.nav-links a.is-active{font-weight:600;}
+
+/* ============ 1. HERO ============ */
+/* Figma frame "סקשן 2" — 1280×832, white behind a full-bleed plate. Copy is
+   right-aligned; the section is a runway and the stage pins while the sky sits
+   still, the copy drifts up and the buildings rise past it. */
+.sec-hero{
+  display:block;
+  min-height:0;
+  height:160vh;
+  overflow:visible;
+  padding:0;
+}
+.hero-stage{
+  position:sticky;top:0;
+  height:100vh;
+  overflow:hidden;
+  background:#fff;
+}
+/* 233:1719 — the wide layers are full 16:9 plates; cover-crop to any screen */
+.hero-layer{
+  position:absolute;
+  inset:0;
+  width:100%;height:100%;
+  transform:translateY(var(--y,0px));
+  will-change:transform;
+}
+/* Both supplied layers are the same 2560×1656 canvas, so they have to sit on
+   identical geometry or the cut-out buildings drift off the sky behind them.
+   (Figma's differing offsets belong to two other source images.) Filling the
+   plate also removes the white band the sky's 6.49% top offset left behind. */
+.hero-layer img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  max-width:none;
+  object-fit:cover;object-position:center;
+}
+.hero-sky{z-index:0;}
+/* the plate is above the copy (z3 > z2) and an <img> swallows pointer events
+   across its whole box — transparent pixels included — so without this the
+   button under it can never be hovered or clicked */
+.hero-buildings{z-index:3;pointer-events:none;}
+/* Section 2's background, welded to the underside of the buildings so it rides
+   up with them — what you see under the rising plate is never the sky. */
+.hero-buildings::after{
+  content:"";
+  position:absolute;top:100%;inset-inline:0;
+  height:160vh;
+  background:var(--ink);
+}
+/* 155:897 — 167px fade into the next section */
+.hero-fade{
+  position:absolute;inset-inline:0;bottom:0;
+  height:20.17%;
+  background:linear-gradient(180deg,rgba(0,20,9,0) 0%,#001409 100%);
+}
+/* 155:881 — right edge x:1217, top:116, w:654 */
+.hero-copy{
+  position:absolute;
+  z-index:2;
+  top:9.125rem;
+  right:3.9375rem;
+  width:40.875rem;
+  text-align:right;
+  color:#002511;
+  transform:translateY(var(--y,0px));
+  will-change:transform;
+}
+.hero-title{
+  font-family:var(--display);
+  display:flex;flex-direction:column;
+}
+/* entrance: once the loader clears (~3s), the copy lands line by line —
+   rise out of a blur, top to bottom, button last. Children animate, not
+   .hero-copy itself, whose transform belongs to the scroll parallax. */
+.hero-title .l1,.hero-title .l2,.hero-title .l3,.hero-lead,.hero-cta{
+  opacity:0;
+  animation:hero-in .9s cubic-bezier(.16,1,.3,1) both;
+}
+.hero-title .l1{animation-delay:2.35s;}
+.hero-title .l2{animation-delay:2.5s;}
+.hero-title .l3{animation-delay:2.65s;}
+.hero-lead{animation-delay:2.8s;}
+.hero-cta{animation-delay:2.95s;}
+@keyframes hero-in{
+  from{opacity:0;transform:translateY(2.5rem);filter:blur(10px);}
+  to{opacity:1;transform:none;filter:none;}
+}
+@media (prefers-reduced-motion:reduce){
+  .hero-title .l1,.hero-title .l2,.hero-title .l3,.hero-lead,.hero-cta{
+    animation:none;opacity:1;
+  }
+}
+.hero-title .l1{font-size:5rem;font-weight:700;line-height:normal;}
+.hero-title .l2{font-size:10.625rem;font-weight:700;line-height:.74;}
+.hero-title .l3{
+  font-size:3.75rem;font-weight:400;line-height:1.12;
+  margin-block-start:.75rem;
+}
+/* 155:882 — w:563, 20px IBM Plex.
+   margin-left (not inline-start): in RTL the logical start is the right edge,
+   so auto there pushed the block left instead of flushing it right. */
+.hero-lead{
+  width:35.1875rem;
+  margin-left:auto;
+  margin-block-start:.625rem;
+  font-family:var(--sans);
+  font-size:1.5rem;line-height:1.3;
+  color:#000;
+}
+.hero-lead strong,.intro-body strong{font-weight:900;}
+/* 155:883 — 215×62 at x:1005 y:521, fill #002511, radius 15 */
+.hero-cta{
+  position:relative;
+  margin-block-start:1.25rem;
+  margin-left:auto;
+  width:13.4375rem;height:3.875rem;
+  border-radius:.9375rem;
+  background:#002511;
+  color:var(--white);
+  font-family:var(--sans);
+  font-size:1.5rem;line-height:1.21;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .45s ease,color .45s ease;
+}
+.hero-cta:hover{background:rgba(0,37,17,.8);}
+
+/* ============ 2. INTRO ============ */
+.sec-intro{overflow:hidden;}
+/* knocks the reveal back from 80% to ~15% behind the copy, feathered at the
+   edges. Same colour as the section, so it is invisible on its own. */
+.intro::before{
+  content:"";
+  position:absolute;
+  inset:-4rem -5rem;
+  z-index:-1;
+  pointer-events:none;
+  background:radial-gradient(ellipse at center,
+    rgba(0,20,9,.8125) 0%,
+    rgba(0,20,9,.8125) 58%,
+    rgba(0,20,9,0) 100%);
+}
+.intro{
+  position:relative;z-index:1;
+  display:flex;flex-direction:column;align-items:center;
+  text-align:center;
+  padding-block:6rem;
+}
+/* 163:988 — 174×116 badge above the heading, centred on the frame */
+.intro-badge{
+  position:relative;display:block;
+  width:5.4375rem;height:3.625rem;
+  margin-block-end:1.5625rem;
+}
+.intro-badge-bg{width:100%;height:100%;}
+.intro-badge-icon{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:2.1334rem;height:2.1189rem;
+}
+/* 60:88 — Bold 60 over Regular 45, centred, w:1021 */
+.intro-head{
+  width:63.8125rem;max-width:100%;
+  font-family:var(--display);
+  display:flex;flex-direction:column;
+}
+.intro-head .b{font-size:3.75rem;font-weight:700;line-height:1.21;}
+.intro-head .r{font-size:2.8125rem;font-weight:400;line-height:1.33;}
+/* 60:91 — IBM Plex 35, centred, w:911 */
+.intro-body{
+  width:56.9375rem;max-width:100%;
+  margin-block-start:1.5625rem;
+  font-size:2.1875rem;line-height:1.41;
+}
+/* ScrollReveal — each word fades and un-blurs on its own delay, the block
+   settles from a slight tilt. Scoped to .js-reveal, which JS adds, so without
+   scripting every heading simply shows. */
+.word{display:inline-block;will-change:opacity,filter;}
+.js-reveal .word{
+  opacity:0;
+  filter:blur(var(--blur,10px));
+  transition:opacity .55s ease,filter .55s ease;
+}
+.js-reveal.is-in .word{opacity:1;filter:none;}
+.js-reveal{
+  transform:rotate(5deg);
+  transform-origin:100% 50%;
+  transition:transform .9s cubic-bezier(.16,1,.3,1);
+  will-change:transform;
+}
+.js-reveal.is-in{transform:none;}
+/* the badge and the button carry no words — they just arrive */
+.js-fade{opacity:0;transform:translateY(1.5rem);transition:opacity .6s ease,transform .6s cubic-bezier(.16,1,.3,1);}
+.js-fade.is-in{opacity:1;transform:none;}
+/* the intro button has no words of its own, it just arrives */
+.sec-intro .btn-ghost.js-reveal{transform:none;opacity:0;transition:opacity .6s ease;}
+.sec-intro .btn-ghost.js-reveal.is-in{opacity:1;}
+.btn-ghost{
+  position:relative;
+  margin-block-start:1.5625rem;
+  width:35.3125rem;max-width:100%;height:3.875rem;
+  /* dimmed base line so the traced stroke reads on top of it */
+  border:1px solid rgba(255,255,255,.35);border-radius:.9375rem;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;line-height:1.21;
+  transition:background 1s ease-in-out,opacity .6s ease;
+}
+.btn-ghost:hover{background:rgba(255,255,255,.08);}
+/* pathLength normalises the outline to 480 units, so the dash values hold at
+   any button size — no need to recompute the perimeter as the layout scales */
+.btn-outline{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  overflow:visible;pointer-events:none;
+  fill:none;stroke:var(--white);stroke-width:1;
+  stroke-dasharray:150 480;
+  stroke-dashoffset:150;
+  transition:1s ease-in-out;
+}
+/* a dash of exactly one perimeter at offset 0 closes the frame completely —
+   the CodePen's 760/300 leaves the last 20 of 480 units sitting in the gap */
+.btn-ghost:hover .btn-outline{
+  stroke-dasharray:480 480;
+  stroke-dashoffset:0;
+}
+
+/* ============ 3. PROBLEM ============ */
+/* Figma 204:1263 — centred heading, three 319×271 tiles at y:348 with the big
+   80px word straddling each tile's top edge, arc flipped along the bottom. */
+.sec-problem{overflow:hidden;}
+.problem{
+  padding-block:6rem;
+  padding-inline:1.875rem;
+}
+/* 204:1297 — Regular opening, Bold close, centred */
+.problem-head{
+  width:45.9375rem;max-width:100%;
+  margin-inline:auto;
+  font-family:var(--display);font-weight:700;
+  font-size:2.8125rem;line-height:1.1;
+  text-align:center;
+}
+.problem-cards{
+  margin-block-start:5.875rem;
+  display:flex;justify-content:center;
+  gap:1.9375rem;
+}
+/* 204:1298 — rgba(255,255,255,.1), radius 15 */
+.pcard{
+  position:relative;
+  flex:none;
+  width:19.9375rem;
+  min-height:16.9375rem;
+  background:rgba(255,255,255,.1);
+  border-radius:.9375rem;
+  padding:3.6875rem 2.1875rem 2rem;
+  text-align:center;
+}
+/* 204:1301 — IBM Plex Bold 80px at 40% white, straddling the top edge */
+.pcard-word{
+  position:absolute;
+  top:-3.0625rem;
+  left:50%;
+  transform:translateX(-50%);
+  font-family:var(--sans);font-weight:700;
+  font-size:5rem;line-height:1.1;
+  color:rgba(255,255,255,.4);
+  white-space:nowrap;
+  pointer-events:none;
+}
+/* 204:1304 — 24px, centred, w:249 */
+.pcard p{
+  width:15.5625rem;max-width:100%;
+  margin-inline:auto;
+  font-size:1.5rem;line-height:1.3;
+}
+/* 204:1322 — the divider arc mirrored, low on the section */
+.problem-arc{
+  position:absolute;
+  bottom:2.75rem;left:50%;
+  transform:translateX(-50%) scaleY(-1);
+  width:100%;height:8.75rem;
+  max-width:none;
+  pointer-events:none;
+}
+
+/* entrance: tiles vault up out of a blur with a spring, then their words
+   drop in from above — staggered right to left */
+.js-cards .pcard{
+  opacity:0;
+  transform:translateY(4.5rem) scale(.92);
+  filter:blur(14px);
+  transition:
+    opacity .7s ease,
+    transform .95s cubic-bezier(.22,1.4,.36,1),
+    filter .7s ease;
+}
+.js-cards .pcard-word{
+  opacity:0;
+  transform:translateX(-50%) translateY(-2.5rem);
+  transition:
+    opacity .55s ease,
+    transform .8s cubic-bezier(.22,1.4,.36,1);
+}
+/* DOM order runs מחיר→מיסוי, which RTL lays out right→left — so nth-child
+   order *is* the right-to-left sweep */
+.js-cards .pcard:nth-child(1){transition-delay:0s;}
+.js-cards .pcard:nth-child(2){transition-delay:.12s;}
+.js-cards .pcard:nth-child(3){transition-delay:.24s;}
+.js-cards .pcard:nth-child(1) .pcard-word{transition-delay:.3s;}
+.js-cards .pcard:nth-child(2) .pcard-word{transition-delay:.42s;}
+.js-cards .pcard:nth-child(3) .pcard-word{transition-delay:.54s;}
+.js-cards.is-in .pcard{opacity:1;transform:none;filter:none;}
+.problem-cards{perspective:800px;}
+.pcard{transform-style:preserve-3d;}
+.js-cards.is-in .pcard-word{opacity:1;transform:translateX(-50%);}
+
+/* ============ 4. OPPORTUNITY ============ */
+/* Rebuilt from Figma: the pinned drawer cards are gone. Static 2×2 grid of
+   294×255 tiles, big translucent numerals, decorative arcs behind. */
+.sec-opp{
+  overflow:hidden;
+  background:var(--ink);
+}
+/* 204:1352 — outline 1021×680 at x:-488 y:128; the photo (204:1350) sits
+   inside it at +45.5/+22.8, already cut to the eye shape in the file */
+.opp-eye{
+  position:absolute;
+  top:5rem;right:45.5rem;left:auto;
+  width:75rem;height:49.95rem;
+  pointer-events:none;
+}
+.opp-ring{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  max-width:none;
+}
+/* uniformly inset so the ring keeps a clear margin around the photo */
+.opp-eye-photo{
+  position:absolute;
+  left:2.75%;top:2.75%;
+  width:94.5%;height:94.5%;
+  max-width:none;
+}
+.opp-inner{
+  position:relative;z-index:1;
+  width:100%;max-width:none;
+  padding-inline:1.875rem;
+}
+/* 163:1005 — "למה" Regular + "דובאי?" Bold, 45px, right edge 65px in */
+.opp-head{
+  width:100%;
+  font-family:var(--display);font-weight:400;
+  font-size:2.8125rem;line-height:1.1;
+  text-align:right;
+  padding-right:2.0625rem;
+}
+.opp-head strong{font-weight:700;}
+.rg{font-weight:400;}
+/* grid 2×294 with a 28px gutter, rows 255 with 31px between */
+/* margin-left (not inline-start): in RTL the logical start is the right edge,
+   so auto there shoved the grid left instead of flushing it right under the
+   heading, which is where Figma puts it (x:595–1211). */
+.opp-cards{
+  margin-block-start:2.8125rem;
+  margin-left:auto;
+  margin-right:2.0625rem;
+  width:38.5rem;max-width:100%;
+  display:grid;
+  grid-template-columns:repeat(2,18.375rem);
+  column-gap:1.75rem;row-gap:1.9375rem;
+}
+/* 163:1032 — rgba(255,255,255,.1), radius 15 */
+.js-drop .dcard{
+  opacity:0;
+  transform:translateY(-.875rem);
+  transition:opacity .6s ease,transform .7s cubic-bezier(.16,1,.3,1);
+}
+.js-drop .dcard:nth-child(2){transition-delay:.08s;}
+.js-drop .dcard:nth-child(3){transition-delay:.16s;}
+.js-drop .dcard:nth-child(4){transition-delay:.24s;}
+.js-drop.is-in .dcard{opacity:1;transform:none;}
+.dcard{
+  position:relative;
+  min-height:15.9375rem;
+  background:rgba(255,255,255,.1);
+  border-radius:.9375rem;
+  padding:2rem 1.9375rem;
+  display:flex;flex-direction:column;justify-content:center;
+  text-align:center;
+}
+/* 176:1056 — 95×64 box at x:1167 y:2669, i.e. 250px in from the card's left
+   edge and 20px above it, so the numeral overhangs the top-right corner */
+.dcard-num{
+  position:absolute;
+  top:-1.25rem;left:15.625rem;
+  width:5.9375rem;
+  text-align:center;
+  font-family:var(--display);font-weight:400;
+  font-size:6.25rem;line-height:.64;
+  color:rgba(255,255,255,.3);
+  pointer-events:none;
+}
+.dcard h3{
+  font-family:var(--display);font-weight:400;
+  font-size:1.75rem;line-height:1.2;
+}
+.dcard p{
+  margin-block-start:1.25rem;
+  font-size:1.5rem;line-height:1.3;
+}
+
+/* ============ 5. ABOUT / TEAM ============ */
+/* Rebuilt from Figma: photo 832×901 on the right bleeding off the edge, the
+   four bullets in a 2×2 block on the left. */
+.sec-about{padding-block:6rem;}
+.about-stage{
+  position:relative;
+  height:61.25rem;
+}
+/* 204:1410 — 832×901 at y:79, bleeding 41px past the right edge */
+.about-photo{
+  position:absolute;
+  top:4.9375rem;right:-2.5625rem;
+  width:52rem;height:56.3125rem;
+  object-fit:cover;object-position:center;
+}
+/* 81:358 — right edge x:1215, top:3956 */
+/* positioning lives on the wrapper so the scroll drift can ride it without
+   fighting the heading's own reveal transform */
+.about-name-wrap{
+  /* JS drives --drift from +15px (entry) to -30px (exit) */
+  position:absolute;
+  /* measured: the stage bottom sits 78px under the last line of ניהול נכס
+     מלא, so this rests the heading's bottom on the word לקצה */
+  top:auto;bottom:4.875rem;
+  right:3.9375rem;
+  width:28.75rem;
+  transform:translateY(var(--drift,43px));
+  will-change:transform;
+}
+.about-name{
+  text-align:right;
+  font-family:var(--display);font-weight:700;
+  font-size:2.8125rem;line-height:1.1;
+}
+/* 68:186 — block x:64 w:530, two 240px columns 46px apart.
+   direction:ltr so column 1 is physically the left one; the items flip back
+   to rtl so the Hebrew still reads and aligns right inside each cell. */
+.about-grid{
+  direction:ltr;
+  position:absolute;
+  top:17.375rem;
+  left:4rem;
+  width:33.125rem;
+  display:grid;
+  grid-template-columns:15rem 15rem;
+  column-gap:2.875rem;
+  row-gap:2.5rem;
+  align-items:start;
+  transform:translateY(var(--drift,43px));
+  will-change:transform;
+}
+.about-grid > *{direction:rtl;}
+.feat--r1{grid-column:2;grid-row:1;position:relative;top:-1.25rem;}
+.feat--l1{grid-column:1;grid-row:1;position:relative;top:1.25rem;}
+.feat--r2{grid-column:2;grid-row:2;position:relative;top:-1.25rem;}
+.feat--l2{grid-column:1;grid-row:2;position:relative;top:1.25rem;}
+.feat{width:15rem;}
+.feat p{text-align:right;font-size:1.5rem;line-height:1.3;}
+.feat strong{
+  display:block;
+  font-family:var(--display);font-weight:400;
+  font-size:1.75rem;line-height:1.21;
+  margin-block-end:.5rem;
+}
+.feat-icon{width:3rem;height:3rem;margin-left:auto;margin-block-end:.75rem;}
+
+/* entrance: the photo rises out of a bottom-up wipe while easing off a slight
+   drift, each bullet lands on its own beat and its palm pops in with a spring */
+.about-stage.js-stage .about-photo{
+  clip-path:inset(100% 0 0 0);
+  transform:translateY(2.5rem) scale(1.06);
+  transition:clip-path 1.2s cubic-bezier(.16,1,.3,1),
+             transform 1.2s cubic-bezier(.16,1,.3,1);
+  will-change:clip-path,transform;
+}
+.about-stage.js-stage.is-in .about-photo{clip-path:inset(0 0 0 0);transform:none;}
+.about-stage.js-stage .about-grid > *{
+  opacity:0;
+  transform:translateY(3rem);
+  filter:blur(8px);
+  transition:opacity .7s ease,transform .9s cubic-bezier(.16,1,.3,1),filter .7s ease;
+}
+.about-stage.js-stage .about-grid > :nth-child(1){transition-delay:.25s;}
+.about-stage.js-stage .about-grid > :nth-child(2){transition-delay:.4s;}
+.about-stage.js-stage .about-grid > :nth-child(3){transition-delay:.55s;}
+.about-stage.js-stage .about-grid > :nth-child(4){transition-delay:.7s;}
+.about-stage.js-stage .feat-icon{
+  transform:scale(.4);
+  opacity:0;
+  transition:transform .7s cubic-bezier(.22,1.6,.36,1),opacity .4s ease;
+  transition-delay:inherit;
+}
+.about-stage.js-stage.is-in .about-grid > *{opacity:1;transform:none;filter:none;}
+.about-stage.js-stage.is-in .feat-icon{transform:none;opacity:1;}
+
+/* ============ 6. PROCESS ============ */
+/* Figma frame "תהליך" 1280×832. The card column scrolls inside a pinned stage;
+   two gradients top and bottom are what clip the third card in the design. */
+/* card runway + one extra viewport during which the next section covers the
+   pinned stage bottom-up */
+.sec-process{
+  display:block;
+  min-height:0;
+  height:350vh;
+  padding:0;
+}
+.proc-stage{
+  position:sticky;top:0;
+  height:100vh;
+  overflow:hidden;
+  background:var(--ink);
+}
+.proc-bg{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  transform:scaleX(-1);
+  object-fit:cover;object-position:center;
+  z-index:0;
+}
+/* the Figma overlay lives inside the flipped wrapper, so its 230deg mirrors
+   to 130deg out here */
+.proc-shade{
+  position:absolute;inset:0;
+  background:linear-gradient(130deg,rgba(0,0,0,0) 73.195%,rgba(0,0,0,.6) 100%);
+  z-index:0;
+  pointer-events:none;
+}
+.proc-wrap{
+  position:absolute;inset:0;
+  z-index:2;
+  width:80rem;max-width:100%;
+  margin-inline:auto;
+}
+/* cards x:64 w:559, first at y:148 — window runs to the bottom of the frame */
+/* cards now start at y:4307 → 15.5% down the 832 frame */
+.proc-viewport{
+  position:absolute;
+  left:4rem;
+  top:15.5%;
+  width:34.9375rem;
+  height:84.5%;
+  overflow:hidden;
+}
+.proc-track{
+  display:flex;flex-direction:column;
+  gap:.9375rem;
+  will-change:transform;
+}
+.step{
+  position:relative;
+  flex:none;
+  background:rgba(0,37,17,.7);
+  backdrop-filter:blur(10.7px);
+  -webkit-backdrop-filter:blur(10.7px);
+  color:var(--white);
+  border-radius:.9375rem;
+  min-height:18.75rem;
+  padding:2rem;
+  display:flex;flex-direction:column;
+}
+/* 213:1663 — titles now Fb Sayeeda Regular 28px */
+.step h3{
+  font-family:var(--display);
+  font-size:1.75rem;line-height:1.21;font-weight:400;
+  text-align:right;
+}
+/* one blank line between title and body, as in the design */
+.step p{
+  font-size:1.5rem;line-height:1.3;
+  margin-block-start:1.3613rem;
+  text-align:right;
+}
+.step-rule{
+  margin-block-start:1.5rem;
+  width:100%;
+  height:1px;background:rgba(255,255,255,.5);
+}
+/* Figma 129:819 — x:558..594, flush with the right edge of the copy block */
+.step-num{
+  margin-block-start:1.25rem;
+  align-self:flex-start;
+  width:3.375rem;height:3.375rem;border-radius:50%;
+  background:var(--white);color:#002511;
+  display:flex;align-items:center;justify-content:center;
+}
+.step-num svg{width:2.125rem;height:2.125rem;stroke:#001409;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+/* 204:1489 — one heading, centre y:746, right edge x:1218 */
+.proc-sub{
+  position:absolute;
+  right:3.875rem;
+  top:79.9%;
+  width:29.6875rem;
+  text-align:right;
+  font-family:var(--display);font-weight:700;
+  font-size:3.75rem;line-height:1;
+}
+
+/* ============ 7. QUOTE ============ */
+/* rides up over the pinned process stage during its final viewport */
+.sec-quote{
+  position:relative;z-index:2;
+  background:var(--ink);
+  margin-top:-100vh;
+}
+.quote{
+  /* Figma: image x=110 (left), quote text x=605–1170 (right) */
+  direction:ltr;
+  display:flex;align-items:center;justify-content:space-between;
+  padding-inline:6.875rem;
+  padding-block:6rem;
+  gap:3rem;
+}
+/* the organic circular edge is baked into the file's alpha channel — clipping
+   it with border-radius would shave that edge back into a hard circle */
+/* 178:1225 — 2187×592 arc behind the quote */
+.quote-arc{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:170.86vw;height:auto;
+  max-width:none;
+  opacity:.5;
+  pointer-events:none;
+}
+.quote-img{
+  width:26.875rem;height:26.9375rem;
+  object-fit:contain;
+  flex:none;
+}
+.quote-body{direction:rtl;width:35.3125rem;flex:none;}
+.quote-mark{
+  display:block;
+  font-family:var(--display);font-weight:700;
+  font-size:9.375rem;line-height:.7;
+  text-align:right;
+}
+.quote-body p{
+  text-align:right;
+  margin-block-start:1.5rem;
+  font-family:var(--display);font-weight:400;
+  font-size:2.8125rem;line-height:1.21;
+}
+.quote-body strong{font-weight:700;}
+
+/* ============ 8. CONTACT ============ */
+/* Figma 208:1491 — one 1150×371 tinted card (radius 30) holds both columns:
+   the form on the left, heading + phone/email on the right. Footer shares the
+   same viewport below it. */
+.sec-contact{
+  min-height:100vh;
+  display:block;
+  padding:0;
+}
+.contact-stack{
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.contact{
+  width:100%;max-width:none;
+  padding-block-start:7.8125rem;
+  padding-inline:3.9375rem;
+}
+.contact-panel{
+  direction:ltr;
+  width:100%;
+  min-height:23.1875rem;
+  /* the SVG plate is itself white at 10% (palm at 5%) — no colour underneath,
+     or the two would stack to ~19% */
+  background:url("assets/img/form-panel.svg") center/100% 100% no-repeat;
+  border-radius:1.875rem;
+  overflow:hidden;
+  display:flex;justify-content:flex-end;align-items:center;
+  gap:3.125rem;
+  padding:2.875rem 5.75rem 2.875rem 2rem;
+}
+.contact-form-col{
+  direction:rtl;
+  width:33.75rem;flex:none;
+}
+/* 208:1558 — 35px Fb Sayeeda, centred over the form column */
+.contact-title{
+  text-align:center;
+  color:var(--white);
+  font-family:var(--display);font-weight:400;
+  font-size:2.1875rem;line-height:1.1;
+}
+.contact-form{
+  margin-block-start:1.25rem;
+  display:flex;flex-direction:column;gap:.9375rem;
+}
+.contact-form .row{gap:.9375rem;}
+.contact-form .row{display:flex;gap:.9375rem;}
+.contact-form .f-sm{width:8.125rem;flex:none;}
+.contact-form .f-lg{flex:1;}
+.contact-form input{
+  height:3.25rem;
+  width:100%;
+  border:1px solid var(--white);border-radius:.9375rem;
+  background:transparent;color:var(--white);
+  font-family:var(--sans);font-size:1.5rem;line-height:1.21;
+  text-align:center;
+  padding-inline:1rem;
+}
+.contact-form input::placeholder{color:var(--white);opacity:1;}
+.contact-form input:focus{outline:2px solid var(--white);outline-offset:-1px;}
+/* 208:1563 — filled white, SemiBold ink label */
+.contact-form button{
+  height:3.25rem;
+  border:1px solid var(--white);border-radius:.9375rem;
+  background:var(--white);color:#001409;
+  font-family:var(--sans);font-size:1.5rem;font-weight:600;line-height:1.21;
+  cursor:pointer;
+  transition:opacity .3s ease;
+}
+.contact-form button:hover{opacity:.85;}
+/* 208:1581 — Regular opening, Bold close, right edge on the card's inset */
+.contact-aside{direction:rtl;width:32.1875rem;flex:none;}
+.contact-head{
+  font-family:var(--display);font-weight:400;
+  font-size:2.8125rem;line-height:1.1;
+  text-align:right;
+}
+.contact-head strong{font-weight:700;}
+/* 208:1582 — 35px lines, 38px icons flush to the right edge */
+.contact-lines{
+  list-style:none;margin:0;padding:0;
+  margin-block-start:1.5rem;
+  font-size:2.1875rem;line-height:2.1;
+}
+.contact-lines li{
+  display:flex;align-items:center;justify-content:flex-start;
+  gap:1.1875rem;
+}
+.contact-lines img{width:2.375rem;height:2.375rem;flex:none;}
+
+/* ============ FOOTER ============ */
+.footer{padding-block:2rem 1.875rem;}
+/* the footer rides the header's gutters: full-bleed with 30px each side */
+.footer-inner{
+  width:100%;max-width:none;
+  padding-inline:1.875rem;
+}
+.footer-top{
+  /* Figma: brand x=65 (left), nav x=616 (centre), contact x=857–1215 (right) */
+  direction:ltr;
+  display:flex;align-items:flex-start;justify-content:space-between;
+  gap:2rem;
+}
+/* matches the header mark: cover crops the padding baked into the PNG */
+.footer-logo{width:8.8769rem;height:5.375rem;object-fit:cover;}
+.footer-copy{
+  direction:rtl;text-align:left;
+  margin-block-start:1.125rem;
+  font-size:1.125rem;line-height:2.32;
+}
+.footer-nav{
+  direction:rtl;text-align:right;
+  display:flex;flex-direction:column;font-size:1.125rem;line-height:2.32;
+}
+.footer-contact{
+  direction:rtl;
+  list-style:none;margin:0;padding:0;
+  font-size:1.125rem;line-height:2.32;
+  text-align:right;
+}
+/* icon sits to the right of the text (Figma x=1191) */
+.footer-contact li{display:flex;align-items:center;justify-content:flex-start;gap:1rem;}
+.footer-contact img{width:1.4744rem;height:1.4744rem;flex:none;}
+.footer-bottom{
+  margin-block-start:2.125rem;
+  padding-block-start:2.0625rem;
+  border-block-start:1px solid rgba(255,255,255,.35);
+  /* the mark reads as the next word in the sentence, not a separate block */
+  display:flex;align-items:center;justify-content:center;gap:.375rem;
+}
+.footer-bottom span{font-size:1.125rem;line-height:2.32;}
+.footer-credit{width:auto;height:3.8338rem;}
+
+/* ============ MOBILE ============ */
+@media (max-width:900px){
+  html{font-size:min(15px, 3.4vw);}
+  .wrap{padding-inline:1.5rem;}
+
+  .nav{height:5rem;}
+  .nav-inner{padding-inline:1.25rem;}
+  .nav-logo img{width:5rem;height:3rem;}
+  .nav-call{display:none;}
+  .nav-logo{position:static;transform:none;}
+  .nav-links{gap:1rem;}
+  .nav-links a{font-size:1.25rem;}
+
+  .hero-layer{top:0;height:100%;width:140%;}
+  .hero-copy{top:6.5rem;inset-inline:1.25rem;width:auto;}
+  .hero-title .l1{font-size:3rem;}
+  .hero-title .l2{font-size:5.6rem;}
+  .hero-title .l3{font-size:2rem;}
+  .hero-lead{width:100%;font-size:1.1rem;}
+  .hero-lead br{display:none;}
+  .hero-cta{width:11rem;height:3.2rem;font-size:1.15rem;}
+
+  .intro-head .b{font-size:2.4rem;}
+  .intro-head .r{font-size:1.9rem;}
+  .intro-body{font-size:1.4rem;}
+  .intro-body br{display:none;}
+  .btn-ghost{width:100%;height:auto;padding:1rem;font-size:1.15rem;text-align:center;}
+
+  .problem{padding-inline:1.25rem;}
+  .problem-head{width:100%;font-size:2.1rem;}
+  .problem-cards{flex-direction:column;align-items:stretch;gap:3.5rem;}
+  .pcard{width:100%;min-height:0;padding:3rem 1.5rem 1.75rem;}
+  .pcard-word{font-size:3.25rem;top:-2rem;}
+  .pcard p{font-size:1.15rem;}
+  .problem-arc{display:none;}
+
+  .opp-head{
+    width:100%;margin-left:0;margin-right:0;padding-inline:1.5rem;
+    margin-block-start:8rem;font-size:2.1rem;
+  }
+  .problem-head{margin-left:0;}
+  .quote{direction:rtl;}
+  .footer-top{direction:rtl;}
+  .footer-copy{text-align:right;}
+  .opp-eye{display:none;}
+  .opp-head{font-size:2.1rem;padding-inline-end:0;}
+  .opp-cards{width:100%;grid-template-columns:1fr;}
+  .dcard{min-height:0;padding:2.25rem 1.5rem 1.5rem;}
+  .dcard h3{font-size:1.5rem;}
+  .dcard-num{font-size:4rem;top:-1.2rem;}
+
+  .about-stage{height:auto;display:flex;flex-direction:column;align-items:center;gap:2.5rem;}
+  .about-photo{position:static;transform:none;width:100%;height:auto;}
+  .about-name{position:static;width:100%;font-size:2.1rem;text-align:center;}
+  .about-stage{height:auto;display:flex;flex-direction:column;gap:2rem;}
+  .about-photo{position:static;width:100%;height:auto;}
+  .about-grid{
+    position:static;direction:rtl;
+    width:100%;
+    grid-template-columns:1fr;
+    row-gap:2.5rem;
+  }
+  .feat--r1,.feat--l1,.feat--r2,.feat--l2{grid-column:1;grid-row:auto;}
+  .feat{width:100%;}
+  .feat p{font-size:1.15rem;}
+
+  .proc-viewport{
+    left:1.25rem;right:1.25rem;width:auto;
+    top:34%;height:66%;
+  }
+  .proc-sub{left:1.25rem;right:1.25rem;width:auto;top:14%;font-size:2.4rem;}
+
+  .quote{flex-direction:column;padding-inline:1.5rem;gap:2.5rem;}
+  .quote-img{width:16rem;height:16rem;}
+  .quote-body{width:100%;}
+  .quote-body p{font-size:1.8rem;}
+
+  .contact{padding-inline:1.25rem;padding-block-start:7rem;}
+  .contact-panel{flex-direction:column;direction:rtl;gap:2.5rem;padding:1.5rem 1.25rem;}
+  .contact-form-col,.contact-aside{width:100%;padding-block-start:0;}
+  .contact-head{width:100%;font-size:2.1rem;}
+  .contact-lines{font-size:1.5rem;line-height:1.8;margin-block-start:1.5rem;}
+  .contact-lines img{width:1.6rem;height:1.6rem;}
+  .contact-title{font-size:1.7rem;}
+  .contact-form .row{flex-direction:column;}
+  .contact-form .f-sm{width:100%;}
+  .contact-form input,.contact-form button{font-size:1.2rem;height:3.2rem;}
+  .footer-inner{width:100%;padding-inline:1.25rem;}
+  .quote-arc{display:none;}
+
+  .footer-inner{padding-inline:1.25rem;}
+  .footer-top{flex-direction:column;align-items:flex-start;gap:2rem;}
+  .footer-contact li{justify-content:flex-start;}
+}
