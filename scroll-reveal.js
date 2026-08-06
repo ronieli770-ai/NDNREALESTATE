@@ -66,7 +66,6 @@
     '.problem-head',
     '.opp-head',
     '.about-name',
-    '.contact-head',
     '.quote-body p'
   ];
 
