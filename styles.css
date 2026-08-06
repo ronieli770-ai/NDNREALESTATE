@@ -894,15 +894,19 @@ h1,h2,h3{margin:0;font-weight:400;}
   flex:none;
 }
 .quote-body{direction:rtl;width:35.3125rem;flex:none;}
+/* the glyph's ink sits high in its em box, leaving ~45px of dead space under
+   it — the negative end-margin swallows that so the visual gap is the 20px
+   the paragraph margin supplies */
 .quote-mark{
   display:block;
   font-family:var(--display);font-weight:700;
   font-size:9.375rem;line-height:.7;
   text-align:right;
+  margin-block-end:-2.8125rem;
 }
 .quote-body p{
   text-align:right;
-  margin-block-start:1.5rem;
+  margin-block-start:1.25rem;
   font-family:var(--display);font-weight:400;
   font-size:2.8125rem;line-height:1.21;
 }
