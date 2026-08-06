@@ -1,14 +1,29 @@
 // עלינו — a stepped story with no page scroll. The dots (and wheel / arrow
-// keys) move between slides; each activation replays the right-to-left text
-// wipe. The photo is a vanilla port of the React Bits DecayCard: cursor speed
-// feeds an feDisplacementMap while the card drifts and tilts after the pointer.
+// keys) move between slides; each activation replays the right-to-left word
+// reveal and cross-fades the photo to the one the slide carries.
 (function () {
   var slides = Array.prototype.slice.call(document.querySelectorAll('.story-slide'));
   var dots = Array.prototype.slice.call(document.querySelectorAll('.story-dot'));
   if (!slides.length) return;
 
+  var photo = document.querySelector('.decay img');
   var current = 0;
   var lock = 0;
+
+  // preload so the cross-fade never lands on a blank frame
+  slides.forEach(function (s) {
+    if (s.dataset.img) new Image().src = s.dataset.img;
+  });
+
+  function setPhoto(slide) {
+    if (!photo || !slide.dataset.img || photo.getAttribute('src') === slide.dataset.img) return;
+    photo.classList.add('is-swapping');
+    setTimeout(function () {
+      photo.src = slide.dataset.img;
+      photo.alt = slide.dataset.alt || '';
+      photo.classList.remove('is-swapping');
+    }, 260);
+  }
 
   function goTo(i) {
     if (i < 0 || i >= slides.length || i === current) return;
@@ -17,6 +32,7 @@
     current = i;
     slides[current].classList.add('is-active');
     dots[current].classList.add('is-active');
+    setPhoto(slides[current]);
   }
 
   dots.forEach(function (dot, i) {
@@ -70,8 +86,10 @@
     });
   });
 
-  // the iris finishes at ~1.15s; everything below fades in after it
-  setTimeout(function () {
-    document.body.classList.add('is-ready');
-  }, 1150);
+  // let the first paint settle, then fade the composition in
+  requestAnimationFrame(function () {
+    setTimeout(function () {
+      document.body.classList.add('is-ready');
+    }, 60);
+  });
 })();
