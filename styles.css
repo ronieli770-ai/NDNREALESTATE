@@ -1249,6 +1249,8 @@ h1,h2,h3{margin:0;font-weight:400;}
 }
 .story-text strong,.story-text strong .sword{font-weight:600;}
 .story-text b,.story-text b .sword{font-weight:700;}
+/* closing slide: same head, the home page's form where the copy would sit */
+.story-slide--form .contact-form{margin-block-start:1.75rem;}
 /* the stage holds empty under the iris, then everything fades in together */
 .about-page .story{
   opacity:0;
