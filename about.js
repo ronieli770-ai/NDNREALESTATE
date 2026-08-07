@@ -6,6 +6,7 @@
   var dots = Array.prototype.slice.call(document.querySelectorAll('.story-dot'));
   if (!slides.length) return;
 
+  var stage = document.querySelector('.story');
   var photo = document.querySelector('.decay img');
   var current = 0;
   var lock = 0;
@@ -33,6 +34,7 @@
     slides[current].classList.add('is-active');
     dots[current].classList.add('is-active');
     setPhoto(slides[current]);
+    stage.classList.toggle('is-form', slides[current].classList.contains('story-slide--form'));
   }
 
   dots.forEach(function (dot, i) {
