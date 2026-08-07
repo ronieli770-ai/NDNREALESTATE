@@ -1249,17 +1249,15 @@ h1,h2,h3{margin:0;font-weight:400;}
 }
 .story-text strong,.story-text strong .sword{font-weight:600;}
 .story-text b,.story-text b .sword{font-weight:700;}
-/* closing slide: no photo, everything centred on the page */
+/* closing slide: no photo — the home page's full contact panel, centred */
 .story-slide--form{
-  right:0;left:0;width:auto;min-width:0;
+  inset:0;width:auto;min-width:0;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  padding:7.5rem 3.9375rem 3rem;
   text-align:center;
 }
-.story-slide--form .story-head{max-width:42rem;margin-inline:auto;}
-.story-slide--form .contact-form{
-  margin-block-start:1.75rem;
-  width:min(34.3vw,34rem);min-width:28rem;
-  margin-inline:auto;
-}
+.story-slide--form .story-head{max-width:52rem;}
+.story-slide--form .contact-panel{margin-block-start:2.5rem;}
 .story.is-form .decay{opacity:0;visibility:hidden;transition:opacity .4s ease,visibility 0s .4s;}
 /* the stage holds empty under the iris, then everything fades in together */
 .about-page .story{
@@ -1270,7 +1268,8 @@ h1,h2,h3{margin:0;font-weight:400;}
 /* 273:48 — dots inset 10.76% from the right, just under centre */
 .story-dots{
   position:absolute;
-  right:10.76%;
+  /* flush with the header's right gutter */
+  right:1.875rem;
   top:53%;
   transform:translateY(-50%);
   display:flex;flex-direction:column;
