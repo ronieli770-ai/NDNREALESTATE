@@ -273,7 +273,8 @@ h1,h2,h3{margin:0;font-weight:400;}
 .sec-hero{
   display:block;
   min-height:0;
-  height:160vh;
+  /* 100vh stage + a quarter-screen runway for the buildings to clear */
+  height:125vh;
   overflow:visible;
   padding:0;
 }
