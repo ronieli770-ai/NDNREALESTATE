@@ -1617,10 +1617,9 @@ h1,h2,h3{margin:0;font-weight:400;}
   .hero-buildings{top:auto;bottom:0;height:auto;z-index:1;}
   /* both files are full-frame exports of the Figma mobile artboard, so each
      one maps onto the whole stage — no cropping, no re-framing.
-     In the Figma frame the skyline is the bottom layer — the button sits at
-     48.7% and the opaque skyline starts at 48.6%, so on top it would bury it.
-     The skyline stays under the copy; the copy fades out as it climbs. */
-  .hero-buildings{top:0;bottom:0;height:100%;z-index:1;}
+     Stack: sky, copy, skyline. The skyline rides over the copy as it climbs;
+     the copy only drifts a few pixels and keeps its opacity. */
+  .hero-buildings{top:0;bottom:0;height:100%;z-index:3;}
   .hero-layer picture{display:block;position:absolute;inset:0;height:100%;}
   .hero-layer img{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;}
 
