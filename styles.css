@@ -1114,7 +1114,8 @@ h1,h2,h3{margin:0;font-weight:400;}
   .nav-inner{padding-inline:1.25rem;}
   .nav-logo{width:5rem;height:3rem;}
   .nav-call{display:none;}
-  .nav-logo{position:static;transform:none;}
+  /* stays the containing block for the light mark layered on top */
+  .nav-logo{position:relative;left:auto;transform:none;}
   .nav-links{gap:1rem;}
   .nav-links a{font-size:1.25rem;}
 
