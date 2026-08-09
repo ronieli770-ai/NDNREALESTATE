@@ -2198,16 +2198,18 @@ h1,h2,h3{margin:0;font-weight:400;}
     align-items:stretch;
     gap:2rem;
   }
+  /* two equal halves — explicit, so no base width sneaks in */
   .reach-copy{
-    width:19rem;flex:none;
+    flex:none;width:calc(50% - 1rem);min-width:0;
     display:flex;flex-direction:column;
   }
-  /* the map fills whatever height the form column sets — equal columns */
-  .reach-map{flex:1;min-height:0;}
+  .reach .contact-panel{flex:none;width:calc(50% - 1rem);}
+  /* square-ish map closing the column */
+  .reach-map{aspect-ratio:3/2;min-height:0;flex:none;}
   .reach .contact-panel{
     flex:1;min-width:0;
     min-height:0;
-    justify-content:flex-start;
+    justify-content:center;
     padding:2.25rem 2rem;
     /* plain glass plate — the palm artwork is gone */
     background:rgba(255,255,255,.1);
@@ -2216,4 +2218,14 @@ h1,h2,h3{margin:0;font-weight:400;}
 }
 @media (max-width:900px){
   .reach-map{min-height:14rem;}
+}
+
+@media (min-width:901px){
+  .reach .contact-form .row{flex-direction:column;}
+  .reach .contact-form .f-sm,.reach .contact-form .f-lg{width:100%;flex:none;}
+  /* tighter beat between the second heading and the contact lines */
+  .reach-lines{margin-block-start:.75rem;}
+  /* the fold shows a good bite of the footer */
+  .reach{padding-block-start:3.5rem;}
+  .contact-page .footer{margin-block-start:.75rem;}
 }
