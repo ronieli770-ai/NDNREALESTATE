@@ -1967,7 +1967,8 @@ h1,h2,h3{margin:0;font-weight:400;}
     flex:none;
     height:auto;min-height:0;
     justify-content:flex-start;
-    padding:2.25rem 1.25rem;
+    /* equal air above the form title and under the last contact line */
+    padding:2.75rem 1.25rem;
   }
   .story-slide--form .contact-form-col{width:100%;}
 }
