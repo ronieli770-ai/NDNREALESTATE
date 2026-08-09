@@ -10,6 +10,7 @@
 
   var track = sec.querySelector('.proc-track');
   var heading = sec.querySelector('.proc-sub');
+  var headWrap = sec.querySelector('.proc-sub-wrap');
   if (!track) return;
 
   var ticking = false;
@@ -19,7 +20,13 @@
     var vh = window.innerHeight;
     var rect = sec.getBoundingClientRect();
 
-    // the heading pops the moment the stage fills the screen
+    // the heading is already up at half a screen, then settles into place
+    if (headWrap) {
+      var d = (vh * 0.5 - rect.top) / (vh * 0.5);
+      d = d < 0 ? 0 : d > 1 ? 1 : d;
+      headWrap.style.setProperty('--drop', (-(1 - d) * 6).toFixed(3) + 'rem');
+      if (d > 0) heading.classList.add('is-in');
+    }
     if (heading && rect.top <= 0 && rect.bottom >= vh) {
       heading.classList.add('is-in');
     }

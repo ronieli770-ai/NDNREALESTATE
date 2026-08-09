@@ -222,9 +222,9 @@ h1,h2,h3{margin:0;font-weight:400;}
   background:#002511;
   color:var(--white);
   font-family:var(--sans);
-  font-size:1.5rem;line-height:1.21;
+  font-size:1.5rem;font-weight:700;line-height:1.21;
   display:flex;align-items:center;justify-content:center;
-  transition:background .45s ease,color .45s ease;
+  transition:background .45s ease,color .45s ease,box-shadow .45s ease;
 }
 .nav-call{direction:rtl;gap:.625rem;}
 .nav-call-icon{
@@ -233,9 +233,12 @@ h1,h2,h3{margin:0;font-weight:400;}
   -webkit-mask:url("assets/icons/phone.svg") center/contain no-repeat;
   mask:url("assets/icons/phone.svg") center/contain no-repeat;
 }
-.nav-call:hover{background:var(--white);color:#001409;}
-.nav.is-scrolled .nav-call{background:var(--white);color:#002511;}
-.nav.is-scrolled .nav-call:hover{background:rgba(255,255,255,.8);}
+.nav-call:hover{background:var(--white);color:#002511;}
+.nav.is-scrolled .nav-call{
+  background:#AFDF8E;color:#002511;
+  box-shadow:0 4px 20.1px rgba(175,223,142,.5);
+}
+.nav.is-scrolled .nav-call:hover{background:var(--white);color:#002511;}
 /* 163:983 — logo x:586..695, i.e. dead centre of the 1280 frame, so it is
    centred against the bar rather than left to space-between (the call button
    and the links are different widths and would push it off-centre) */
@@ -383,14 +386,16 @@ h1,h2,h3{margin:0;font-weight:400;}
   margin-left:auto;
   width:13.4375rem;height:3.875rem;
   border-radius:.9375rem;
-  background:#002511;
-  color:var(--white);
+  background:#AFDF8E;
+  color:#002511;
+  font-weight:700;
+  box-shadow:0 4px 20.1px rgba(175,223,142,.5);
   font-family:var(--sans);
   font-size:1.5rem;line-height:1.21;
   display:flex;align-items:center;justify-content:center;
   transition:background .45s ease,color .45s ease;
 }
-.hero-cta:hover{background:rgba(0,37,17,.8);}
+.hero-cta:hover{background:var(--white);color:#002511;}
 
 /* ============ 2. INTRO ============ */
 .sec-intro{overflow:hidden;}
@@ -425,6 +430,9 @@ h1,h2,h3{margin:0;font-weight:400;}
   top:50%;left:50%;
   transform:translate(-50%,-50%);
   width:2.1334rem;height:2.1189rem;
+  background:#AFDF8E;opacity:.3;
+  -webkit-mask:url("assets/icons/intro-badge-icon.svg") center/contain no-repeat;
+  mask:url("assets/icons/intro-badge-icon.svg") center/contain no-repeat;
 }
 /* 60:88 — Bold 60 over Regular 45, centred, w:1021 */
 .intro-head{
@@ -467,13 +475,17 @@ h1,h2,h3{margin:0;font-weight:400;}
   position:relative;
   margin-block-start:1.5625rem;
   width:35.3125rem;max-width:100%;height:3.875rem;
-  /* dimmed base line so the traced stroke reads on top of it */
-  border:1px solid rgba(255,255,255,.35);border-radius:.9375rem;
+  border:0;border-radius:.9375rem;
+  background:#AFDF8E;
+  color:#002511;
+  font-weight:700;
+  box-shadow:0 4px 20.1px rgba(175,223,142,.5);
   display:flex;align-items:center;justify-content:center;
   font-size:1.5rem;line-height:1.21;
-  transition:background 1s ease-in-out,opacity .6s ease;
+  transition:background .45s ease,color .45s ease,opacity .6s ease;
 }
-.btn-ghost:hover{background:rgba(255,255,255,.08);}
+.btn-ghost:hover{background:var(--white);color:#002511;}
+.btn-outline{display:none;}
 /* pathLength normalises the outline to 480 units, so the dash values hold at
    any button size — no need to recompute the perimeter as the layout scales */
 .btn-outline{
@@ -531,8 +543,8 @@ h1,h2,h3{margin:0;font-weight:400;}
   left:50%;
   transform:translateX(-50%);
   font-family:var(--sans);font-weight:700;
-  font-size:5rem;line-height:1.1;
-  color:rgba(255,255,255,.4);
+  font-size:3.125rem;line-height:1.1;
+  color:rgba(175,223,142,.3);
   white-space:nowrap;
   pointer-events:none;
 }
@@ -665,7 +677,7 @@ h1,h2,h3{margin:0;font-weight:400;}
   padding:2rem 1.9375rem;
   /* titles pin to a shared top line instead of floating with centred content */
   display:flex;flex-direction:column;justify-content:flex-start;
-  text-align:center;
+  text-align:right;
 }
 /* 176:1056 — 95×64 box at x:1167 y:2669, i.e. 250px in from the card's left
    edge and 20px above it, so the numeral overhangs the top-right corner */
@@ -676,7 +688,7 @@ h1,h2,h3{margin:0;font-weight:400;}
   text-align:center;
   font-family:var(--display);font-weight:400;
   font-size:6.25rem;line-height:.64;
-  color:rgba(255,255,255,.3);
+  color:rgba(175,223,142,.3);
   pointer-events:none;
 }
 .dcard h3{
@@ -717,6 +729,7 @@ h1,h2,h3{margin:0;font-weight:400;}
   transform:translateY(var(--drift,43px));
   will-change:transform;
 }
+.about-names{color:#AFDF8E;}
 .about-name{
   text-align:right;
   font-family:var(--display);font-weight:700;
@@ -875,11 +888,15 @@ h1,h2,h3{margin:0;font-weight:400;}
 }
 .step-num svg{width:2.125rem;height:2.125rem;stroke:#001409;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
 /* 204:1489 — one heading, centre y:746, right edge x:1218 */
-.proc-sub{
+.proc-sub-wrap{
   position:absolute;
   right:3.875rem;
   top:79.9%;
   width:29.6875rem;
+  /* JS walks --drop from -6rem to 0 as the stage climbs the last half-screen */
+  transform:translateY(var(--drop,-6rem));
+}
+.proc-sub{
   text-align:right;
   font-family:var(--display);font-weight:700;
   font-size:3.75rem;line-height:1;
@@ -923,6 +940,7 @@ h1,h2,h3{margin:0;font-weight:400;}
    the paragraph margin supplies */
 .quote-mark{
   display:block;
+  color:rgba(175,223,142,.3);
   font-family:var(--display);font-weight:700;
   font-size:9.375rem;line-height:.7;
   text-align:right;
@@ -934,7 +952,7 @@ h1,h2,h3{margin:0;font-weight:400;}
   font-family:var(--display);font-weight:400;
   font-size:2.8125rem;line-height:1.21;
 }
-.quote-body strong{font-weight:700;}
+.quote-body strong{font-weight:700;color:#AFDF8E;}
 
 /* ============ 8. CONTACT ============ */
 /* Figma 208:1491 — one 1150×371 tinted card (radius 30) holds both columns:
@@ -1000,13 +1018,16 @@ h1,h2,h3{margin:0;font-weight:400;}
 /* 208:1563 — filled white, SemiBold ink label */
 .contact-form button{
   height:3.25rem;
-  border:1px solid var(--white);border-radius:.9375rem;
-  background:var(--white);color:#001409;
-  font-family:var(--sans);font-size:1.5rem;font-weight:600;line-height:1.21;
+  border:0;border-radius:.9375rem;
+  background:#AFDF8E;
+  color:#002511;
+  font-weight:700;
+  box-shadow:0 4px 20.1px rgba(175,223,142,.5);
+  font-family:var(--sans);font-size:1.5rem;line-height:1.21;
   cursor:pointer;
-  transition:opacity .3s ease;
+  transition:background .45s ease,color .45s ease;
 }
-.contact-form button:hover{opacity:.85;}
+.contact-form button:hover{background:var(--white);color:#002511;}
 /* 208:1581 — Regular opening, Bold close, right edge on the card's inset */
 .contact-aside{direction:rtl;width:32.1875rem;flex:none;}
 .contact-head{
@@ -1140,7 +1161,8 @@ h1,h2,h3{margin:0;font-weight:400;}
     left:1.25rem;right:1.25rem;width:auto;
     top:34%;height:66%;
   }
-  .proc-sub{left:1.25rem;right:1.25rem;width:auto;top:14%;font-size:2.4rem;}
+  .proc-sub-wrap{left:1.25rem;right:1.25rem;width:auto;top:14%;}
+  .proc-sub{font-size:2.4rem;}
 
   .quote{flex-direction:column;padding-inline:1.5rem;gap:2.5rem;}
   .quote-img{width:16rem;height:16rem;}
