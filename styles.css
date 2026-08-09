@@ -2024,6 +2024,12 @@ h1,h2,h3{margin:0;font-weight:400;}
 }
 
 @media (max-width:900px){
-  .story-slide--form{text-align:center;}
+  .story-slide--form{
+    text-align:center;
+    /* the slide scrolls, but without drawing a scrollbar over the content */
+    scrollbar-width:none;
+    -ms-overflow-style:none;
+  }
+  .story-slide--form::-webkit-scrollbar{display:none;}
   .story-slide--form .story-head{padding-inline-start:0;text-align:center;}
 }
