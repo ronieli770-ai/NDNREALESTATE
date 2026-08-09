@@ -2080,3 +2080,32 @@ h1,h2,h3{margin:0;font-weight:400;}
   .nav-sheet-lines a{color:var(--white);}
   .nav-sheet-mark{position:absolute;right:27px;bottom:44px;width:86px;height:auto;}
 }
+
+/* ============ MOBILE MOTION PASS ============ */
+@media (max-width:900px) and (prefers-reduced-motion: no-preference){
+  /* the menu builds itself: each row rides in on its own beat after the
+     sheet lands */
+  .nav-sheet-links a,.nav-sheet-cta,.nav-sheet-lines,.nav-sheet-mark{
+    opacity:0;transform:translateX(2.75rem);
+    transition:opacity .45s ease,transform .6s cubic-bezier(.16,1,.3,1);
+  }
+  .menu-open .nav-sheet-links a,.menu-open .nav-sheet-cta,
+  .menu-open .nav-sheet-lines,.menu-open .nav-sheet-mark{
+    opacity:1;transform:none;
+  }
+  .menu-open .nav-sheet-links a:nth-child(1){transition-delay:.28s;}
+  .menu-open .nav-sheet-links a:nth-child(2){transition-delay:.36s;}
+  .menu-open .nav-sheet-links a:nth-child(3){transition-delay:.44s;}
+  .menu-open .nav-sheet-cta{transition-delay:.54s;}
+  .menu-open .nav-sheet-lines{transition-delay:.62s;}
+  .menu-open .nav-sheet-mark{transition-delay:.7s;}
+
+  /* the step deck deals itself in, card by card, as the section arrives */
+  .proc-viewport .step{
+    opacity:0;transform:translateX(-2.25rem);
+    transition:opacity .55s ease,transform .75s cubic-bezier(.16,1,.3,1),filter .3s ease;
+  }
+  .proc-viewport.is-in .step{opacity:1;transform:none;}
+  .proc-viewport.is-in .step:nth-child(2){transition-delay:.1s;}
+  .proc-viewport.is-in .step:nth-child(3){transition-delay:.2s;}
+}

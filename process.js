@@ -53,6 +53,18 @@
     // than through rAF, which some in-app browsers starve
     scroller.addEventListener('scroll', paint, { passive: true });
     addEventListener('resize', paint);
+
+    // the deck deals in once the section reaches the viewport
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries, obs) {
+        if (entries[0].isIntersecting) {
+          scroller.classList.add('is-in');
+          obs.disconnect();
+        }
+      }, { rootMargin: '0px 0px -12% 0px' }).observe(scroller);
+    } else {
+      scroller.classList.add('is-in');
+    }
     if (heading) heading.classList.add('is-in');
     paint();
     setTimeout(paint, 300);
