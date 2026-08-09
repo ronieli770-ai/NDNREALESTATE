@@ -8,6 +8,19 @@
 
   var stage = document.querySelector('.story');
 
+  // the closing slide's form panel matches the height of the copy column to
+  // its right — measured, since the copy wraps differently per viewport
+  var formSlide = document.querySelector('.story-slide--form');
+  function sizeFormPanel() {
+    if (!formSlide || window.matchMedia('(max-width:900px)').matches) return;
+    var copy = formSlide.querySelector('.form-copy');
+    var panel = formSlide.querySelector('.contact-panel');
+    if (copy && panel) panel.style.height = copy.getBoundingClientRect().height + 'px';
+  }
+  sizeFormPanel();
+  addEventListener('resize', sizeFormPanel);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(sizeFormPanel);
+
   var photo = document.querySelector('.decay img');
   var current = 0;
   var lock = 0;

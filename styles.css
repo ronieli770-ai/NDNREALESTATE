@@ -2166,12 +2166,14 @@ h1,h2,h3{margin:0;font-weight:400;}
   .story-slide--form .contact-title{margin-block-end:.5rem;}
   .story-slide--form .contact-panel{
     position:absolute;
-    left:10.76%;top:50%;
-    transform:translateY(-50%);
+    left:10.76%;top:29.9%;
+    transform:none;
     width:calc(67vh * 561 / 749);
-    height:67vh;
+    /* height is matched to the copy column at runtime (about.js) */
+    height:auto;
     display:flex;flex-direction:column;justify-content:center;
-    padding:2.5rem 2rem;
+    padding:20px;
+    margin:0;
     background:rgba(255,255,255,.1);
   }
 }
