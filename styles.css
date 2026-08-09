@@ -1558,8 +1558,9 @@ h1,h2,h3{margin:0;font-weight:400;}
 
   /* --- 4. "למה דובאי": heading and numerals share the tiles' right edge --- */
   .opp-head{padding-inline:0;text-align:right;}
-  .opp-cards{margin-block-start:2rem;}
-  .dcard{min-height:17.5rem;padding:2.5rem 1.5rem 1.5rem;}
+  /* more air under the heading, and the tiles hug their copy */
+  .opp-cards{margin-block-start:3.25rem;}
+  .dcard{min-height:0;padding:2.5rem 1.5rem 1.5rem;}
   .dcard-num{left:auto;right:1.5rem;width:auto;text-align:right;top:-1rem;}
 
   /* --- 5. "נעים מאוד": one even rhythm between the bullets --- */
