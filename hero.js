@@ -93,9 +93,9 @@ window.setNavBare = function (key, on) {
     if (!animate) return;
 
     copy.style.setProperty('--y', -(p * TITLE_RISE).toFixed(1) + 'px');
-    // mobile: the whole layers animation plays out in the first half of the
-    // runway; section 2's text enters during the second half
-    var pb = small.matches ? Math.min(1, p * 2) : p;
+    // mobile: the skyline keeps climbing for the entire runway — no stop —
+    // while the copy drifts up and section 2's text rides in over it
+    var pb = p;
     var rise = small.matches ? 0.58 : BUILDINGS_RISE;
     buildings.style.setProperty(
       '--y',
