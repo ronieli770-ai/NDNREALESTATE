@@ -1793,9 +1793,9 @@ h1,h2,h3{margin:0;font-weight:400;}
   }
   .decay img{width:100%;height:100%;object-fit:cover;}
   .story-slide{
-    /* the copy stops at the burger's left edge (1.25rem gutter + 2.6rem icon),
-       leaving the dots their own column */
-    left:1.25rem;right:3.85rem;
+    /* the container sits on the header's own gutters — logo edge to burger
+       edge — and only the running lines keep clear of the dots column */
+    left:1.25rem;right:1.25rem;
     /* directly under the square photo, 30px below it */
     top:calc(6.5rem + env(safe-area-inset-top) + 100vw - 2.5rem + 30px);
     bottom:auto;
@@ -1804,15 +1804,17 @@ h1,h2,h3{margin:0;font-weight:400;}
   }
   .story-head{font-size:25px;line-height:1.15;}
   .story-text{font-size:20px;margin-block-start:.75rem;}
-  /* flush with the burger's right edge, centred on the page */
+  /* fixed on the header's right gutter, centred on the screen */
   .story-dots{
+    position:fixed;
     right:1.25rem;left:auto;
     top:50%;bottom:auto;
     transform:translateY(-50%);
     gap:1rem;
+    z-index:40;
   }
   .story-slide--form{
-    inset:calc(6.5rem + env(safe-area-inset-top)) 3.85rem 2rem 1.25rem;
+    inset:calc(6.5rem + env(safe-area-inset-top)) 1.25rem 2rem 1.25rem;
     padding:0;
     justify-content:flex-start;
     overflow-y:auto;
@@ -1933,4 +1935,11 @@ h1,h2,h3{margin:0;font-weight:400;}
     padding-block:30px;
   }
   .intro{padding-block:0;}
+}
+
+@media (max-width:900px){
+  /* the dots hold a 2.35rem column on the right — the copy stops before it,
+     while the photo and the form panel run the full container width */
+  .story-head,.story-text{padding-inline-start:2.35rem;}
+  .story-slide--form .story-head{padding-inline-start:0;}
 }
