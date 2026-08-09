@@ -247,11 +247,12 @@ h1,h2,h3{margin:0;font-weight:400;}
   left:50%;
   transform:translateX(-50%);
   display:block;
+  width:8.8769rem;height:5.375rem;
 }
-.nav-logo img{width:8.8769rem;height:5.375rem;object-fit:cover;}
+.nav-logo img{width:100%;height:100%;object-fit:cover;}
 /* the dark mark is unreadable once the bar goes dark — cross-fade to the light one */
 .nav-logo .logo-light{
-  position:absolute;inset-block-start:0;inset-inline-start:0;
+  position:absolute;inset:0;
   opacity:0;
 }
 .nav-logo img{transition:opacity .45s ease;}
@@ -1111,7 +1112,7 @@ h1,h2,h3{margin:0;font-weight:400;}
 
   .nav{height:5rem;}
   .nav-inner{padding-inline:1.25rem;}
-  .nav-logo img{width:5rem;height:3rem;}
+  .nav-logo{width:5rem;height:3rem;}
   .nav-call{display:none;}
   .nav-logo{position:static;transform:none;}
   .nav-links{gap:1rem;}
@@ -1457,7 +1458,7 @@ h1,h2,h3{margin:0;font-weight:400;}
     padding-inline:1.25rem;
     display:flex;align-items:center;justify-content:space-between;
   }
-  .nav-logo img{width:7.5rem;height:4.5rem;}
+  .nav-logo{width:7.5rem;height:4.5rem;}
   .nav-burger{
     display:flex;flex-direction:column;justify-content:center;gap:.4rem;
     position:relative;z-index:62;
@@ -1655,7 +1656,7 @@ h1,h2,h3{margin:0;font-weight:400;}
   }
   .btn-ghost{width:100%;padding:0 1rem;}
 
-  .nav-logo{display:flex;align-items:center;height:100%;}
+  .nav-logo{display:block;}
 
   /* hero: a quarter-screen of empty ground before section 2 */
   .sec-hero{height:125vh;}
@@ -1831,7 +1832,7 @@ h1,h2,h3{margin:0;font-weight:400;}
 
 /* the hero copy has to live entirely in the sky, clear of the skyline */
 @media (max-width:900px){
-  .nav-logo img{width:6.5rem;height:3.9rem;}
+  .nav-logo{width:6.5rem;height:3.9rem;}
   .hero-title .l1{font-size:2.8rem;line-height:1;}
   .hero-title .l2{font-size:5.6rem;line-height:.8;}
   .hero-title .l3{font-size:1.9rem;line-height:1.2;margin-block-start:0;}
