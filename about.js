@@ -7,6 +7,23 @@
   if (!slides.length) return;
 
   var stage = document.querySelector('.story');
+
+  // On a phone the stepped story has nowhere to put a slide's overflow (the
+  // closing form especially), so it unfolds into a normal scrolling column:
+  // every slide keeps its own photo and scrolling simply moves to the next.
+  if (window.matchMedia('(max-width:900px)').matches) {
+    document.body.classList.add('story-flow');
+    slides.forEach(function (slide) {
+      slide.classList.add('is-active');
+      if (!slide.dataset.img) return;
+      var img = document.createElement('img');
+      img.className = 'story-photo';
+      img.src = slide.dataset.img;
+      img.alt = slide.dataset.alt || '';
+      slide.insertBefore(img, slide.firstChild);
+    });
+    return;
+  }
   var photo = document.querySelector('.decay img');
   var current = 0;
   var lock = 0;
