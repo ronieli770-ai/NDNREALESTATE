@@ -1418,8 +1418,9 @@ h1,h2,h3{margin:0;font-weight:400;}
     transform:none !important;
     margin-block-end:1.75rem;
   }
+  .opp-cards{margin-inline:0;width:100%;}
   .proc-viewport{
-    position:relative;left:auto;top:auto;
+    position:relative;left:auto;right:auto;top:auto;
     width:100%;height:auto;
     padding-inline:1.25rem;
     overflow:visible;
