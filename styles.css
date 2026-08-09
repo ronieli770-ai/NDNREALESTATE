@@ -1889,11 +1889,11 @@ h1,h2,h3{margin:0;font-weight:400;}
   .hero-title .l2{font-size:5.4rem;line-height:.8;}
   .hero-title .l3{font-size:1.9rem;line-height:1.2;margin-block-start:0;}
   .hero-lead{
-    margin-block-start:.5rem;
+    margin-block-start:1.4rem;
     max-width:none;
     line-height:1.12;
   }
-  .hero-cta{margin-block-start:.5rem;}
+  .hero-cta{margin-block-start:1.4rem;}
 }
 
 @media (max-width:900px){
