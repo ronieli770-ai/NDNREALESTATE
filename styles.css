@@ -1492,7 +1492,7 @@ h1,h2,h3{margin:0;font-weight:400;}
   .step h3,.step p{transition:filter .3s ease;}
   /* the stage photo mirrors back to its original direction on the phone,
      and reads a step brighter under the cards */
-  .proc-bg{transform:none;filter:brightness(1.7);}
+  .proc-bg{transform:none;filter:brightness(1.45);}
   .proc-shade{background:linear-gradient(230deg,rgba(0,0,0,0) 73.195%,rgba(0,0,0,.6) 100%);}
   .step h3{font-size:22px;}
   .step p{font-size:16px;margin-block-start:.75rem;}
