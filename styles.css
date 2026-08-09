@@ -1885,3 +1885,16 @@ h1,h2,h3{margin:0;font-weight:400;}
   .pcard{min-height:0;text-align:center;}
   .pcard p{text-align:center;}
 }
+
+@media (max-width:900px){
+  /* "נעים מאוד" rides up onto the photo so its baseline block finishes on the
+     picture's bottom edge instead of floating below it */
+  .about-stage{position:relative;}
+  .about-name-wrap{
+    position:relative;
+    top:-5.9rem;
+    margin-block-end:-5.9rem;
+    z-index:2;
+  }
+  .about-name{text-shadow:0 2px 12px rgba(0,20,9,.55);}
+}
