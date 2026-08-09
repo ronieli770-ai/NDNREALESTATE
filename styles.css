@@ -399,7 +399,7 @@ h1,h2,h3{margin:0;font-weight:400;}
 .hero-cta:hover{background:var(--white);color:#002511;}
 
 /* ============ 2. INTRO ============ */
-.sec-intro{overflow:hidden;}
+.sec-intro{overflow:hidden;align-items:flex-start;}
 /* knocks the reveal back from 80% to ~15% behind the copy, feathered at the
    edges. Same colour as the section, so it is invisible on its own. */
 .intro::before{
@@ -417,7 +417,7 @@ h1,h2,h3{margin:0;font-weight:400;}
   position:relative;z-index:1;
   display:flex;flex-direction:column;align-items:center;
   text-align:center;
-  padding-block:6rem;
+  padding-block:0 6rem;
 }
 /* 163:988 — 174×116 badge above the heading, centred on the frame */
 .intro-badge{
@@ -1336,11 +1336,11 @@ h1,h2,h3{margin:0;font-weight:400;}
   box-shadow:var(--gx,0px) var(--gy,4px) var(--gblur,20.1px) rgba(175,223,142,var(--galpha,.5));
 }
 .hero-cta:hover,.btn-ghost:hover,.contact-form button:hover,.nav.is-scrolled .nav-call:hover{
-  --galpha:.85;
-  --gblur:14px;
-  transform:scale(1.035);
+  --galpha:.55;
+  --gblur:9px;
+  transform:scale(1.02);
 }
-.nav-call:hover{transform:scale(1.035);}
+.nav-call:hover{transform:scale(1.02);}
 .hero-cta,.btn-ghost,.contact-form button,.nav-call{
   transform-origin:center;
   transition:background .45s ease,color .45s ease,transform .35s cubic-bezier(.16,1,.3,1),box-shadow .25s ease;
