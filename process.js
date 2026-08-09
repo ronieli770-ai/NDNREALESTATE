@@ -33,8 +33,20 @@
         var soft = 1 - Math.min(1, ratio / 0.9);
         card.style.filter = soft > 0.02 ? 'blur(' + (soft * 3.5).toFixed(2) + 'px)' : '';
         card.style.opacity = (1 - soft * 0.35).toFixed(3);
+        card.__ratio = ratio;
       });
+
+      var best = 0;
+      cards.forEach(function (card, i) { if (card.__ratio > cards[best].__ratio) best = i; });
+      pips.forEach(function (p, i) { p.classList.toggle('is-on', i === best); });
     };
+
+    // a slim progress rail under the deck, so the position is always legible
+    var rail = document.createElement('div');
+    rail.className = 'proc-rail';
+    cards.forEach(function () { rail.appendChild(document.createElement('span')); });
+    scroller.parentNode.insertBefore(rail, scroller.nextSibling);
+    var pips = Array.prototype.slice.call(rail.children);
 
     var queued = false;
     var onScroll = function () {

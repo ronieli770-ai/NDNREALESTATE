@@ -1989,3 +1989,18 @@ h1,h2,h3{margin:0;font-weight:400;}
   }
   .story-slide--form .contact-form-col{width:100%;}
 }
+
+@media (max-width:900px){
+  /* the deck's progress rail */
+  .proc-rail{
+    display:flex;justify-content:center;gap:.5rem;
+    margin-block-start:1.5rem;
+    padding-inline:1.25rem;
+  }
+  .proc-rail span{
+    width:.5rem;height:.5rem;border-radius:50%;
+    background:rgba(255,255,255,.25);
+    transition:background .3s ease,width .3s ease;
+  }
+  .proc-rail span.is-on{width:1.6rem;border-radius:.25rem;background:#AFDF8E;}
+}
