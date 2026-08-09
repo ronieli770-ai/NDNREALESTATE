@@ -2168,8 +2168,8 @@ h1,h2,h3{margin:0;font-weight:400;}
 }
 @media (min-width:901px){
   .reach{
-    /* the whole composition holds half the page, centred */
-    width:min(50%,48rem);
+    /* the whole composition holds 80% of the page, centred */
+    width:min(80%,72rem);
     padding-inline:0;
     margin-inline:auto;
     align-items:stretch;
