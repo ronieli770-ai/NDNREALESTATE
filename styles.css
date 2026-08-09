@@ -2012,10 +2012,10 @@ h1,h2,h3{margin:0;font-weight:400;}
   }
   .proc-rail span{
     width:.5rem;height:.5rem;border-radius:50%;
-    background:rgba(255,255,255,.25);
+    background:rgba(0,20,9,.35);
     transition:background .3s ease,width .3s ease;
   }
-  .proc-rail span.is-on{width:1.6rem;border-radius:.25rem;background:#AFDF8E;}
+  .proc-rail span.is-on{width:1.6rem;border-radius:.25rem;background:#001409;}
 }
 
 @media (max-width:900px){
