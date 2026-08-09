@@ -1966,11 +1966,13 @@ h1,h2,h3{margin:0;font-weight:400;}
     /* rides up over the pinned hero during its cover screen */
     position:relative;z-index:5;
     background:var(--ink);
-    min-height:0;
+    min-height:100vh;
+    min-height:100dvh;
     height:auto;
     margin-block-start:-100vh;
     margin-block-start:-100dvh;
     padding-block:30px;
+    display:flex;align-items:center;justify-content:center;
   }
   .intro{padding-block:0;}
 }
