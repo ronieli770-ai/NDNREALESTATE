@@ -16,6 +16,40 @@
   var small = window.matchMedia('(max-width:900px)');
   var ticking = false;
 
+  // --- mobile: the column turns on its side and the finger drives it ---
+  // The card that is only half on screen carries a light blur, which lifts as
+  // it slides into view — that is what tells you there is more to swipe.
+  if (small.matches) {
+    var scroller = sec.querySelector('.proc-viewport');
+    var cards = Array.prototype.slice.call(track.children);
+
+    var paint = function () {
+      var box = scroller.getBoundingClientRect();
+      cards.forEach(function (card) {
+        var r = card.getBoundingClientRect();
+        var visible = Math.min(r.right, box.right) - Math.max(r.left, box.left);
+        var ratio = Math.max(0, Math.min(1, visible / r.width));
+        // fully in view is sharp; anything cut off softens toward the edge
+        var soft = 1 - Math.min(1, ratio / 0.9);
+        card.style.filter = soft > 0.02 ? 'blur(' + (soft * 3.5).toFixed(2) + 'px)' : '';
+        card.style.opacity = (1 - soft * 0.35).toFixed(3);
+      });
+    };
+
+    var queued = false;
+    var onScroll = function () {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(function () { queued = false; paint(); });
+    };
+    scroller.addEventListener('scroll', onScroll, { passive: true });
+    addEventListener('resize', onScroll);
+    if (heading) heading.classList.add('is-in');
+    paint();
+    setTimeout(paint, 300);
+    return;
+  }
+
   function update() {
     ticking = false;
     var vh = window.innerHeight;

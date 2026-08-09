@@ -1442,35 +1442,50 @@ h1,h2,h3{margin:0;font-weight:400;}
   .intro{padding-block:1.5rem 3.5rem;}
   .intro-badge{margin-block-end:1.25rem;}
 
-  /* the stage pins to the screen and the card column travels inside it,
-     exactly like the desktop — the heading sits above the column */
-  /* one pinned screen plus the column travel — no cover phase on mobile */
-  .sec-process{height:220vh;height:220dvh;}
+  /* the column lies on its side: one card in view, the next one peeking, and
+     the finger drives it. The stage is only as tall as its contents. */
+  .sec-process{height:auto;min-height:0;}
   .proc-stage{
-    position:sticky;top:0;
-    height:100vh;height:100dvh;
-    padding:0;overflow:hidden;
+    position:relative;top:auto;
+    height:auto;min-height:0;
+    padding-block:3rem;
+    overflow:hidden;
   }
-  .proc-wrap{position:absolute;inset:0;display:block;width:100%;max-width:none;padding:0;}
+  .proc-wrap{position:relative;inset:auto;display:block;width:100%;max-width:none;padding:0;}
   .proc-sub-wrap{
-    position:absolute;
-    top:calc(5.5rem + env(safe-area-inset-top) + 20px);
-    left:1.25rem;right:1.25rem;width:auto;
+    position:relative;inset:auto;
+    width:auto;padding-inline:1.25rem;
+    margin:0 0 2.25rem;
     transform:none !important;
-    margin:0;
   }
   .opp-cards{margin-inline:0;width:100%;}
   .proc-viewport{
-    position:absolute;
-    left:1.25rem;right:1.25rem;width:auto;
-    top:calc(5.5rem + env(safe-area-inset-top) + 6rem);
-    bottom:1.5rem;height:auto;
-    overflow:hidden;
+    position:relative;inset:auto;
+    width:auto;height:auto;
+    padding-inline:1.25rem;
+    overflow-x:auto;overflow-y:hidden;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
   }
-  .proc-track{gap:1.25rem;}
-  .step{min-height:0;padding:1.5rem;}
-  .step h3{font-size:1.5rem;}
-  .step p{font-size:1.15rem;margin-block-start:.75rem;}
+  .proc-viewport::-webkit-scrollbar{display:none;}
+  .proc-track{
+    flex-direction:row;
+    align-items:stretch;
+    width:max-content;
+    gap:1rem;
+    transform:none;
+  }
+  .step{
+    flex:none;
+    width:78vw;max-width:22rem;
+    min-height:0;
+    padding:1.75rem 1.5rem;
+    scroll-snap-align:start;
+    transition:filter .35s ease,opacity .35s ease;
+  }
+  .step h3{font-size:22px;}
+  .step p{font-size:16px;margin-block-start:.75rem;}
 
   /* nothing rides over the stage here — the quote simply follows it */
   .sec-quote{margin-top:0;}
