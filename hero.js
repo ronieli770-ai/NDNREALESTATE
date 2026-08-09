@@ -64,6 +64,8 @@ window.setNavBare = function (key, on) {
   var nav = document.querySelector('.nav');
   if (!section || !copy || !buildings) return;
 
+  var intro = document.querySelector('.sec-intro');
+  var introContent = document.querySelector('.sec-intro .intro');
   var TITLE_RISE = 90;       // px
   var BUILDINGS_RISE = 1.25; // × viewport height
   // On mobile the layer is a full-frame export whose skyline starts halfway
@@ -76,6 +78,7 @@ window.setNavBare = function (key, on) {
 
   function update() {
     ticking = false;
+    var vhNow = window.innerHeight;
     var rect = section.getBoundingClientRect();
     var runway = section.offsetHeight - window.innerHeight;
 
@@ -96,6 +99,18 @@ window.setNavBare = function (key, on) {
     // mobile: the skyline keeps climbing for the entire runway — no stop —
     // while the copy drifts up and section 2's text rides in over it
     var pb = p;
+    // desktop cover phase: section 2's content only starts showing once the
+    // section has ridden half-way in, then climbs from the bottom and lands
+    // centred exactly as the section reaches full height
+    if (!small.matches && intro && introContent) {
+      var q = 1 - intro.getBoundingClientRect().top / vhNow;
+      q = q < 0 ? 0 : q > 1 ? 1 : q;
+      var t2 = (q - 0.5) * 2;
+      t2 = t2 < 0 ? 0 : t2 > 1 ? 1 : t2;
+      introContent.style.transform = 'translateY(' + ((1 - t2) * 55).toFixed(2) + 'vh)';
+      introContent.style.opacity = t2.toFixed(3);
+    }
+
     var rise = small.matches ? 0.58 : BUILDINGS_RISE;
     buildings.style.setProperty(
       '--y',
