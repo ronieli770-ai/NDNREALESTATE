@@ -1819,13 +1819,18 @@ h1,h2,h3{margin:0;font-weight:400;}
   }
 }
 
-/* the fixed header must not tint the status-bar strip — no blur, no fill, so
-   the hero image runs unbroken to the very top and the bar just floats */
+/* Over the hero the bar carries nothing at all, so the sky runs unbroken to
+   the very top and the status-bar strip stays clean. Past the hero it takes
+   the desktop treatment: the dark fill and the heavier blur. */
 @media (max-width:900px){
-  .nav,
-  .nav.is-scrolled{
+  .nav{
     background:transparent;
+    backdrop-filter:none;-webkit-backdrop-filter:none;
     box-shadow:none;
+  }
+  .nav.is-scrolled{
+    background:rgba(0,20,9,.7);
+    backdrop-filter:blur(13px);-webkit-backdrop-filter:blur(13px);
   }
   .sec-hero{margin:0;padding:0;}
   .hero-stage{top:0;}
