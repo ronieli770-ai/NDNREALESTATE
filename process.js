@@ -13,6 +13,7 @@
   var headWrap = sec.querySelector('.proc-sub-wrap');
   if (!track) return;
 
+  var small = window.matchMedia('(max-width:900px)');
   var ticking = false;
 
   function update() {
@@ -33,9 +34,11 @@
 
     if (rect.bottom < 0 || rect.top > vh) return;
 
-    // the last viewport of the section is the cover phase: the stage holds
-    // still while the next section rides up over it
-    var runway = sec.offsetHeight - vh * 2;
+    // Desktop keeps a second viewport as the cover phase, where the quote
+    // rides up over the pinned stage. On mobile the sections are only as tall
+    // as their copy, so that overlap swallowed them — there the section ends
+    // as soon as the cards finish.
+    var runway = sec.offsetHeight - vh * (small.matches ? 1 : 2);
     if (runway <= 0) return;
 
     var p = -rect.top / runway;

@@ -1444,8 +1444,8 @@ h1,h2,h3{margin:0;font-weight:400;}
 
   /* the stage pins to the screen and the card column travels inside it,
      exactly like the desktop — the heading sits above the column */
-  /* two screens (pinned stage + the cover phase) plus the column travel */
-  .sec-process{height:320vh;height:320dvh;}
+  /* one pinned screen plus the column travel — no cover phase on mobile */
+  .sec-process{height:220vh;height:220dvh;}
   .proc-stage{
     position:sticky;top:0;
     height:100vh;height:100dvh;
@@ -1472,8 +1472,8 @@ h1,h2,h3{margin:0;font-weight:400;}
   .step h3{font-size:1.5rem;}
   .step p{font-size:1.15rem;margin-block-start:.75rem;}
 
-  /* the quote rides up over the pinned stage, as on the desktop */
-  .sec-quote{margin-top:-100vh;margin-top:-100dvh;}
+  /* nothing rides over the stage here — the quote simply follows it */
+  .sec-quote{margin-top:0;}
 
   /* "נעים מאוד" — the drift scripts write inline transforms; drop them */
   .about-name-wrap{
