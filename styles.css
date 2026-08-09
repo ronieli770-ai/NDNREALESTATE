@@ -1183,7 +1183,7 @@ h1,h2,h3{margin:0;font-weight:400;}
   .footer-copy{text-align:right;}
   .opp-eye{display:none;}
   .opp-head{font-size:2.1rem;padding-inline-end:0;}
-  .opp-cards{width:100%;grid-template-columns:1fr;}
+  .opp-cards{width:100%;}
   .dcard{min-height:0;padding:2.25rem 1.5rem 1.5rem;}
   .dcard h3{font-size:1.5rem;}
   .dcard-num{font-size:4rem;top:-1.2rem;}
@@ -1942,4 +1942,17 @@ h1,h2,h3{margin:0;font-weight:400;}
      while the photo and the form panel run the full container width */
   .story-head,.story-text{padding-inline-start:2.35rem;}
   .story-slide--form .story-head{padding-inline-start:0;}
+}
+
+@media (max-width:900px){
+  /* 2 × 2 on the phone, same as the desktop grid */
+  .opp-cards{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    column-gap:.75rem;row-gap:.75rem;
+  }
+  .dcard{padding:2.25rem 1rem 1.25rem;}
+  .dcard h3{font-size:19px;}
+  .dcard p{font-size:15px;line-height:1.35;}
+  /* the numeral straddles the tile's top-right corner at this width too */
+  .dcard-num{font-size:3.25rem;right:.9rem;top:-.7rem;}
 }
