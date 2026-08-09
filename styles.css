@@ -1451,8 +1451,10 @@ h1,h2,h3{margin:0;font-weight:400;}
     padding-block:3rem;
     overflow:hidden;
   }
-  .proc-wrap{position:relative;inset:auto;display:block;width:100%;max-width:none;padding:0;}
+  /* the heading comes after the cards in the markup — put it back on top */
+  .proc-wrap{position:relative;inset:auto;display:flex;flex-direction:column;width:100%;max-width:none;padding:0;}
   .proc-sub-wrap{
+    order:-1;
     position:relative;inset:auto;
     width:auto;padding-inline:1.25rem;
     margin:0 0 2.25rem;
