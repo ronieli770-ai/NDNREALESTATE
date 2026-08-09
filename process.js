@@ -8,6 +8,14 @@
   var sec = document.querySelector('.sec-process');
   if (!sec) return;
 
+  // The cards' glass blur, forced inline. The Lovable build pipeline processes
+  // site.css and somewhere along the way the backdrop-filter stopped reaching
+  // the page; an inline style bypasses any stylesheet transform for good.
+  sec.querySelectorAll('.step').forEach(function (card) {
+    card.style.webkitBackdropFilter = 'blur(10.7px)';
+    card.style.backdropFilter = 'blur(10.7px)';
+  });
+
   var track = sec.querySelector('.proc-track');
   var heading = sec.querySelector('.proc-sub');
   var headWrap = sec.querySelector('.proc-sub-wrap');
