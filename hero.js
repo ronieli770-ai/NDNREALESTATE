@@ -82,6 +82,8 @@ window.setNavBare = function (key, on) {
     if (!animate) return;
 
     copy.style.setProperty('--y', -(p * TITLE_RISE).toFixed(1) + 'px');
+    // on a phone the skyline sits under the copy, so the copy fades as it
+    // climbs instead of being wiped by the rising layer
     if (small.matches) copy.style.opacity = Math.max(0, 1 - p * 2.2).toFixed(3);
     else copy.style.opacity = '';
     buildings.style.setProperty(
