@@ -230,8 +230,8 @@ h1,h2,h3{margin:0;font-weight:400;}
 .nav-call-icon{
   width:1.375rem;height:1.375rem;flex:none;
   background:currentColor;
-  -webkit-mask:url("assets/icons/phone.svg") center/contain no-repeat;
-  mask:url("assets/icons/phone.svg") center/contain no-repeat;
+  -webkit-mask:url("assets/icons/phone-bold.svg") center/contain no-repeat;
+  mask:url("assets/icons/phone-bold.svg") center/contain no-repeat;
 }
 .nav-call:hover{background:var(--white);color:#002511;}
 .nav.is-scrolled .nav-call{
@@ -430,7 +430,7 @@ h1,h2,h3{margin:0;font-weight:400;}
   top:50%;left:50%;
   transform:translate(-50%,-50%);
   width:2.1334rem;height:2.1189rem;
-  background:#AFDF8E;opacity:.3;
+  background:#AFDF8E;
   -webkit-mask:url("assets/icons/intro-badge-icon.svg") center/contain no-repeat;
   mask:url("assets/icons/intro-badge-icon.svg") center/contain no-repeat;
 }
@@ -446,7 +446,7 @@ h1,h2,h3{margin:0;font-weight:400;}
 .intro-body{
   width:56.9375rem;max-width:100%;
   margin-block-start:1.5625rem;
-  font-size:2.1875rem;line-height:1.41;
+  font-size:1.875rem;line-height:1.41;
 }
 /* ScrollReveal — each word fades and un-blurs on its own delay, the block
    settles from a slight tilt. Scoped to .js-reveal, which JS adds, so without
@@ -539,9 +539,9 @@ h1,h2,h3{margin:0;font-weight:400;}
 /* 204:1301 — IBM Plex Bold 80px at 40% white, straddling the top edge */
 .pcard-word{
   position:absolute;
-  top:-3.0625rem;
+  top:0;
   left:50%;
-  transform:translateX(-50%);
+  transform:translate(-50%,-50%);
   font-family:var(--sans);font-weight:700;
   font-size:3.125rem;line-height:1.1;
   color:rgba(175,223,142,.3);
@@ -577,7 +577,7 @@ h1,h2,h3{margin:0;font-weight:400;}
 }
 .js-cards .pcard-word{
   opacity:0;
-  transform:translateX(-50%) translateY(-2.5rem);
+  transform:translate(-50%,-50%) translateY(-2.5rem);
   transition:
     opacity .55s ease,
     transform .8s cubic-bezier(.22,1.4,.36,1);
@@ -593,7 +593,7 @@ h1,h2,h3{margin:0;font-weight:400;}
 .js-cards.is-in .pcard{opacity:1;transform:none;filter:none;}
 .problem-cards{perspective:800px;}
 .pcard{transform-style:preserve-3d;}
-.js-cards.is-in .pcard-word{opacity:1;transform:translateX(-50%);}
+.js-cards.is-in .pcard-word{opacity:1;transform:translate(-50%,-50%);}
 
 /* ============ 4. OPPORTUNITY ============ */
 /* Rebuilt from Figma: the pinned drawer cards are gone. Static 2×2 grid of
@@ -1123,7 +1123,7 @@ h1,h2,h3{margin:0;font-weight:400;}
   .problem-head{width:100%;font-size:2.1rem;}
   .problem-cards{flex-direction:column;align-items:stretch;gap:3.5rem;}
   .pcard{width:100%;min-height:0;padding:3rem 1.5rem 1.75rem;}
-  .pcard-word{font-size:3.25rem;top:-2rem;}
+  .pcard-word{font-size:3.25rem;}
   .pcard p{font-size:1.15rem;}
   .problem-arc{display:none;}
 
@@ -1316,3 +1316,20 @@ h1,h2,h3{margin:0;font-weight:400;}
   .story-text{font-size:1.4rem;}
   .story-dots{right:1rem;}
 }
+
+/* ============ BUTTONS: pointer-tracked glow ============ */
+/* JS feeds --gx/--gy from the cursor's offset inside the button, so the halo
+   slides around the rim toward the pointer instead of sitting still */
+.hero-cta,.btn-ghost,.contact-form button,.nav.is-scrolled .nav-call{
+  box-shadow:var(--gx,0px) var(--gy,4px) var(--gblur,20.1px) rgba(175,223,142,.5);
+}
+.hero-cta:hover,.btn-ghost:hover,.contact-form button:hover,.nav.is-scrolled .nav-call:hover{
+  --gblur:26px;
+  transform:scale(1.035);
+}
+.nav-call:hover{transform:scale(1.035);}
+.hero-cta,.btn-ghost,.contact-form button,.nav-call{
+  transform-origin:center;
+  transition:background .45s ease,color .45s ease,transform .35s cubic-bezier(.16,1,.3,1),box-shadow .25s ease;
+}
+.is-glowing{transition:background .45s ease,color .45s ease,transform .35s cubic-bezier(.16,1,.3,1),box-shadow 0s;}
