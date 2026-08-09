@@ -1442,30 +1442,38 @@ h1,h2,h3{margin:0;font-weight:400;}
   .intro{padding-block:1.5rem 3.5rem;}
   .intro-badge{margin-block-end:1.25rem;}
 
-  /* the process stage unpins — the cards simply stack down the page */
-  .sec-process{height:auto;}
-  .proc-stage{position:relative;height:auto;padding-block:3.5rem;}
-  .proc-wrap{position:relative;inset:auto;width:100%;max-width:none;}
+  /* the stage pins to the screen and the card column travels inside it,
+     exactly like the desktop — the heading sits above the column */
+  /* two screens (pinned stage + the cover phase) plus the column travel */
+  .sec-process{height:320vh;height:320dvh;}
+  .proc-stage{
+    position:sticky;top:0;
+    height:100vh;height:100dvh;
+    padding:0;overflow:hidden;
+  }
+  .proc-wrap{position:absolute;inset:0;display:block;width:100%;max-width:none;padding:0;}
   .proc-sub-wrap{
-    position:relative;left:auto;right:auto;top:auto;
-    width:100%;padding-inline:1.25rem;
+    position:absolute;
+    top:calc(5.5rem + env(safe-area-inset-top) + 20px);
+    left:1.25rem;right:1.25rem;width:auto;
     transform:none !important;
-    margin-block-end:1.75rem;
+    margin:0;
   }
   .opp-cards{margin-inline:0;width:100%;}
   .proc-viewport{
-    position:relative;left:auto;right:auto;top:auto;
-    width:100%;height:auto;
-    padding-inline:1.25rem;
-    overflow:visible;
+    position:absolute;
+    left:1.25rem;right:1.25rem;width:auto;
+    top:calc(5.5rem + env(safe-area-inset-top) + 6rem);
+    bottom:1.5rem;height:auto;
+    overflow:hidden;
   }
-  .proc-track{transform:none !important;gap:1.25rem;}
+  .proc-track{gap:1.25rem;}
   .step{min-height:0;padding:1.5rem;}
   .step h3{font-size:1.5rem;}
   .step p{font-size:1.15rem;margin-block-start:.75rem;}
 
-  /* nothing is pinned above it any more, so the quote sits in normal flow */
-  .sec-quote{margin-top:0;}
+  /* the quote rides up over the pinned stage, as on the desktop */
+  .sec-quote{margin-top:-100vh;margin-top:-100dvh;}
 
   /* "נעים מאוד" — the drift scripts write inline transforms; drop them */
   .about-name-wrap{
@@ -1528,7 +1536,6 @@ h1,h2,h3{margin:0;font-weight:400;}
   .intro{padding-block:0;}
   .problem{padding-block:0;}
   .quote{padding-block:0;}
-  .proc-stage{padding-block:0;}
   .contact{padding-block-start:0;}
   .footer{padding-block:1.875rem;}
 
@@ -1568,8 +1575,6 @@ h1,h2,h3{margin:0;font-weight:400;}
   .about-grid{row-gap:2.25rem;}
 
   /* --- 6. the steps: heading first, then the cards --- */
-  .proc-wrap{display:flex;flex-direction:column;}
-  .proc-sub-wrap{order:-1;}
 
   /* --- 7. the quote leads, the portrait follows --- */
   .quote-body{order:-1;}
@@ -1697,7 +1702,6 @@ h1,h2,h3{margin:0;font-weight:400;}
   .dcard h3,.step h3,.feat strong{font-size:22px;line-height:1.2;}
 
   /* the photo-backed stage keeps 20px of air */
-  .proc-stage{padding-block:20px;}
 
   /* ---- fullscreen menu (Figma 299:246) ---- */
   .nav-links{display:none;}
@@ -1770,7 +1774,6 @@ h1,h2,h3{margin:0;font-weight:400;}
   .dcard h3,.step h3,.feat strong{font-size:25px;line-height:1.15;}
 
   /* the steps: 60px of air on the stage, roomier cards */
-  .proc-stage{padding-block:40px;}
   .step{padding:1.75rem 1.5rem;}
 
 }
