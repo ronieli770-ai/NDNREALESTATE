@@ -1470,7 +1470,9 @@ h1,h2,h3{margin:0;font-weight:400;}
     /* the snap honours the gutter, so the resting card lines up with the
        heading instead of kissing the screen edge */
     scroll-padding-inline:1.25rem;
-    -webkit-overflow-scrolling:touch;
+    /* NOTE: -webkit-overflow-scrolling:touch was here and killed the cards'
+       backdrop-filter on iOS (known Safari bug); momentum scrolling is the
+       default anyway, so it is gone for good */
     scrollbar-width:none;
   }
   .proc-viewport::-webkit-scrollbar{display:none;}
