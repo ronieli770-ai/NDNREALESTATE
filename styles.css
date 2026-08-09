@@ -1566,8 +1566,6 @@ h1,h2,h3{margin:0;font-weight:400;}
   .hero-title .l2{font-size:7.6rem;}
   .hero-title .l3{margin-block-start:0;}
   .hero-cta{width:14rem;height:3.9rem;font-size:18px;}
-  /* a longer runway so the skyline's climb is actually visible */
-  .sec-hero{height:185vh;}
 
   /* 2. the secondary line under the main heading */
   .intro-head .r{font-size:20px;line-height:1.25;}
@@ -1656,8 +1654,6 @@ h1,h2,h3{margin:0;font-weight:400;}
 
   .nav-logo{display:block;}
 
-  /* hero: a quarter-screen of empty ground before section 2 */
-  .sec-hero{height:125vh;}
 
   .intro-head .b{line-height:1.05;}
   .intro-badge-icon{width:2.6rem;height:2.6rem;}
@@ -1730,8 +1726,9 @@ h1,h2,h3{margin:0;font-weight:400;}
 
 /* ============ MOBILE ROUND 5 ============ */
 @media (max-width:900px){
-  /* a long runway so the skyline's climb plays out fully */
-  .sec-hero{height:200vh;}
+  /* runway: long enough to watch the skyline climb, short enough that
+     section 2 arrives right after it clears */
+  .sec-hero{height:135vh;}
 
   /* section 3 reads across the tile like section 4 does */
   .pcard{width:100%;padding:2.5rem 1.5rem 1.5rem;text-align:right;}
