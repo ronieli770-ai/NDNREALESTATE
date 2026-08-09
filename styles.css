@@ -1758,9 +1758,10 @@ h1,h2,h3{margin:0;font-weight:400;}
 
 /* ============ MOBILE ROUND 5 ============ */
 @media (max-width:900px){
-  /* runway: long enough to watch the skyline climb, short enough that
-     section 2 arrives right after it clears */
+  /* 100vh stage + a 35vh runway, and the skyline is tuned to finish clearing
+     exactly at the end of it — no empty screen before section 2 */
   .sec-hero{height:135vh;}
+  .sec-intro{margin-block-start:0;}
 
   /* section 3 reads across the tile like section 4 does */
   .pcard{width:100%;padding:2.5rem 1.5rem 1.5rem;text-align:right;}

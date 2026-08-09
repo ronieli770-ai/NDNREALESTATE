@@ -66,6 +66,10 @@ window.setNavBare = function (key, on) {
 
   var TITLE_RISE = 90;       // px
   var BUILDINGS_RISE = 1.25; // × viewport height
+  // On mobile the layer is a full-frame export whose skyline starts halfway
+  // down, so it clears after ~55% of a screen. Rising the full 1.25 screens
+  // meant the last two thirds of the runway showed nothing but empty sky.
+  var small = window.matchMedia('(max-width:900px)');
   var NAV_AT = 0.98;         // stays bare until the hero has fully cleared
   var animate = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var ticking = false;
@@ -81,9 +85,10 @@ window.setNavBare = function (key, on) {
     if (!animate) return;
 
     copy.style.setProperty('--y', -(p * TITLE_RISE).toFixed(1) + 'px');
+    var rise = small.matches ? 0.58 : BUILDINGS_RISE;
     buildings.style.setProperty(
       '--y',
-      -(p * BUILDINGS_RISE * window.innerHeight).toFixed(1) + 'px'
+      -(p * rise * window.innerHeight).toFixed(1) + 'px'
     );
   }
 
