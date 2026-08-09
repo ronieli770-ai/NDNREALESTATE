@@ -1319,7 +1319,7 @@ h1,h2,h3{margin:0;font-weight:400;}
   transition:background .3s ease,transform .3s ease;
 }
 .story-dot:hover{transform:scale(1.25);}
-.story-dot.is-active{background:#637570;}
+.story-dot.is-active{background:#AFDF8E;}
 
 @media (max-width:900px){
   .decay{left:50%;top:7.5rem;transform:translateX(-50%);height:38vh;}
