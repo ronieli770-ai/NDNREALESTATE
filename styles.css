@@ -1951,23 +1951,14 @@ h1,h2,h3{margin:0;font-weight:400;}
      removing the negative pull brings back the empty-screen gap. Both broke
      once; never again. */
   .sec-hero{
-    /* 100 on screen + 160 of runway: the gradient finishes its sweep by 60%
-       of the runway, and section 2 starts entering at ~37% — the overlap is
-       what makes the text peek in while the skyline is still fading */
-    height:260vh;      /* fallback */
-    height:260dvh;     /* real visible height on iOS */
+    /* 100 on screen + 100 of runway. First half: the layers animation with
+       the skyline's own baked gradient, exactly the look that was approved.
+       Second half: section 2's text rides up over the darkened stage. */
+    height:200vh;      /* fallback */
+    height:200dvh;     /* real visible height on iOS */
     min-height:0;
     margin:0;
     padding:0;
-  }
-  /* phase 1 of the scroll: a dark gradient sweeps up over the skyline,
-     0 → 100, before section 2 begins to enter */
-  .hero-stage::after{
-    content:"";
-    position:absolute;inset:0;z-index:4;
-    pointer-events:none;
-    background:linear-gradient(180deg,rgba(0,20,9,0) 0%,#001409 60%);
-    transform:translateY(calc((1 - var(--fadep,0)) * 100%));
   }
   .hero-stage{
     position:sticky;top:0;
@@ -1982,8 +1973,8 @@ h1,h2,h3{margin:0;font-weight:400;}
     min-height:100vh;
     min-height:100dvh;
     height:auto;
-    margin-block-start:-100vh;
-    margin-block-start:-100dvh;
+    margin-block-start:-50vh;
+    margin-block-start:-50dvh;
     padding-block:30px;
     display:flex;align-items:center;justify-content:center;
   }

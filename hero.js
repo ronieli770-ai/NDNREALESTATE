@@ -93,16 +93,13 @@ window.setNavBare = function (key, on) {
     if (!animate) return;
 
     copy.style.setProperty('--y', -(p * TITLE_RISE).toFixed(1) + 'px');
-    // mobile phase 1 (first half of the runway): the bottom gradient sweeps
-    // the hero 0 → 100; section 2 only starts entering in the second half
-    if (small.matches) {
-      var stage = section.querySelector('.hero-stage');
-      if (stage) stage.style.setProperty('--fadep', Math.min(1, p / 0.6).toFixed(3));
-    }
+    // mobile: the whole layers animation plays out in the first half of the
+    // runway; section 2's text enters during the second half
+    var pb = small.matches ? Math.min(1, p * 2) : p;
     var rise = small.matches ? 0.58 : BUILDINGS_RISE;
     buildings.style.setProperty(
       '--y',
-      -(p * rise * window.innerHeight).toFixed(1) + 'px'
+      -(pb * rise * window.innerHeight).toFixed(1) + 'px'
     );
   }
 
