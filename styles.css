@@ -1741,11 +1741,11 @@ h1,h2,h3{margin:0;font-weight:400;}
     position:fixed;inset:0;z-index:60;
     background:#001409;
     display:flex;align-items:center;justify-content:center;
-    transform:translateX(100%);
-    transition:transform .45s cubic-bezier(.16,1,.3,1),visibility 0s .45s;
+    opacity:0;
+    transition:opacity .35s ease,visibility 0s .35s;
     visibility:hidden;
   }
-  .menu-open .nav-sheet{transform:none;visibility:visible;transition:transform .45s cubic-bezier(.16,1,.3,1),visibility 0s;}
+  .menu-open .nav-sheet{opacity:1;visibility:visible;transition:opacity .35s ease,visibility 0s;}
   .nav-sheet-card{
     position:relative;
     width:calc(100% - 4rem);height:87.75%;
@@ -1883,7 +1883,7 @@ h1,h2,h3{margin:0;font-weight:400;}
   /* the backdrop carries no colour of its own — just the site, blurred */
   .nav-sheet{
     background:transparent;
-    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);
     padding-block-start:env(safe-area-inset-top);
   }
   .nav-sheet-close{
