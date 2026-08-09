@@ -434,7 +434,7 @@ h1,h2,h3{margin:0;font-weight:400;}
   background:#AFDF8E;
   -webkit-mask:url("assets/icons/palm.svg") center/contain no-repeat;
   mask:url("assets/icons/palm.svg") center/contain no-repeat;
-  opacity:.55;
+  opacity:.3;
 }
 /* 60:88 — Bold 60 over Regular 45, centred, w:1021 */
 .intro-head{
@@ -991,7 +991,7 @@ h1,h2,h3{margin:0;font-weight:400;}
   min-height:23.1875rem;
   /* the SVG plate is itself white at 10% (palm at 5%) — no colour underneath,
      or the two would stack to ~19% */
-  background:url("assets/img/form-panel.svg") center/100% 100% no-repeat;
+  background:url("assets/img/form-panel.svg") center/cover no-repeat;
   border-radius:1.875rem;
   overflow:hidden;
   display:flex;justify-content:flex-end;align-items:center;
@@ -1722,4 +1722,23 @@ h1,h2,h3{margin:0;font-weight:400;}
   .nav-sheet-close span:nth-child(1){transform:translate(-50%,-50%) rotate(45deg);}
   .nav-sheet-close span:nth-child(2){transform:translate(-50%,-50%) rotate(-45deg);}
   .menu-open .nav-burger{display:none;}
+}
+
+/* ============ MOBILE ROUND 5 ============ */
+@media (max-width:900px){
+  /* a long runway so the skyline's climb plays out fully */
+  .sec-hero{height:200vh;}
+
+  /* section 3 reads across the tile like section 4 does */
+  .pcard{width:100%;padding:2.5rem 1.5rem 1.5rem;text-align:right;}
+
+  /* container titles */
+  .dcard h3,.step h3,.feat strong{font-size:25px;line-height:1.15;}
+
+  /* the steps: 60px of air on the stage, roomier cards */
+  .proc-stage{padding-block:60px;}
+  .step{padding:1.75rem 1.5rem;}
+
+  /* the close badge sits on the card's top edge */
+  .nav-sheet-close{top:-1.1rem;z-index:2;}
 }
