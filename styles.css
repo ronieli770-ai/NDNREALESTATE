@@ -1446,3 +1446,112 @@ h1,h2,h3{margin:0;font-weight:400;}
   .contact{padding-block-start:3.5rem;}
   .footer{padding-block:2rem;}
 }
+
+/* ============ MOBILE ROUND 2 ============ */
+.nav-burger{display:none;}
+@media (max-width:900px){
+  /* --- header: a bigger mark, and the links live behind a burger --- */
+  .nav{height:5.5rem;}
+  .nav-inner{
+    padding-inline:1.25rem;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .nav-logo img{width:7.5rem;height:4.5rem;}
+  .nav-burger{
+    display:flex;flex-direction:column;justify-content:center;gap:.4rem;
+    position:relative;z-index:62;
+    width:2.6rem;height:2.6rem;
+    padding:0;border:0;background:transparent;cursor:pointer;
+  }
+  .nav-burger span{
+    display:block;height:2px;width:100%;
+    background:var(--ink);border-radius:2px;
+    transition:background .45s ease,transform .3s ease,opacity .3s ease;
+  }
+  .nav.is-scrolled .nav-burger span,
+  .menu-open .nav-burger span{background:var(--white);}
+  .menu-open .nav-burger span:nth-child(1){transform:translateY(.6rem) rotate(45deg);}
+  .menu-open .nav-burger span:nth-child(2){opacity:0;}
+  .menu-open .nav-burger span:nth-child(3){transform:translateY(-.6rem) rotate(-45deg);}
+  .nav-links{
+    position:fixed;inset:0;z-index:60;
+    background:#001409;
+    flex-direction:column;align-items:center;justify-content:center;
+    gap:2.5rem;
+    opacity:0;visibility:hidden;
+    transition:opacity .35s ease,visibility 0s .35s;
+  }
+  .menu-open .nav-links{opacity:1;visibility:visible;transition:opacity .35s ease,visibility 0s;}
+  .menu-open{overflow:hidden;}
+  .nav-links a{font-size:28px;color:var(--white);}
+  .nav.is-scrolled .nav-links a{color:var(--white);}
+
+  /* --- loader mark --- */
+  .loader-mark{width:12rem;height:8rem;}
+
+  /* --- 60px between every band --- */
+  .sec{padding-block:1.875rem;}
+  .intro{padding-block:0;}
+  .problem{padding-block:0;}
+  .quote{padding-block:0;}
+  .proc-stage{padding-block:0;}
+  .contact{padding-block-start:0;}
+  .footer{padding-block:1.875rem;}
+
+  /* --- 1. hero: larger type, copy kept clear of the skyline --- */
+  .hero-title .l1{font-size:3.4rem;}
+  .hero-title .l2{font-size:6.6rem;}
+  .hero-title .l3{font-size:2.35rem;}
+  .hero-lead{
+    width:auto;max-width:19rem;
+    margin-left:auto;
+    font-size:16px;line-height:1.45;
+  }
+  .hero-cta{font-size:16px;}
+
+  /* --- no running text under 16px anywhere --- */
+  .intro-body,.pcard p,.dcard p,.feat p,.step p,.contact-lines,
+  .reach-lines,.footer-nav,.footer-contact,.footer-copy,.footer-bottom,
+  .contact-form input,.contact-form button,.story-text{
+    font-size:16px;
+  }
+  .intro-body{font-size:18px;}
+
+  /* --- 3. "עובדים קשה": squarer tiles, content to the top, tighter to the head
+  --- */
+  .problem-cards{margin-block-start:2.5rem;gap:3rem;}
+  .pcard{min-height:19.5rem;justify-content:flex-start;padding:2.75rem 1.5rem 1.5rem;}
+
+  /* --- 4. "למה דובאי": heading and numerals share the tiles' right edge --- */
+  .opp-head{padding-inline:0;text-align:right;}
+  .opp-cards{margin-block-start:2rem;}
+  .dcard{min-height:17.5rem;padding:2.5rem 1.5rem 1.5rem;}
+  .dcard-num{left:auto;right:1.5rem;width:auto;text-align:right;top:-1rem;}
+
+  /* --- 5. "נעים מאוד": one even rhythm between the bullets --- */
+  .feat--r1,.feat--l1,.feat--r2,.feat--l2{top:0;}
+  .about-grid{row-gap:2.25rem;}
+
+  /* --- 6. the steps: heading first, then the cards --- */
+  .proc-wrap{display:flex;flex-direction:column;}
+  .proc-sub-wrap{order:-1;}
+
+  /* --- 7. the quote leads, the portrait follows --- */
+  .quote-body{order:-1;}
+
+  /* --- 8. the form panel breathes, and every field is the same height --- */
+  .contact-panel{padding:2.75rem 1.25rem;}
+  .contact-form .row{flex-direction:column;}
+  .contact-form .f-sm,.contact-form .f-lg{width:100%;flex:none;}
+  .contact-form input,.contact-form button{
+    height:3.5rem;min-height:3.5rem;
+    box-sizing:border-box;
+    line-height:1.21;
+  }
+  .contact-lines{font-size:20px;line-height:1.9;}
+
+  /* --- 9. footer: the mark and the copyright close the column --- */
+  .footer-bottom span{font-size:16px;}
+  .footer-brand{order:3;}
+  .footer-top{align-items:flex-start;}
+}

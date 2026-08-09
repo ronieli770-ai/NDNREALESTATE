@@ -10,7 +10,7 @@
   // leave touch devices on their own native momentum
   if (!window.matchMedia('(pointer: fine)').matches) return;
 
-  var EASE = 0.07;     // lower = longer, softer glide
+  var EASE = 0.045;     // lower = longer, softer glide
   var GLIDE_MS = 700;  // anchor links and in-page jumps tween over this
   var LINE = 40;       // px per line for deltaMode 1
 
