@@ -142,7 +142,7 @@ h1,h2,h3{margin:0;font-weight:400;}
   position:absolute;
   top:50%;left:50%;
   transform:translate(-50%,-54%);
-  width:6.25rem;height:auto;
+  width:32.9%;height:auto;
 }
 .loader-dim{opacity:.1;}
 .loader-bright{opacity:1;}
@@ -1588,4 +1588,17 @@ h1,h2,h3{margin:0;font-weight:400;}
 
   /* buttons never drop under 16px */
   .btn-ghost{font-size:18px;padding:1.1rem;}
+}
+
+/* ============ MOBILE TYPE SCALE ============ */
+@media (max-width:900px){
+  /* every running text inside a container reads at one size */
+  .pcard p,.dcard p,.feat p,.step p,.story-text,.intro-body{font-size:20px;}
+  .hero-lead{line-height:1.2;}
+  .contact-lines,.contact-lines li{font-size:24px;line-height:1.7;}
+  .reach-lines,.reach-lines li{font-size:24px;line-height:1.7;}
+  .reach-lines img{width:2rem;height:2rem;}
+  .contact-form input,.contact-form button{font-size:18px;}
+  .footer-nav,.footer-nav a,.footer-contact,.footer-contact li,
+  .footer-copy,.footer-bottom,.footer-bottom span{font-size:18px;}
 }
