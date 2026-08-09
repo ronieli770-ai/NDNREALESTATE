@@ -93,6 +93,12 @@ window.setNavBare = function (key, on) {
     if (!animate) return;
 
     copy.style.setProperty('--y', -(p * TITLE_RISE).toFixed(1) + 'px');
+    // mobile phase 1 (first half of the runway): the bottom gradient sweeps
+    // the hero 0 → 100; section 2 only starts entering in the second half
+    if (small.matches) {
+      var stage = section.querySelector('.hero-stage');
+      if (stage) stage.style.setProperty('--fadep', Math.min(1, p * 2).toFixed(3));
+    }
     var rise = small.matches ? 0.58 : BUILDINGS_RISE;
     buildings.style.setProperty(
       '--y',
