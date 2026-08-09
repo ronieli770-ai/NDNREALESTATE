@@ -2115,3 +2115,8 @@ h1,h2,h3{margin:0;font-weight:400;}
   /* the second half of the heading takes its own line */
   .proc-sub-l2{display:block;}
 }
+
+/* the mobile menu sheet has no desktop styling — keep it out of the flow there */
+@media (min-width:901px){
+  .nav-sheet{display:none;}
+}
