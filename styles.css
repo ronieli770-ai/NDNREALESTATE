@@ -1488,6 +1488,7 @@ h1,h2,h3{margin:0;font-weight:400;}
     padding:1.75rem 1.5rem;
     scroll-snap-align:start;
   }
+  .step{background:rgba(0,37,17,.9);}
   .step h3,.step p{transition:filter .3s ease;}
   /* the stage photo mirrors back to its original direction on the phone,
      and reads a step brighter under the cards */
