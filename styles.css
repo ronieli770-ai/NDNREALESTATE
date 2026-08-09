@@ -2157,3 +2157,40 @@ h1,h2,h3{margin:0;font-weight:400;}
   .story-slide--form .contact-aside{width:100%;}
   .story-slide--form .contact-head{font-size:2rem;}
 }
+
+/* ============ יצירת קשר: half-width composition with a map ============ */
+.reach-map{
+  display:block;width:100%;
+  border:0;border-radius:.9375rem;
+  min-height:13rem;
+  margin-block-start:1.75rem;
+  filter:grayscale(.15) contrast(1.02);
+}
+@media (min-width:901px){
+  .reach{
+    /* the whole composition holds half the page, centred */
+    width:min(50%,48rem);
+    padding-inline:0;
+    margin-inline:auto;
+    align-items:stretch;
+    gap:2rem;
+  }
+  .reach-copy{
+    width:19rem;flex:none;
+    display:flex;flex-direction:column;
+  }
+  /* the map fills whatever height the form column sets — equal columns */
+  .reach-map{flex:1;min-height:0;}
+  .reach .contact-panel{
+    flex:1;min-width:0;
+    min-height:0;
+    justify-content:flex-start;
+    padding:2.25rem 2rem;
+    /* plain glass plate — the palm artwork is gone */
+    background:rgba(255,255,255,.1);
+  }
+  .reach .contact-form-col{width:100%;}
+}
+@media (max-width:900px){
+  .reach-map{min-height:14rem;}
+}
