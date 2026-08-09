@@ -1829,8 +1829,9 @@ h1,h2,h3{margin:0;font-weight:400;}
     z-index:40;
   }
   .story-slide--form{
-    /* same right inset as the photo and the copy on the other slides */
-    inset:calc(6.5rem + env(safe-area-inset-top)) 3.6rem 2rem 1.25rem;
+    /* right edge clears the dots; the left inset mirrors the gap between the
+       screen's right edge and the dots column (27px) */
+    inset:calc(6.5rem + env(safe-area-inset-top)) 3.6rem 2rem 1.7rem;
     padding:0;
     justify-content:flex-start;
     overflow-y:auto;
@@ -2007,4 +2008,9 @@ h1,h2,h3{margin:0;font-weight:400;}
     transition:background .3s ease,width .3s ease;
   }
   .proc-rail span.is-on{width:1.6rem;border-radius:.25rem;background:#AFDF8E;}
+}
+
+@media (max-width:900px){
+  .story-slide--form{text-align:center;}
+  .story-slide--form .story-head{padding-inline-start:0;text-align:center;}
 }
