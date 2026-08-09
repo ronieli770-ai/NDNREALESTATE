@@ -8,22 +8,6 @@
 
   var stage = document.querySelector('.story');
 
-  // On a phone the stepped story has nowhere to put a slide's overflow (the
-  // closing form especially), so it unfolds into a normal scrolling column:
-  // every slide keeps its own photo and scrolling simply moves to the next.
-  if (window.matchMedia('(max-width:900px)').matches) {
-    document.body.classList.add('story-flow');
-    slides.forEach(function (slide) {
-      slide.classList.add('is-active');
-      if (!slide.dataset.img) return;
-      var img = document.createElement('img');
-      img.className = 'story-photo';
-      img.src = slide.dataset.img;
-      img.alt = slide.dataset.alt || '';
-      slide.insertBefore(img, slide.firstChild);
-    });
-    return;
-  }
   var photo = document.querySelector('.decay img');
   var current = 0;
   var lock = 0;
@@ -67,6 +51,22 @@
     lock = now + 900;
     goTo(current + (e.deltaY > 0 ? 1 : -1));
   }, { passive: false });
+
+  // touch: a flick up moves to the next slide, down to the previous
+  var y0 = null;
+  addEventListener('touchstart', function (e) {
+    y0 = e.touches[0].clientY;
+  }, { passive: true });
+  addEventListener('touchend', function (e) {
+    if (y0 === null) return;
+    var dy = y0 - e.changedTouches[0].clientY;
+    y0 = null;
+    if (Math.abs(dy) < 40) return;
+    var now = performance.now();
+    if (now < lock) return;
+    lock = now + 700;
+    goTo(current + (dy > 0 ? 1 : -1));
+  }, { passive: true });
 
   addEventListener('keydown', function (e) {
     if (e.key === 'ArrowDown' || e.key === 'ArrowLeft') goTo(current + 1);

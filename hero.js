@@ -68,6 +68,7 @@ window.setNavBare = function (key, on) {
   var BUILDINGS_RISE = 1.25; // × viewport height
   var NAV_AT = 0.98;         // stays bare until the hero has fully cleared
   var animate = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var small = window.matchMedia('(max-width:900px)');
   var ticking = false;
 
   function update() {
@@ -81,6 +82,8 @@ window.setNavBare = function (key, on) {
     if (!animate) return;
 
     copy.style.setProperty('--y', -(p * TITLE_RISE).toFixed(1) + 'px');
+    if (small.matches) copy.style.opacity = Math.max(0, 1 - p * 2.2).toFixed(3);
+    else copy.style.opacity = '';
     buildings.style.setProperty(
       '--y',
       -(p * BUILDINGS_RISE * window.innerHeight).toFixed(1) + 'px'

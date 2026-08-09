@@ -1737,7 +1737,7 @@ h1,h2,h3{margin:0;font-weight:400;}
   .dcard h3,.step h3,.feat strong{font-size:25px;line-height:1.15;}
 
   /* the steps: 60px of air on the stage, roomier cards */
-  .proc-stage{padding-block:60px;}
+  .proc-stage{padding-block:40px;}
   .step{padding:1.75rem 1.5rem;}
 
   /* the close badge sits on the card's top edge */
@@ -1745,42 +1745,43 @@ h1,h2,h3{margin:0;font-weight:400;}
 }
 
 /* ============ עלינו ON MOBILE ============ */
-/* the stepped story unfolds into a scrolling column */
+/* the stepped story stays — a square photo on top, the copy under it, and a
+   flick moves to the next slide */
 @media (max-width:900px){
-  .story-flow .story{
-    position:static;height:auto;
-    display:flex;flex-direction:column;
-    padding:7.5rem 1.25rem 4rem;
-    gap:4rem;
-    opacity:1;
+  .about-page .story{overflow:hidden;}
+  .decay{
+    left:1.25rem;right:1.25rem;
+    top:calc(6.5rem + env(safe-area-inset-top));
+    width:auto;height:auto;
+    aspect-ratio:1/1;
+    transform:none;
+    border-radius:.9375rem;
   }
-  .story-flow .decay,
-  .story-flow .story-dots{display:none;}
-  .story-flow .story-slide{
-    position:static;inset:auto;
+  .decay img{width:100%;height:100%;object-fit:cover;}
+  .story-slide{
+    left:1.25rem;right:1.25rem;
+    top:auto;
+    bottom:7rem;
     width:auto;min-width:0;
-    opacity:1;visibility:visible;transform:none;
-    padding:0;
-    display:flex;flex-direction:column;
     text-align:right;
   }
-  .story-photo{
-    width:100%;height:auto;
-    border-radius:.9375rem;
-    margin-block-end:30px;
+  .story-head{font-size:25px;line-height:1.15;}
+  .story-text{font-size:20px;margin-block-start:.75rem;}
+  .story-dots{right:.5rem;top:auto;bottom:2.5rem;transform:none;gap:1rem;}
+  .story-slide--form{
+    inset:calc(6.5rem + env(safe-area-inset-top)) 1.25rem 2rem;
+    padding:0;
+    justify-content:flex-start;
+    overflow-y:auto;
   }
-  .story-flow .story-head{font-size:25px;line-height:1.15;}
-  .story-flow .story-text{font-size:20px;margin-block-start:1rem;color:#fff;}
-  /* in flow mode every slide is on screen at some point — no staged reveal */
-  .story-flow .story-text .sword{color:#fff;}
-  .story-flow .story-slide--form{align-items:stretch;}
-  .story-flow .story-slide--form .story-head{max-width:none;text-align:center;}
-  .story-flow .contact-panel{margin-block-start:1.5rem;}
-  .story-flow .contact-form-col{width:100%;}
-  .story-flow .contact-aside{width:100%;}
+  .story-slide--form .story-head{max-width:none;}
+  .story-slide--form .contact-panel{margin-block-start:1.5rem;}
+  .story-slide--form .contact-form-col{width:100%;}
+  .story.is-form .decay{opacity:0;visibility:hidden;}
 
   /* יצירת קשר: the secondary heading joins the site scale */
   .reach-sub{font-size:20px;}
+}
 }
 
 @media (max-width:900px){
@@ -1788,4 +1789,28 @@ h1,h2,h3{margin:0;font-weight:400;}
   .nav{height:calc(5.5rem + env(safe-area-inset-top));}
   .nav-inner{padding-block-start:calc(.3125rem + env(safe-area-inset-top));}
   .hero-copy{top:calc(4.5rem + env(safe-area-inset-top));}
+}
+
+/* ============ MOBILE ROUND 6 ============ */
+@media (max-width:900px){
+  /* the tile copy was pinned to a 249px column — let it fill the tile */
+  .pcard p{width:100%;max-width:none;margin-inline:0;}
+  .pcard{padding:2.5rem 1.25rem 1.5rem;}
+
+  /* more air between the two heading lines */
+  .intro-head{gap:.75rem;}
+
+  /* section 3 drops 60px further down */
+  .sec-problem{margin-block-start:90px;}
+
+  /* the menu shows the site through a heavy blur, and the close badge is
+     centred on the card's top edge */
+  .nav-sheet{
+    background:rgba(0,20,9,.35);
+    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    padding-block-start:env(safe-area-inset-top);
+  }
+  .nav-sheet-close{
+    top:0;transform:translate(-50%,-50%);
+  }
 }
