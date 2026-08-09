@@ -1769,7 +1769,9 @@ h1,h2,h3{margin:0;font-weight:400;}
     margin-block-end:30px;
   }
   .story-flow .story-head{font-size:25px;line-height:1.15;}
-  .story-flow .story-text{font-size:20px;margin-block-start:1rem;}
+  .story-flow .story-text{font-size:20px;margin-block-start:1rem;color:#fff;}
+  /* in flow mode every slide is on screen at some point — no staged reveal */
+  .story-flow .story-text .sword{color:#fff;}
   .story-flow .story-slide--form{align-items:stretch;}
   .story-flow .story-slide--form .story-head{max-width:none;text-align:center;}
   .story-flow .contact-panel{margin-block-start:1.5rem;}
