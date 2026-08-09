@@ -267,7 +267,7 @@ h1,h2,h3{margin:0;font-weight:400;}
 }
 .nav.is-scrolled .nav-links a{color:var(--white);}
 .nav-links a:hover{color:var(--white);}
-.nav-links a.is-active{font-weight:600;}
+.nav-links a.is-active{font-weight:600;color:#AFDF8E;}
 
 /* ============ 1. HERO ============ */
 /* Figma frame "סקשן 2" — 1280×832, white behind a full-bleed plate. Copy is
