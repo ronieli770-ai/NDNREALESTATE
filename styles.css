@@ -1874,7 +1874,7 @@ h1,h2,h3{margin:0;font-weight:400;}
   /* outside the card the site shows through a plain dark scrim — no blur;
      the frosting lives on the card alone */
   .nav-sheet{
-    background:rgba(0,20,9,.55);
+    background:#001409;
     backdrop-filter:none;-webkit-backdrop-filter:none;
     padding-block-start:env(safe-area-inset-top);
   }
