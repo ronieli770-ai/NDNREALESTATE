@@ -1943,16 +1943,17 @@ h1,h2,h3{margin:0;font-weight:400;}
    an empty screen before section 2. dvh measures what the user really sees. */
 @media (max-width:900px){
   /* !! לא לגעת: המסלול של אנימציית השכבות בהירו !!
-     The 35dvh past the first screen IS the scroll animation — the stage pins
-     for that stretch while the skyline rises over the copy. Cutting this back
-     to 100dvh deletes the animation (it happened once; never again). The
-     skyline's travel in hero.js (rise 0.58) is tuned to finish clearing
-     exactly at the end of these 35dvh, so no empty screen follows. */
+     The second 100dvh IS the scroll animation: the stage pins for one full
+     screen while the skyline climbs, and section 2 rides up OVER the pinned
+     stage (the -100dvh pull below) — so not a single pixel of that stretch is
+     ever empty. Cutting the height back to 100dvh deletes the animation, and
+     removing the negative pull brings back the empty-screen gap. Both broke
+     once; never again. */
   .sec-hero{
-    height:135vh;      /* fallback */
-    height:135dvh;     /* real visible height on iOS */
+    height:200vh;      /* fallback */
+    height:200dvh;     /* real visible height on iOS */
     min-height:0;
-    margin:0 0 30px;
+    margin:0;
     padding:0;
   }
   .hero-stage{
@@ -1962,9 +1963,13 @@ h1,h2,h3{margin:0;font-weight:400;}
     min-height:0;
   }
   .sec-intro{
+    /* rides up over the pinned hero during its cover screen */
+    position:relative;z-index:5;
+    background:var(--ink);
     min-height:0;
     height:auto;
-    margin-block-start:0;
+    margin-block-start:-100vh;
+    margin-block-start:-100dvh;
     padding-block:30px;
   }
   .intro{padding-block:0;}
