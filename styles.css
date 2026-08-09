@@ -2139,23 +2139,46 @@ h1,h2,h3{margin:0;font-weight:400;}
   }
 }
 
-/* ============ עלינו: the closing form matches the story column ============ */
+/* ============ עלינו: the closing slide mirrors the others ============ */
+/* copy on the right where every slide's text lives, the form on the left in
+   the photo's exact frame — same measures, same grid */
 @media (min-width:901px){
-  .story-slide--form .contact-panel{
-    /* same measure as the other slides' copy column */
+  .story-slide--form{
+    inset:0;
+    display:block;
+    padding:0;
+    text-align:right;
+  }
+  .story-slide--form .form-copy{
+    position:absolute;
+    top:29.9%;right:17.13%;
     width:34.3vw;min-width:28rem;
-    flex:none;
-    flex-direction:column;
-    align-items:stretch;
-    gap:2rem;
-    min-height:0;
-    padding:2.5rem 2.25rem;
-    /* the palm plate needs the wide panel — a plain glass plate replaces it */
+  }
+  .story-slide--form .story-head{max-width:none;text-align:right;}
+  .story-slide--form .contact-head{
+    margin-block-start:1.75rem;
+    font-size:2rem;
+  }
+  .story-slide--form .contact-lines{
+    margin-block-start:1.25rem;
+    font-size:1.75rem;line-height:2;
+  }
+  .story-slide--form .contact-panel{
+    position:absolute;
+    left:10.76%;top:50%;
+    transform:translateY(-50%);
+    width:calc(67vh * 561 / 749);
+    height:67vh;
+    display:flex;flex-direction:column;justify-content:center;
+    padding:2.5rem 2rem;
     background:rgba(255,255,255,.1);
   }
-  .story-slide--form .contact-form-col{width:100%;}
-  .story-slide--form .contact-aside{width:100%;}
-  .story-slide--form .contact-head{font-size:2rem;}
+}
+@media (max-width:900px){
+  .story-slide--form .form-copy{display:flex;flex-direction:column;}
+  .story-slide--form .contact-head{font-size:22px;margin-block-start:1rem;}
+  .story-slide--form .contact-lines{font-size:18px;margin-block-start:.75rem;}
+  .story-slide--form .contact-panel{margin-block-start:1.5rem;}
 }
 
 /* ============ יצירת קשר: half-width composition with a map ============ */
