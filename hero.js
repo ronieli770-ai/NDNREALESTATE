@@ -97,7 +97,7 @@ window.setNavBare = function (key, on) {
     // the hero 0 → 100; section 2 only starts entering in the second half
     if (small.matches) {
       var stage = section.querySelector('.hero-stage');
-      if (stage) stage.style.setProperty('--fadep', Math.min(1, p * 2).toFixed(3));
+      if (stage) stage.style.setProperty('--fadep', Math.min(1, p / 0.6).toFixed(3));
     }
     var rise = small.matches ? 0.58 : BUILDINGS_RISE;
     buildings.style.setProperty(

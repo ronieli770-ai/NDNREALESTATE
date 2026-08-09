@@ -1951,8 +1951,11 @@ h1,h2,h3{margin:0;font-weight:400;}
      removing the negative pull brings back the empty-screen gap. Both broke
      once; never again. */
   .sec-hero{
-    height:300vh;      /* fallback */
-    height:300dvh;     /* real visible height on iOS */
+    /* 100 on screen + 160 of runway: the gradient finishes its sweep by 60%
+       of the runway, and section 2 starts entering at ~37% — the overlap is
+       what makes the text peek in while the skyline is still fading */
+    height:260vh;      /* fallback */
+    height:260dvh;     /* real visible height on iOS */
     min-height:0;
     margin:0;
     padding:0;
