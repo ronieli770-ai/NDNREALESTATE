@@ -1906,3 +1906,29 @@ h1,h2,h3{margin:0;font-weight:400;}
   }
   .about-name{text-shadow:0 2px 12px rgba(0,20,9,.55);}
 }
+
+/* ============ MOBILE: the hero runway measured in real screen height ============ */
+/* On iOS, 100vh is the *large* viewport (toolbars hidden), so a 100vh pinned
+   stage is taller than what is actually on screen — its bottom strip reads as
+   an empty screen before section 2. dvh measures what the user really sees. */
+@media (max-width:900px){
+  .sec-hero{
+    height:135vh;
+    height:135dvh;
+    min-height:0;
+    margin:0 0 30px;
+    padding:0;
+  }
+  .hero-stage{
+    height:100vh;
+    height:100dvh;
+    min-height:0;
+  }
+  .sec-intro{
+    min-height:0;
+    height:auto;
+    margin-block-start:0;
+    padding-block:30px;
+  }
+  .intro{padding-block:0;}
+}
