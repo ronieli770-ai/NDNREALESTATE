@@ -881,14 +881,14 @@ h1,h2,h3{margin:0;font-weight:400;}
 }
 /* Figma 129:819 — x:558..594, flush with the right edge of the copy block */
 .step-num{
-  margin-block-start:auto;
+  margin-block-start:1.5rem;
   align-self:flex-start;
-  width:4.5rem;height:4.5rem;border-radius:50%;
+  width:3.75rem;height:3.75rem;border-radius:50%;
   background:var(--white);color:#002511;
   display:flex;align-items:center;justify-content:center;
 }
 .step-ico{
-  width:2.875rem;height:2.875rem;
+  width:2.25rem;height:2.25rem;
   background:#001409;
   -webkit-mask-size:contain;mask-size:contain;
   -webkit-mask-position:center;mask-position:center;
@@ -1353,7 +1353,7 @@ h1,h2,h3{margin:0;font-weight:400;}
 .contact-page{background:var(--ink);}
 .reach{
   padding:11.125rem 3.625rem 0;
-  display:flex;flex-direction:row-reverse;
+  display:flex;flex-direction:row;
   align-items:flex-start;
   gap:3.9375rem;
 }
