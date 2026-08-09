@@ -1823,9 +1823,22 @@ h1,h2,h3{margin:0;font-weight:400;}
   .nav,
   .nav.is-scrolled{
     background:transparent;
-    backdrop-filter:none;-webkit-backdrop-filter:none;
     box-shadow:none;
   }
   .sec-hero{margin:0;padding:0;}
   .hero-stage{top:0;}
+}
+
+/* the hero copy has to live entirely in the sky, clear of the skyline */
+@media (max-width:900px){
+  .nav-logo img{width:6.5rem;height:3.9rem;}
+  .hero-title .l1{font-size:3rem;line-height:1;}
+  .hero-title .l2{font-size:6rem;line-height:.8;}
+  .hero-title .l3{font-size:2rem;line-height:1.25;margin-block-start:.2rem;}
+  .hero-lead{
+    margin-block-start:.8rem;
+    max-width:none;
+    line-height:1.22;
+  }
+  .hero-cta{margin-block-start:.95rem;}
 }
