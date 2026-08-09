@@ -2192,10 +2192,13 @@ h1,h2,h3{margin:0;font-weight:400;}
 }
 @media (min-width:901px){
   .reach{
-    /* the whole composition holds 80% of the page, centred */
+    /* the whole composition holds 80% of the page, centred, 60vh tall,
+       and starts clear of the fixed header — nothing under its blur */
     width:min(80%,72rem);
-    padding-inline:0;
+    height:60vh;
+    padding:0;
     margin-inline:auto;
+    margin-block-start:calc(6rem + 5vh);
     align-items:stretch;
     gap:2rem;
   }
@@ -2206,12 +2209,14 @@ h1,h2,h3{margin:0;font-weight:400;}
   }
   .reach .contact-panel{flex:none;width:calc(50% - 1rem);}
   /* square-ish map closing the column */
-  .reach-map{aspect-ratio:3/2;min-height:0;flex:none;}
+  /* the map absorbs whatever the 60vh column leaves */
+  .reach-map{flex:1;min-height:0;}
   .reach .contact-panel{
     flex:1;min-width:0;
     min-height:0;
     justify-content:center;
-    padding:2.25rem 2rem;
+    /* an even 20px on every side */
+    padding:20px;
     /* plain glass plate — the palm artwork is gone */
     background:rgba(255,255,255,.1);
   }
@@ -2227,6 +2232,5 @@ h1,h2,h3{margin:0;font-weight:400;}
   /* tighter beat between the second heading and the contact lines */
   .reach-lines{margin-block-start:.75rem;}
   /* the fold shows a good bite of the footer */
-  .reach{padding-block-start:3.5rem;}
   .contact-page .footer{margin-block-start:.75rem;}
 }
