@@ -1744,8 +1744,7 @@ h1,h2,h3{margin:0;font-weight:400;}
     position:relative;
     width:calc(100% - 4rem);height:87.75%;
     border-radius:.9375rem;
-    background:rgba(0,20,9,.9);
-    backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    background:#001409;
     display:flex;flex-direction:column;align-items:center;justify-content:center;
     gap:2.5rem;
     padding:2rem;
@@ -1875,9 +1874,10 @@ h1,h2,h3{margin:0;font-weight:400;}
 
   /* outside the card the site shows through a plain dark scrim — no blur;
      the frosting lives on the card alone */
+  /* the backdrop carries no colour of its own — just the site, blurred */
   .nav-sheet{
-    background:#001409;
-    backdrop-filter:none;-webkit-backdrop-filter:none;
+    background:transparent;
+    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
     padding-block-start:env(safe-area-inset-top);
   }
   .nav-sheet-close{
