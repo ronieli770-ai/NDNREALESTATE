@@ -1555,3 +1555,37 @@ h1,h2,h3{margin:0;font-weight:400;}
   .footer-brand{order:3;}
   .footer-top{align-items:flex-start;}
 }
+
+/* ============ MOBILE ROUND 3 ============ */
+@media (max-width:900px){
+  /* the filled bar read as a stray green wash — keep only the blur */
+  .nav.is-scrolled{background:transparent;}
+
+  /* 1. hero */
+  .hero-lead{font-size:20px;max-width:21rem;}
+  .hero-title .l2{font-size:7.6rem;}
+  .hero-title .l3{margin-block-start:0;}
+  .hero-cta{width:14rem;height:3.9rem;font-size:18px;}
+  /* a longer runway so the skyline's climb is actually visible */
+  .sec-hero{height:185vh;}
+
+  /* 2. the secondary line under the main heading */
+  .intro-head .r{font-size:20px;line-height:1.25;}
+
+  /* 3. more air above "עובדים קשה", larger copy in the tiles */
+  .sec-problem{margin-block-start:1.875rem;}
+  .pcard p{font-size:18px;}
+
+  /* 4. "למה דובאי" */
+  .dcard p{font-size:18px;}
+
+  /* 5. "נעים מאוד" sits further off section 4 */
+  .sec-about{margin-block-start:1.875rem;}
+
+  /* 6. the steps: 20px of air top and bottom, dark heading */
+  .step{padding:20px 1.5rem;}
+  .proc-sub{color:#001409;}
+
+  /* buttons never drop under 16px */
+  .btn-ghost{font-size:18px;padding:1.1rem;}
+}

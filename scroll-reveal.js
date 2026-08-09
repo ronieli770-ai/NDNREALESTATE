@@ -57,7 +57,9 @@
           obs.disconnect();
         }
       },
-      { rootMargin: '0px 0px -25% 0px' }
+      { rootMargin: window.matchMedia('(max-width:900px)').matches
+          ? '0px 0px -8% 0px'
+          : '0px 0px -25% 0px' }
     ).observe(el);
   }
 
