@@ -1784,7 +1784,9 @@ h1,h2,h3{margin:0;font-weight:400;}
 @media (max-width:900px){
   .about-page .story{overflow:hidden;}
   .decay{
-    left:1.25rem;right:1.25rem;
+    /* same right inset as the copy, so the photo lines up with the text and
+       clears the dots column */
+    left:1.25rem;right:3.6rem;
     top:calc(6.5rem + env(safe-area-inset-top));
     width:auto;height:auto;
     aspect-ratio:1/1;
