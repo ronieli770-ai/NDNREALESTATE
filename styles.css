@@ -1816,7 +1816,8 @@ h1,h2,h3{margin:0;font-weight:400;}
     z-index:40;
   }
   .story-slide--form{
-    inset:calc(6.5rem + env(safe-area-inset-top)) 1.25rem 2rem 1.25rem;
+    /* same right inset as the photo and the copy on the other slides */
+    inset:calc(6.5rem + env(safe-area-inset-top)) 3.6rem 2rem 1.25rem;
     padding:0;
     justify-content:flex-start;
     overflow-y:auto;
@@ -1957,4 +1958,16 @@ h1,h2,h3{margin:0;font-weight:400;}
   .dcard p{font-size:15px;line-height:1.35;}
   /* the numeral straddles the tile's top-right corner at this width too */
   .dcard-num{font-size:3.25rem;right:.9rem;top:-.7rem;}
+}
+
+@media (max-width:900px){
+  /* the panel was filling the slide's leftover height, which pushed all the
+     slack under the button — let it hug the form so the air is even */
+  .story-slide--form .contact-panel{
+    flex:none;
+    height:auto;min-height:0;
+    justify-content:flex-start;
+    padding:2.25rem 1.25rem;
+  }
+  .story-slide--form .contact-form-col{width:100%;}
 }
