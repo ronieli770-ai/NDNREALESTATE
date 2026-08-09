@@ -1499,13 +1499,14 @@ h1,h2,h3{margin:0;font-weight:400;}
   /* nothing rides over the stage here — the quote simply follows it */
   .sec-quote{margin-top:0;}
 
-  /* "נעים מאוד" — the drift scripts write inline transforms; drop them */
+  /* "נעים מאוד" — the texts keep the desktop scroll drift, riding a few
+     pixels upward as the section crosses the screen */
   .about-name-wrap{
     position:static;width:100%;
     bottom:auto;right:auto;
-    transform:none !important;
+    transform:translateY(var(--drift,0px));
   }
-  .about-grid{position:static;left:auto;top:auto;transform:none !important;}
+  .about-grid{position:static;left:auto;top:auto;transform:translateY(var(--drift,0px));}
   .about-name{text-align:right;}
 
   .contact-stack{min-height:auto;}
