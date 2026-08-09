@@ -2051,7 +2051,7 @@ h1,h2,h3{margin:0;font-weight:400;}
     position:absolute;
     top:calc(118px + env(safe-area-inset-top));
     right:27px;left:auto;
-    display:flex;flex-direction:column;align-items:flex-end;
+    display:flex;flex-direction:column;align-items:flex-start;
     gap:44px;
     text-align:right;
   }
@@ -2068,7 +2068,7 @@ h1,h2,h3{margin:0;font-weight:400;}
     list-style:none;margin:0;padding:0;
     position:absolute;
     right:27px;bottom:135px;
-    display:flex;flex-direction:column;align-items:flex-end;
+    display:flex;flex-direction:column;align-items:flex-start;
     gap:16px;
   }
   .nav-sheet-lines li{
