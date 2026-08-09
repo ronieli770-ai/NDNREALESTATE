@@ -2130,9 +2130,8 @@ h1,h2,h3{margin:0;font-weight:400;}
 @media (min-width:901px){
   /* a full-screen runway for the climb, fully covered by section 2 riding in */
   .sec-hero{height:200vh;}
-  /* the copy lands dead-centre when the section reaches full height */
+  /* the copy just lives centred in the section and rides in with it */
   .sec-intro{align-items:center;}
-  .sec-intro .intro{will-change:transform,opacity;}
   .sec-intro{
     position:relative;z-index:5;
     margin-top:-100vh;
