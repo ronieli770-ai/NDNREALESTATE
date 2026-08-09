@@ -1612,10 +1612,11 @@ h1,h2,h3{margin:0;font-weight:400;}
   .hero-layer picture{display:block;height:100%;}
   .hero-sky{top:0;height:100%;}
   .hero-sky img{object-fit:cover;object-position:top center;}
-  /* the skyline holds the lower half so the copy above it stays readable */
-  .hero-buildings{top:auto;bottom:0;height:42%;}
-  .hero-buildings picture{height:100%;display:block;}
-  .hero-buildings img{width:100%;height:100%;object-fit:cover;object-position:bottom center;}
+  /* the skyline shows whole, never cropped: natural proportions, anchored to
+     the bottom. It drops behind the copy so nothing is hidden by it. */
+  .hero-buildings{top:auto;bottom:0;height:auto;z-index:1;}
+  .hero-buildings picture{display:block;height:auto;}
+  .hero-buildings img{width:100%;height:auto;object-fit:fill;}
 
   .hero-copy{
     top:4.5rem;
