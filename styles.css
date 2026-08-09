@@ -1779,10 +1779,6 @@ h1,h2,h3{margin:0;font-weight:400;}
 
 /* ============ MOBILE ROUND 5 ============ */
 @media (max-width:900px){
-  /* 100vh stage + a 35vh runway, and the skyline is tuned to finish clearing
-     exactly at the end of it — no empty screen before section 2 */
-  .sec-hero{height:135vh;}
-  .sec-intro{margin-block-start:0;}
 
   /* section 3 reads across the tile like section 4 does */
   .pcard{width:100%;padding:2.5rem 1.5rem 1.5rem;text-align:right;}
@@ -1937,15 +1933,23 @@ h1,h2,h3{margin:0;font-weight:400;}
    stage is taller than what is actually on screen — its bottom strip reads as
    an empty screen before section 2. dvh measures what the user really sees. */
 @media (max-width:900px){
+  /* !! לא לגעת: המסלול של אנימציית השכבות בהירו !!
+     The 35dvh past the first screen IS the scroll animation — the stage pins
+     for that stretch while the skyline rises over the copy. Cutting this back
+     to 100dvh deletes the animation (it happened once; never again). The
+     skyline's travel in hero.js (rise 0.58) is tuned to finish clearing
+     exactly at the end of these 35dvh, so no empty screen follows. */
   .sec-hero{
-    height:100vh;      /* fallback */
-    height:100dvh;     /* real visible height on iOS */
+    height:135vh;      /* fallback */
+    height:135dvh;     /* real visible height on iOS */
     min-height:0;
     margin:0 0 30px;
     padding:0;
   }
   .hero-stage{
-    height:100%;
+    position:sticky;top:0;
+    height:100vh;
+    height:100dvh;
     min-height:0;
   }
   .sec-intro{
