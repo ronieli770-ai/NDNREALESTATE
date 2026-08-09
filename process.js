@@ -29,10 +29,11 @@
         var r = card.getBoundingClientRect();
         var visible = Math.min(r.right, box.right) - Math.max(r.left, box.left);
         var ratio = Math.max(0, Math.min(1, visible / r.width));
-        // fully in view is sharp; anything cut off softens toward the edge
-        var soft = 1 - Math.min(1, ratio / 0.9);
-        card.style.filter = soft > 0.02 ? 'blur(' + (soft * 3.5).toFixed(2) + 'px)' : '';
-        card.style.opacity = (1 - soft * 0.35).toFixed(3);
+        // the card stays crisp — only its copy softens, and a small swipe
+        // (over half the card in view) already clears it completely
+        var soft = 1 - Math.min(1, ratio / 0.55);
+        var f = soft > 0.02 ? 'blur(' + (soft * 2.5).toFixed(2) + 'px)' : '';
+        card.querySelectorAll('h3, p').forEach(function (el) { el.style.filter = f; });
         card.__ratio = ratio;
       });
 

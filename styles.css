@@ -1467,6 +1467,9 @@ h1,h2,h3{margin:0;font-weight:400;}
     padding-inline:1.25rem;
     overflow-x:auto;overflow-y:hidden;
     scroll-snap-type:x mandatory;
+    /* the snap honours the gutter, so the resting card lines up with the
+       heading instead of kissing the screen edge */
+    scroll-padding-inline:1.25rem;
     -webkit-overflow-scrolling:touch;
     scrollbar-width:none;
   }
@@ -1484,8 +1487,11 @@ h1,h2,h3{margin:0;font-weight:400;}
     min-height:0;
     padding:1.75rem 1.5rem;
     scroll-snap-align:start;
-    transition:filter .35s ease,opacity .35s ease;
   }
+  .step h3,.step p{transition:filter .3s ease;}
+  /* the stage photo mirrors back to its original direction on the phone */
+  .proc-bg{transform:none;}
+  .proc-shade{background:linear-gradient(230deg,rgba(0,0,0,0) 73.195%,rgba(0,0,0,.6) 100%);}
   .step h3{font-size:22px;}
   .step p{font-size:16px;margin-block-start:.75rem;}
 
