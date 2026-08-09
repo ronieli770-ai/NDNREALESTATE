@@ -1831,7 +1831,7 @@ h1,h2,h3{margin:0;font-weight:400;}
   .story-slide--form{
     /* right edge clears the dots; the left inset mirrors the gap between the
        screen's right edge and the dots column (27px) */
-    inset:calc(6.5rem + env(safe-area-inset-top)) 3.6rem 2rem 1.7rem;
+    inset:calc(6.5rem + env(safe-area-inset-top)) 3.6rem 2rem 2.1rem;
     padding:0;
     justify-content:flex-start;
     overflow-y:auto;
