@@ -76,9 +76,17 @@ window.setNavBare = function (key, on) {
 
   function update() {
     ticking = false;
+    var rect = section.getBoundingClientRect();
     var runway = section.offsetHeight - window.innerHeight;
-    if (runway <= 0) return;
-    var p = -section.getBoundingClientRect().top / runway;
+
+    // no runway (mobile, where the hero is exactly one screen): the header
+    // still has to switch the moment the hero clears
+    if (runway <= 0) {
+      if (nav) nav.classList.toggle('is-scrolled', rect.bottom <= window.innerHeight * 0.5);
+      return;
+    }
+
+    var p = -rect.top / runway;
     p = p < 0 ? 0 : p > 1 ? 1 : p;
 
     if (nav) nav.classList.toggle('is-scrolled', p > NAV_AT);
