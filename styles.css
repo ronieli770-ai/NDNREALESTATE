@@ -2120,3 +2120,17 @@ h1,h2,h3{margin:0;font-weight:400;}
 @media (min-width:901px){
   .nav-sheet{display:none;}
 }
+
+/* ============ DESKTOP: section 2 rides up over the hero ============ */
+/* Same cure as on mobile: the hero pins for its runway while the skyline
+   climbs, and section 2 slides in over it — no dead screen in between. The
+   ink backdrop makes it opaque, since the desktop sky behind is bright. */
+@media (min-width:901px){
+  /* a full-screen runway for the climb, fully covered by section 2 riding in */
+  .sec-hero{height:200vh;}
+  .sec-intro{
+    position:relative;z-index:5;
+    margin-top:-100vh;
+    background-color:var(--ink);
+  }
+}
