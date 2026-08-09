@@ -230,8 +230,8 @@ h1,h2,h3{margin:0;font-weight:400;}
 .nav-call-icon{
   width:1.375rem;height:1.375rem;flex:none;
   background:currentColor;
-  -webkit-mask:url("assets/icons/phone-bold.svg") center/contain no-repeat;
-  mask:url("assets/icons/phone-bold.svg") center/contain no-repeat;
+  -webkit-mask:url("assets/icons/phone-solid.svg") center/contain no-repeat;
+  mask:url("assets/icons/phone-solid.svg") center/contain no-repeat;
 }
 .nav-call:hover{background:var(--white);color:#002511;}
 .nav.is-scrolled .nav-call{
@@ -267,7 +267,8 @@ h1,h2,h3{margin:0;font-weight:400;}
 }
 .nav.is-scrolled .nav-links a{color:var(--white);}
 .nav-links a:hover{color:var(--white);}
-.nav-links a.is-active{font-weight:600;color:#AFDF8E;}
+.nav-links a.is-active{font-weight:600;}
+.nav.is-scrolled .nav-links a.is-active{color:#AFDF8E;}
 
 /* ============ 1. HERO ============ */
 /* Figma frame "סקשן 2" — 1280×832, white behind a full-bleed plate. Copy is
@@ -886,7 +887,18 @@ h1,h2,h3{margin:0;font-weight:400;}
   background:var(--white);color:#002511;
   display:flex;align-items:center;justify-content:center;
 }
-.step-num svg{width:2.125rem;height:2.125rem;stroke:#001409;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+.step-ico{
+  width:2.125rem;height:2.125rem;
+  background:#001409;
+  -webkit-mask-size:contain;mask-size:contain;
+  -webkit-mask-position:center;mask-position:center;
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+}
+.step-num--meeting .step-ico{-webkit-mask-image:url("assets/icons/step-meeting.svg");mask-image:url("assets/icons/step-meeting.svg");}
+.step-num--property .step-ico{-webkit-mask-image:url("assets/icons/step-property.svg");mask-image:url("assets/icons/step-property.svg");}
+.step-num--paperwork .step-ico{-webkit-mask-image:url("assets/icons/step-paperwork.svg");mask-image:url("assets/icons/step-paperwork.svg");}
+.step-num--secure .step-ico{-webkit-mask-image:url("assets/icons/step-secure.svg");mask-image:url("assets/icons/step-secure.svg");}
+.step-num--yield .step-ico{-webkit-mask-image:url("assets/icons/step-yield.svg");mask-image:url("assets/icons/step-yield.svg");}
 /* 204:1489 — one heading, centre y:746, right edge x:1218 */
 .proc-sub-wrap{
   position:absolute;
@@ -1321,10 +1333,11 @@ h1,h2,h3{margin:0;font-weight:400;}
 /* JS feeds --gx/--gy from the cursor's offset inside the button, so the halo
    slides around the rim toward the pointer instead of sitting still */
 .hero-cta,.btn-ghost,.contact-form button,.nav.is-scrolled .nav-call{
-  box-shadow:var(--gx,0px) var(--gy,4px) var(--gblur,20.1px) rgba(175,223,142,.5);
+  box-shadow:var(--gx,0px) var(--gy,4px) var(--gblur,20.1px) rgba(175,223,142,var(--galpha,.5));
 }
 .hero-cta:hover,.btn-ghost:hover,.contact-form button:hover,.nav.is-scrolled .nav-call:hover{
-  --gblur:26px;
+  --galpha:.85;
+  --gblur:14px;
   transform:scale(1.035);
 }
 .nav-call:hover{transform:scale(1.035);}
