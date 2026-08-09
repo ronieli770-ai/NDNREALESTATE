@@ -12,7 +12,10 @@
   burger.addEventListener('click', function () {
     set(!document.body.classList.contains('menu-open'));
   });
-  document.querySelectorAll('.nav-links a').forEach(function (a) {
+  var close = document.querySelector('.nav-sheet-close');
+  if (close) close.addEventListener('click', function () { set(false); });
+
+  document.querySelectorAll('.nav-links a, .nav-sheet-links a').forEach(function (a) {
     a.addEventListener('click', function () { set(false); });
   });
   addEventListener('keydown', function (e) {

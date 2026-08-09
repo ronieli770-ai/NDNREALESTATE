@@ -432,8 +432,9 @@ h1,h2,h3{margin:0;font-weight:400;}
   transform:translate(-50%,-50%);
   width:2.1334rem;height:2.1189rem;
   background:#AFDF8E;
-  -webkit-mask:url("assets/icons/intro-badge-icon.svg") center/contain no-repeat;
-  mask:url("assets/icons/intro-badge-icon.svg") center/contain no-repeat;
+  -webkit-mask:url("assets/icons/palm.svg") center/contain no-repeat;
+  mask:url("assets/icons/palm.svg") center/contain no-repeat;
+  opacity:.55;
 }
 /* 60:88 — Bold 60 over Regular 45, centred, w:1021 */
 .intro-head{
@@ -441,7 +442,7 @@ h1,h2,h3{margin:0;font-weight:400;}
   font-family:var(--display);
   display:flex;flex-direction:column;
 }
-.intro-head .b{font-size:3.75rem;font-weight:700;line-height:1.21;}
+.intro-head .b{font-size:3.75rem;font-weight:700;line-height:1.05;}
 .intro-head .r{font-size:2.8125rem;font-weight:400;line-height:1.33;}
 /* 60:91 — IBM Plex 35, centred, w:911 */
 .intro-body{
@@ -1608,6 +1609,7 @@ h1,h2,h3{margin:0;font-weight:400;}
    filling the bottom of the stage */
 @media (max-width:900px){
   .hero-layer,.hero-layer picture{width:100%;left:0;right:0;}
+  .hero-layer picture{display:block;height:100%;}
   .hero-sky{top:0;height:100%;}
   .hero-sky img{object-fit:cover;object-position:top center;}
   /* the skyline holds the lower half so the copy above it stays readable */
@@ -1633,4 +1635,88 @@ h1,h2,h3{margin:0;font-weight:400;}
     width:12.4rem;height:3rem;
     font-size:18px;
   }
+}
+
+/* ============ MOBILE ROUND 4 ============ */
+@media (max-width:900px){
+  /* one button shape across the site — the hero CTA is the reference */
+  .btn-ghost,.contact-form button,.hero-cta{
+    height:3rem;min-height:3rem;
+    border-radius:.9375rem;
+    font-size:18px;font-weight:700;
+  }
+  .btn-ghost{width:100%;padding:0 1rem;}
+
+  .nav-logo{display:flex;align-items:center;height:100%;}
+
+  /* hero: a quarter-screen of empty ground before section 2 */
+  .sec-hero{height:125vh;}
+
+  .intro-head .b{line-height:1.05;}
+  .intro-badge-icon{width:2.6rem;height:2.6rem;}
+
+  /* section 3 tiles get section 4's inner width */
+  .pcard{width:100%;padding:2.5rem 1.5rem 1.5rem;}
+
+  /* larger container titles */
+  .dcard h3,.step h3,.feat strong{font-size:22px;line-height:1.2;}
+
+  /* the photo-backed stage keeps 20px of air */
+  .proc-stage{padding-block:20px;}
+
+  /* ---- fullscreen menu (Figma 299:246) ---- */
+  .nav-links{display:none;}
+  .nav-sheet{
+    position:fixed;inset:0;z-index:60;
+    background:#001409;
+    display:flex;align-items:center;justify-content:center;
+    transform:translateX(100%);
+    transition:transform .45s cubic-bezier(.16,1,.3,1),visibility 0s .45s;
+    visibility:hidden;
+  }
+  .menu-open .nav-sheet{transform:none;visibility:visible;transition:transform .45s cubic-bezier(.16,1,.3,1),visibility 0s;}
+  .nav-sheet-card{
+    position:relative;
+    width:calc(100% - 4rem);height:87.75%;
+    border-radius:.9375rem;
+    background:rgba(255,255,255,.2);
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:2.5rem;
+    padding:2rem;
+  }
+  .nav-sheet-mark{width:8.9rem;height:auto;}
+  .nav-sheet-links{
+    display:flex;flex-direction:column;align-items:center;gap:2.6rem;
+    text-align:center;
+  }
+  .nav-sheet-links a{font-size:28px;color:var(--white);}
+  .nav-sheet-cta{
+    margin-block-start:1rem;
+    width:22rem;max-width:100%;height:4rem;
+    border-radius:.9375rem;
+    background:#AFDF8E;color:#001409;
+    box-shadow:0 4px 20.1px rgba(175,223,142,.5);
+    display:flex;align-items:center;justify-content:center;gap:.625rem;
+    direction:rtl;
+    font-size:22px;font-weight:700;
+  }
+  /* the eye-shaped plate with the X, straddling the card's top edge */
+  .nav-sheet-close{
+    position:absolute;
+    top:-1.4rem;left:50%;transform:translateX(-50%);
+    width:4.4rem;height:3rem;
+    border:0;padding:0;cursor:pointer;
+    background:var(--white);
+    -webkit-mask:url("assets/icons/menu-close-plate.svg") center/contain no-repeat;
+    mask:url("assets/icons/menu-close-plate.svg") center/contain no-repeat;
+  }
+  .nav-sheet-close span{
+    position:absolute;top:50%;left:50%;
+    width:1.1rem;height:2px;border-radius:2px;
+    background:#001409;
+  }
+  .nav-sheet-close span:nth-child(1){transform:translate(-50%,-50%) rotate(45deg);}
+  .nav-sheet-close span:nth-child(2){transform:translate(-50%,-50%) rotate(-45deg);}
+  .menu-open .nav-burger{display:none;}
 }
