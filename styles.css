@@ -1880,5 +1880,6 @@ h1,h2,h3{margin:0;font-weight:400;}
 
 @media (max-width:900px){
   /* the tiles hug their copy instead of holding a fixed height */
-  .pcard{min-height:0;}
+  .pcard{min-height:0;text-align:center;}
+  .pcard p{text-align:center;}
 }
