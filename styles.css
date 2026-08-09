@@ -277,8 +277,8 @@ h1,h2,h3{margin:0;font-weight:400;}
 .sec-hero{
   display:block;
   min-height:0;
-  /* 100vh stage + a quarter-screen runway for the buildings to clear */
-  height:125vh;
+  /* 100vh stage + a short runway for the buildings to clear */
+  height:115vh;
   overflow:visible;
   padding:0;
 }
@@ -881,14 +881,14 @@ h1,h2,h3{margin:0;font-weight:400;}
 }
 /* Figma 129:819 — x:558..594, flush with the right edge of the copy block */
 .step-num{
-  margin-block-start:1.25rem;
+  margin-block-start:auto;
   align-self:flex-start;
-  width:3.375rem;height:3.375rem;border-radius:50%;
+  width:4.5rem;height:4.5rem;border-radius:50%;
   background:var(--white);color:#002511;
   display:flex;align-items:center;justify-content:center;
 }
 .step-ico{
-  width:2.125rem;height:2.125rem;
+  width:2.875rem;height:2.875rem;
   background:#001409;
   -webkit-mask-size:contain;mask-size:contain;
   -webkit-mask-position:center;mask-position:center;
@@ -1346,3 +1346,50 @@ h1,h2,h3{margin:0;font-weight:400;}
   transition:background .45s ease,color .45s ease,transform .35s cubic-bezier(.16,1,.3,1),box-shadow .25s ease;
 }
 .is-glowing{transition:background .45s ease,color .45s ease,transform .35s cubic-bezier(.16,1,.3,1),box-shadow 0s;}
+
+/* ============ CONTACT PAGE (293:82) ============ */
+/* the panel and the copy column sit side by side under the header, and the
+   footer keeps the same air below the content that the header leaves above */
+.contact-page{background:var(--ink);}
+.reach{
+  padding:11.125rem 3.625rem 0;
+  display:flex;flex-direction:row-reverse;
+  align-items:flex-start;
+  gap:3.9375rem;
+}
+.reach-copy{width:26rem;flex:none;direction:rtl;text-align:right;}
+/* 293:123 — 60px Sayeeda Bold over 35px Regular */
+.reach-head{
+  font-family:var(--display);font-weight:700;
+  font-size:3.75rem;line-height:1.1;
+}
+.reach-sub{
+  margin-block-start:.9375rem;
+  font-family:var(--display);font-weight:400;
+  font-size:2.1875rem;line-height:1.13;
+}
+/* 293:126 — 18px lines, 23.6px icons flush right */
+.reach-lines{
+  list-style:none;margin:0;padding:0;
+  margin-block-start:2.5rem;
+  font-size:1.125rem;line-height:2.32;
+}
+.reach-lines li{display:flex;align-items:center;justify-content:flex-start;gap:1.0625rem;}
+.reach-lines img{width:1.475rem;height:1.475rem;flex:none;}
+.reach-lines a{color:inherit;}
+.reach .contact-panel{
+  flex:1;min-width:0;
+  min-height:22.9375rem;
+  justify-content:center;
+  padding:2.5rem 2rem;
+}
+.reach .contact-form-col{width:31.875rem;}
+.contact-page .footer{margin-block-start:11.125rem;}
+@media (max-width:900px){
+  .reach{flex-direction:column;padding:8rem 1.25rem 0;gap:2.5rem;}
+  .reach-copy{width:100%;}
+  .reach-head{font-size:2.4rem;}
+  .reach-sub{font-size:1.5rem;}
+  .reach .contact-form-col{width:100%;}
+  .contact-page .footer{margin-block-start:5rem;}
+}
