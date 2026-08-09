@@ -2109,3 +2109,8 @@ h1,h2,h3{margin:0;font-weight:400;}
   .proc-viewport.is-in .step:nth-child(2){transition-delay:.1s;}
   .proc-viewport.is-in .step:nth-child(3){transition-delay:.2s;}
 }
+
+@media (max-width:900px){
+  /* the second half of the heading takes its own line */
+  .proc-sub-l2{display:block;}
+}
