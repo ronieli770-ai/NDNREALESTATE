@@ -1852,7 +1852,9 @@ h1,h2,h3{margin:0;font-weight:400;}
     overflow-y:auto;
   }
   .story-slide--form .story-head{max-width:none;}
-  .story-slide--form .contact-panel{margin-block-start:1.5rem;}
+  .story-slide--form .form-side{margin-block-start:1.5rem;}
+  .story-slide--form .contact-title{margin:0 0 20px;}
+  .story-slide--form .contact-panel{margin-block-start:0;}
   .story-slide--form .contact-form-col{width:100%;}
   .story.is-form .decay{opacity:0;visibility:hidden;}
 
@@ -2163,25 +2165,34 @@ h1,h2,h3{margin:0;font-weight:400;}
     margin-block-start:1.25rem;
     font-size:1.75rem;line-height:2;
   }
-  .story-slide--form .contact-title{margin-block-end:.5rem;}
-  .story-slide--form .contact-panel{
+  /* the title floats 20px above the panel; the panel holds only the form */
+  .story-slide--form .form-side{
     position:absolute;
     left:10.76%;top:29.9%;
-    transform:none;
     width:calc(67vh * 561 / 749);
+    display:flex;flex-direction:column;
+  }
+  .story-slide--form .contact-title{margin:0 0 20px;text-align:center;}
+  .story-slide--form .contact-panel{
+    position:static;
+    width:100%;
     /* height is matched to the copy column at runtime (about.js) */
     height:auto;
-    display:flex;flex-direction:column;justify-content:center;
+    display:flex;flex-direction:column;justify-content:center;align-items:center;
+    text-align:center;
     padding:20px;
     margin:0;
     background:rgba(255,255,255,.1);
   }
+  .story-slide--form .contact-form{width:100%;}
 }
 @media (max-width:900px){
   .story-slide--form .form-copy{display:flex;flex-direction:column;}
   .story-slide--form .contact-head{font-size:22px;margin-block-start:1rem;}
   .story-slide--form .contact-lines{font-size:18px;margin-block-start:.75rem;}
-  .story-slide--form .contact-panel{margin-block-start:1.5rem;}
+  .story-slide--form .form-side{margin-block-start:1.5rem;}
+  .story-slide--form .contact-title{margin:0 0 20px;}
+  .story-slide--form .contact-panel{margin-block-start:0;}
 }
 
 /* ============ יצירת קשר: half-width composition with a map ============ */
