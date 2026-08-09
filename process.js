@@ -48,14 +48,10 @@
     scroller.parentNode.insertBefore(rail, scroller.nextSibling);
     var pips = Array.prototype.slice.call(rail.children);
 
-    var queued = false;
-    var onScroll = function () {
-      if (queued) return;
-      queued = true;
-      requestAnimationFrame(function () { queued = false; paint(); });
-    };
-    scroller.addEventListener('scroll', onScroll, { passive: true });
-    addEventListener('resize', onScroll);
+    // painting five cards is cheap — run it straight off the event rather
+    // than through rAF, which some in-app browsers starve
+    scroller.addEventListener('scroll', paint, { passive: true });
+    addEventListener('resize', paint);
     if (heading) heading.classList.add('is-in');
     paint();
     setTimeout(paint, 300);
