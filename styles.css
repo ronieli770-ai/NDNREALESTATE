@@ -571,12 +571,40 @@ h1,h2,h3{margin:0;font-weight:400;}
    drop in from above — staggered right to left */
 .js-cards .pcard{
   opacity:0;
-  transform:translateY(4.5rem) scale(.92);
+  /* the tile lies back on its bottom edge, then swings upright */
+  transform:translateY(4.5rem) rotateX(24deg) scale(.94);
+  transform-origin:50% 100%;
   filter:blur(14px);
   transition:
     opacity .7s ease,
-    transform .95s cubic-bezier(.22,1.4,.36,1),
-    filter .7s ease;
+    transform 1.05s cubic-bezier(.22,1.35,.32,1),
+    filter .7s ease,
+    box-shadow .9s ease;
+  box-shadow:0 0 0 rgba(0,0,0,0);
+}
+/* the surface catches a sheen as it swings up */
+.js-cards .pcard::after{
+  content:"";
+  position:absolute;inset:0;
+  border-radius:inherit;
+  pointer-events:none;
+  background:linear-gradient(115deg,
+    rgba(255,255,255,0) 38%,
+    rgba(255,255,255,.16) 50%,
+    rgba(255,255,255,0) 62%);
+  opacity:0;
+  transform:translateX(-40%);
+}
+.js-cards.is-in .pcard::after{
+  animation:pcard-sheen 1.1s cubic-bezier(.4,0,.2,1) forwards;
+}
+.js-cards.is-in .pcard:nth-child(1)::after{animation-delay:.35s;}
+.js-cards.is-in .pcard:nth-child(2)::after{animation-delay:.47s;}
+.js-cards.is-in .pcard:nth-child(3)::after{animation-delay:.59s;}
+@keyframes pcard-sheen{
+  0%{opacity:0;transform:translateX(-45%);}
+  35%{opacity:1;}
+  100%{opacity:0;transform:translateX(45%);}
 }
 .js-cards .pcard-word{
   opacity:0;
@@ -593,8 +621,11 @@ h1,h2,h3{margin:0;font-weight:400;}
 .js-cards .pcard:nth-child(1) .pcard-word{transition-delay:.3s;}
 .js-cards .pcard:nth-child(2) .pcard-word{transition-delay:.42s;}
 .js-cards .pcard:nth-child(3) .pcard-word{transition-delay:.54s;}
-.js-cards.is-in .pcard{opacity:1;transform:none;filter:none;}
-.problem-cards{perspective:800px;}
+.js-cards.is-in .pcard{
+  opacity:1;transform:none;filter:none;
+  box-shadow:0 1.5rem 3rem rgba(0,0,0,.28);
+}
+.problem-cards{perspective:900px;perspective-origin:50% 100%;}
 .pcard{transform-style:preserve-3d;}
 .js-cards.is-in .pcard-word{opacity:1;transform:translate(-50%,-50%);}
 
@@ -1845,4 +1876,9 @@ h1,h2,h3{margin:0;font-weight:400;}
     line-height:1.12;
   }
   .hero-cta{margin-block-start:.5rem;}
+}
+
+@media (max-width:900px){
+  /* the tiles hug their copy instead of holding a fixed height */
+  .pcard{min-height:0;}
 }
