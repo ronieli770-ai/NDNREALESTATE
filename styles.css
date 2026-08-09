@@ -1380,10 +1380,11 @@ h1,h2,h3{margin:0;font-weight:400;}
 .reach .contact-panel{
   flex:1;min-width:0;
   min-height:22.9375rem;
-  justify-content:center;
-  padding:2.5rem 2rem;
+  justify-content:flex-end;
+  /* 30px of air on the right, where the fields now reach */
+  padding:2.5rem 1.875rem;
 }
-.reach .contact-form-col{width:31.875rem;}
+.reach .contact-form-col{width:36rem;max-width:100%;}
 .contact-page .footer{margin-block-start:11.125rem;}
 @media (max-width:900px){
   .reach{flex-direction:column;padding:8rem 1.25rem 0;gap:2.5rem;}
@@ -1392,4 +1393,55 @@ h1,h2,h3{margin:0;font-weight:400;}
   .reach-sub{font-size:1.5rem;}
   .reach .contact-form-col{width:100%;}
   .contact-page .footer{margin-block-start:5rem;}
+}
+
+/* ============ MOBILE (home page) ============ */
+/* One gutter for every band, and every pinned or absolutely-placed section
+   falls back to plain vertical flow. The !important marks override the inline
+   transforms the scroll scripts write. */
+@media (max-width:900px){
+  .wrap,.nav-inner,.problem,.opp-inner,.quote,.contact,.footer-inner{
+    padding-inline:1.25rem;
+  }
+  .sec{min-height:auto;padding-block:3.5rem;}
+  .sec-hero{padding:0;}
+  .intro{padding-block:1.5rem 3.5rem;}
+  .intro-badge{margin-block-end:1.25rem;}
+
+  /* the process stage unpins — the cards simply stack down the page */
+  .sec-process{height:auto;}
+  .proc-stage{position:relative;height:auto;padding-block:3.5rem;}
+  .proc-wrap{position:relative;inset:auto;width:100%;max-width:none;}
+  .proc-sub-wrap{
+    position:relative;left:auto;right:auto;top:auto;
+    width:100%;padding-inline:1.25rem;
+    transform:none !important;
+    margin-block-end:1.75rem;
+  }
+  .proc-viewport{
+    position:relative;left:auto;top:auto;
+    width:100%;height:auto;
+    padding-inline:1.25rem;
+    overflow:visible;
+  }
+  .proc-track{transform:none !important;gap:1.25rem;}
+  .step{min-height:0;padding:1.5rem;}
+  .step h3{font-size:1.5rem;}
+  .step p{font-size:1.15rem;margin-block-start:.75rem;}
+
+  /* nothing is pinned above it any more, so the quote sits in normal flow */
+  .sec-quote{margin-top:0;}
+
+  /* "נעים מאוד" — the drift scripts write inline transforms; drop them */
+  .about-name-wrap{
+    position:static;width:100%;
+    bottom:auto;right:auto;
+    transform:none !important;
+  }
+  .about-grid{position:static;left:auto;top:auto;transform:none !important;}
+  .about-name{text-align:right;}
+
+  .contact-stack{min-height:auto;}
+  .contact{padding-block-start:3.5rem;}
+  .footer{padding-block:2rem;}
 }
