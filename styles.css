@@ -1967,9 +1967,10 @@ h1,h2,h3{margin:0;font-weight:400;}
     min-height:0;
   }
   .sec-intro{
-    /* rides up over the pinned hero during its cover screen */
+    /* the content rides up over the pinned hero with NO backdrop of its own —
+       the hero and its gradient stay in view to the end of their scroll */
     position:relative;z-index:5;
-    background:var(--ink);
+    background:transparent;
     min-height:100vh;
     min-height:100dvh;
     height:auto;
