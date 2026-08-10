@@ -2285,3 +2285,29 @@ h1,h2,h3{margin:0;font-weight:400;}
   .story-slide--form .contact-form input,
   .story-slide--form .contact-form button{height:3rem;min-height:3rem;font-size:16px;}
 }
+
+/* ============ DESKTOP: forms ============ */
+@media (min-width:901px){
+  /* עלינו — the closing panel is a copy of the contact page's form card:
+     same box, same padding, same radius, same stacked fields */
+  .story-slide--form .contact-panel{
+    top:50%;
+    transform:translateY(-50%);
+    width:34.625rem;
+    height:60vh;
+    padding:20px;
+    border-radius:1.875rem;
+    background:rgba(255,255,255,.1);
+    display:flex;flex-direction:column;justify-content:center;align-items:center;
+    gap:20px;
+  }
+  .story-slide--form .contact-form{width:100%;max-width:32.125rem;margin:0;}
+  .story-slide--form .contact-form .row{flex-direction:column;}
+  .story-slide--form .contact-form .f-sm,
+  .story-slide--form .contact-form .f-lg{width:100%;flex:none;}
+
+  /* home page — the form column stretches into the empty left half so its
+     rail over the transparent palm equals the aside's rail on the right */
+  .sec-contact .contact-panel{padding-inline:5.75rem;}
+  .sec-contact .contact-form-col{flex:1;min-width:0;width:auto;}
+}
