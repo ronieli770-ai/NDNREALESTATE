@@ -2244,3 +2244,6 @@ h1,h2,h3{margin:0;font-weight:400;}
   /* the fold shows a good bite of the footer */
   .contact-page .footer{margin-block-start:.75rem;}
 }
+
+/* the address rows link out to Maps — inherit the row's own look */
+.footer-contact a,.contact-lines a,.reach-lines a,.nav-sheet-lines a{color:inherit;}
