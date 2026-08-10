@@ -2331,3 +2331,30 @@ h1,h2,h3{margin:0;font-weight:400;}
   .story-slide--form .contact-lines{text-align:right;}
   .story-slide--form .contact-lines li{justify-content:flex-start;}
 }
+
+/* Short phone viewports (Safari with its toolbars showing) leave ~500px for a
+   slide. Without this the closing slide's content overruns its box and gets
+   clipped — or the browser tries to scroll it. Everything tightens so the
+   whole slide always fits and a swipe stays the only gesture. */
+@media (max-width:900px) and (max-height:740px){
+  .story-slide--form{gap:.75rem;}
+  .story-slide--form .story-head{font-size:19px;line-height:1.15;}
+  .story-slide--form .contact-head{font-size:16px;margin-block-start:.25rem;}
+  .story-slide--form .contact-lines{font-size:15px;line-height:1.5;margin-block-start:.25rem;}
+  .story-slide--form .contact-lines img{width:1.15rem;height:1.15rem;}
+  .story-slide--form .contact-panel{gap:12px;padding:14px;}
+  .story-slide--form .contact-title{font-size:17px;}
+  .story-slide--form .contact-form{gap:.4rem;}
+  .story-slide--form .contact-form input,
+  .story-slide--form .contact-form button{height:2.6rem;min-height:2.6rem;font-size:15px;}
+}
+
+/* On short phone screens the square photo eats the whole slide and the copy
+   below it gets clipped. Shrink the photo and pull the copy up so every
+   text slide fits too. */
+@media (max-width:900px) and (max-height:740px){
+  .decay{aspect-ratio:auto;height:30vh;}
+  .story-slide{top:calc(6.5rem + env(safe-area-inset-top) + 30vh + 22px);}
+  .story-head{font-size:21px;}
+  .story-text{font-size:17px;margin-block-start:.5rem;}
+}
