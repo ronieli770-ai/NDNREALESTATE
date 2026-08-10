@@ -15,12 +15,7 @@
     if (!formSlide || window.matchMedia('(max-width:900px)').matches) return;
     var copy = formSlide.querySelector('.form-copy');
     var panel = formSlide.querySelector('.contact-panel');
-    var title = formSlide.querySelector('.contact-title');
-    if (copy && panel) {
-      var h = copy.getBoundingClientRect().height;
-      if (title) h -= title.getBoundingClientRect().height + 20;
-      panel.style.height = Math.max(0, h) + 'px';
-    }
+    if (copy && panel) panel.style.height = copy.getBoundingClientRect().height + 'px';
   }
   sizeFormPanel();
   addEventListener('resize', sizeFormPanel);

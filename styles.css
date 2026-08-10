@@ -1852,9 +1852,8 @@ h1,h2,h3{margin:0;font-weight:400;}
     overflow-y:auto;
   }
   .story-slide--form .story-head{max-width:none;}
-  .story-slide--form .form-side{margin-block-start:1.5rem;}
   .story-slide--form .contact-title{margin:0 0 20px;}
-  .story-slide--form .contact-panel{margin-block-start:0;}
+  .story-slide--form .contact-panel{margin-block-start:1.5rem;}
   .story-slide--form .contact-form-col{width:100%;}
   .story.is-form .decay{opacity:0;visibility:hidden;}
 
@@ -2165,17 +2164,16 @@ h1,h2,h3{margin:0;font-weight:400;}
     margin-block-start:1.25rem;
     font-size:1.75rem;line-height:2;
   }
-  /* the title floats 20px above the panel; the panel holds only the form */
-  .story-slide--form .form-side{
+  /* the title lives inside the panel, exactly 20px over the form: the panel
+     inherits gap:50px from the home-page panel, so the gap carries the 20 and
+     the margins are zeroed */
+  .story-slide--form .contact-panel{gap:20px;}
+  .story-slide--form .contact-title{margin:0;text-align:center;}
+  .story-slide--form .contact-form{margin:0;}
+  .story-slide--form .contact-panel{
     position:absolute;
     left:10.76%;top:29.9%;
     width:calc(67vh * 561 / 749);
-    display:flex;flex-direction:column;
-  }
-  .story-slide--form .contact-title{margin:0 0 20px;text-align:center;}
-  .story-slide--form .contact-panel{
-    position:static;
-    width:100%;
     /* height is matched to the copy column at runtime (about.js) */
     height:auto;
     display:flex;flex-direction:column;justify-content:center;align-items:center;
@@ -2190,9 +2188,8 @@ h1,h2,h3{margin:0;font-weight:400;}
   .story-slide--form .form-copy{display:flex;flex-direction:column;}
   .story-slide--form .contact-head{font-size:22px;margin-block-start:1rem;}
   .story-slide--form .contact-lines{font-size:18px;margin-block-start:.75rem;}
-  .story-slide--form .form-side{margin-block-start:1.5rem;}
   .story-slide--form .contact-title{margin:0 0 20px;}
-  .story-slide--form .contact-panel{margin-block-start:0;}
+  .story-slide--form .contact-panel{margin-block-start:1.5rem;}
 }
 
 /* ============ יצירת קשר: half-width composition with a map ============ */
