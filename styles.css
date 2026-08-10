@@ -2039,13 +2039,7 @@ h1,h2,h3{margin:0;font-weight:400;}
 }
 
 @media (max-width:900px){
-  .story-slide--form{
-    text-align:center;
-    /* the slide scrolls, but without drawing a scrollbar over the content */
-    scrollbar-width:none;
-    -ms-overflow-style:none;
-  }
-  .story-slide--form::-webkit-scrollbar{display:none;}
+  .story-slide--form{text-align:center;}
   .story-slide--form .story-head{padding-inline-start:0;text-align:center;}
 }
 
@@ -2247,3 +2241,47 @@ h1,h2,h3{margin:0;font-weight:400;}
 
 /* the address rows link out to Maps — inherit the row's own look */
 .footer-contact a,.contact-lines a,.reach-lines a,.nav-sheet-lines a{color:inherit;}
+
+/* ============ עלינו on mobile: no inner scrolling, contact-page form ============ */
+@media (max-width:900px){
+  /* nothing inside a slide scrolls — a swipe always moves to the next one */
+  .story,
+  .story-slide,
+  .story-slide--form{
+    overflow:hidden;
+    overscroll-behavior:contain;
+    scrollbar-width:none;
+    -ms-overflow-style:none;
+  }
+  .story-slide::-webkit-scrollbar,
+  .story-slide--form::-webkit-scrollbar{display:none;width:0;height:0;}
+
+  /* the closing slide is laid out like the contact page: copy, then the glass
+     panel with its title inside and every field on its own row */
+  .story-slide--form{
+    display:flex;flex-direction:column;justify-content:center;
+    gap:1.25rem;
+  }
+  .story-slide--form .form-copy{gap:.5rem;}
+  .story-slide--form .story-head{font-size:22px;line-height:1.2;}
+  .story-slide--form .contact-head{font-size:18px;margin-block-start:.5rem;}
+  .story-slide--form .contact-lines{
+    font-size:16px;line-height:1.7;
+    margin-block-start:.5rem;
+  }
+  .story-slide--form .contact-lines img{width:1.35rem;height:1.35rem;}
+  .story-slide--form .contact-lines li{justify-content:center;}
+  .story-slide--form .contact-panel{
+    margin:0;
+    min-height:0;
+    display:flex;flex-direction:column;justify-content:center;
+    gap:20px;
+    padding:20px;
+    border-radius:.9375rem;
+    background:rgba(255,255,255,.1);
+  }
+  .story-slide--form .contact-title{font-size:20px;margin:0;}
+  .story-slide--form .contact-form{margin:0;gap:.625rem;}
+  .story-slide--form .contact-form input,
+  .story-slide--form .contact-form button{height:3rem;min-height:3rem;font-size:16px;}
+}
