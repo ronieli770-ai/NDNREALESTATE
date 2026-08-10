@@ -2322,3 +2322,12 @@ h1,h2,h3{margin:0;font-weight:400;}
   .story-slide--form .contact-title{text-align:right;}
   .story-slide--form .contact-form input{text-align:right;}
 }
+
+/* the closing slide's copy reads right, like every other slide (mobile) */
+@media (max-width:900px){
+  .story-slide--form{text-align:right;}
+  .story-slide--form .story-head,
+  .story-slide--form .contact-head,
+  .story-slide--form .contact-lines{text-align:right;}
+  .story-slide--form .contact-lines li{justify-content:flex-start;}
+}
