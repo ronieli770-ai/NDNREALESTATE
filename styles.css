@@ -2311,3 +2311,14 @@ h1,h2,h3{margin:0;font-weight:400;}
   .sec-contact .contact-panel{padding-inline:5.75rem;}
   .sec-contact .contact-form-col{flex:1;min-width:0;width:auto;}
 }
+
+/* the closing slide's panel reads right-to-left like the rest of the page */
+@media (min-width:901px){
+  .story-slide--form .contact-panel{
+    direction:rtl;
+    align-items:stretch;
+    text-align:right;
+  }
+  .story-slide--form .contact-title{text-align:right;}
+  .story-slide--form .contact-form input{text-align:right;}
+}
